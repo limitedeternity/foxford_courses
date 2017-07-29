@@ -1,41 +1,42 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
+from os import chdir
+from os.path import dirname, abspath
+from sys import platform, exit
 from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import ActionChains
-import subprocess
-import platform
+from subprocess import call
+from platform import machine
 
 
 def startup():
 	try:
-		if sys.platform.startswith('win'):
-			subprocess.call('taskkill /F /IM chrome.exe', shell=True)
+		if platform.startswith('win'):
+			call('taskkill /F /IM chrome.exe', shell=True)
 
-		elif sys.platform.startswith('darwin'):
-			subprocess.call('pkill -a -i "Google Chrome"', shell=True)
+		elif platform.startswith('darwin'):
+			call('pkill -a -i "Google Chrome"', shell=True)
 
-		elif sys.platform.startswith('linux'):
-			subprocess.call('kill -9 `ps -A |grep chrome| cut -d "?" -f1`', shell=True)
+		elif platform.startswith('linux'):
+			call('kill -9 `ps -A |grep chrome| cut -d "?" -f1`', shell=True)
 
 		else:
 			print("Unknown system.")
-			sys.exit(0)
+			exit(0)
 
 		opts = Options()
 		opts.add_argument("user-data-dir=Chrome")
 
-		if sys.platform.startswith('win'):
+		if platform.startswith('win'):
 			driver = webdriver.Chrome(executable_path="driver/win/chromedriver.exe", chrome_options=opts)
 
-		elif sys.platform.startswith('darwin'):
+		elif platform.startswith('darwin'):
 			driver = webdriver.Chrome(executable_path="driver/darwin/chromedriver", chrome_options=opts)
 
-		elif sys.platform.startswith('linux'):
-			if platform.machine().endswith('64'):
+		elif platform.startswith('linux'):
+			if machine().endswith('64'):
 				driver = webdriver.Chrome(executable_path="driver/linux/x64/chromedriver", chrome_options=opts)
 
 			else:
@@ -43,7 +44,7 @@ def startup():
 
 		else:
 			print("Unknown system.")
-			sys.exit(0)
+			exit(0)
 
 		driver.get('https://foxford.ru/user/registration/')
 		driver.execute_script("return window.open('https://vk.com');")
@@ -57,31 +58,31 @@ def startup():
 def main():
 	while True:
 			try:
-				if sys.platform.startswith('win'):
-					subprocess.call('taskkill /F /IM chrome.exe', shell=True)
+				if platform.startswith('win'):
+					call('taskkill /F /IM chrome.exe', shell=True)
 
-				elif sys.platform.startswith('darwin'):
-					subprocess.call('pkill -a -i "Google Chrome"', shell=True)
+				elif platform.startswith('darwin'):
+					call('pkill -a -i "Google Chrome"', shell=True)
 
-				elif sys.platform.startswith('linux'):
-					subprocess.call('kill -9 `ps -A |grep chrome| cut -d "?" -f1`', shell=True)
+				elif platform.startswith('linux'):
+					call('kill -9 `ps -A |grep chrome| cut -d "?" -f1`', shell=True)
 
 				else:
 					print("Unknown system.")
-					sys.exit(0)
+					exit(0)
 
 				url = str(input("\nWebinar url: "))
 				opts = Options()
 				opts.add_argument("user-data-dir=Chrome")
 
-				if sys.platform.startswith('win'):
+				if platform.startswith('win'):
 					driver = webdriver.Chrome(executable_path="driver/win/chromedriver.exe", chrome_options=opts)
 
-				elif sys.platform.startswith('darwin'):
+				elif platform.startswith('darwin'):
 					driver = webdriver.Chrome(executable_path="driver/darwin/chromedriver", chrome_options=opts)
 
-				elif sys.platform.startswith('linux'):
-					if platform.machine().endswith('64'):
+				elif platform.startswith('linux'):
+					if machine().endswith('64'):
 						driver = webdriver.Chrome(executable_path="driver/linux/x64/chromedriver", chrome_options=opts)
 
 					else:
@@ -89,7 +90,7 @@ def main():
 
 				else:
 					print("Unknown system.")
-					sys.exit(0)
+					exit(0)
 
 				driver.get(url)
 
@@ -127,10 +128,10 @@ def main():
 
 			except KeyboardInterrupt:
 				print('\n')
-				sys.exit(0)
+				exit(0)
 
 
 if __name__ == "__main__":
-	os.chdir(os.path.dirname(os.path.abspath(__file__)))
+	chdir(dirname(abspath(__file__)))
 
 	startup()
