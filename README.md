@@ -90,7 +90,7 @@ https://chrome.google.com/webstore/detail/video-downloader-pro/ilppkoakomgpcblpe
 
 2. Скриптовый:
 Позволяет скачивать, как ДЗ, так и ролики.
-Все здесь: https://github.com/limitedeternity/foxford_downloader
+Все лежит в этом репозитории в папке foxford_downloader.
 
 ----------------------------
 
