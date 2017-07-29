@@ -25,9 +25,13 @@ https://rutracker.org/forum/viewtopic.php?t=5257263
 
 https://rutracker.org/forum/viewtopic.php?t=5257220
 
-*Программирование на С++:*
+*Алгебра. 10 класс:*
 
-https://cloud.mail.ru/public/87UW/6p6JTnWED
+https://rutracker.org/forum/viewtopic.php?t=5427254
+
+*Геометрия. 10 класс:*
+
+https://rutracker.org/forum/viewtopic.php?t=5429370
 
 ...
 
@@ -37,14 +41,6 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 ----------------------------
 __***2017 г.***__
-
-*Алгебра. 10 класс:*
-
-https://rutracker.org/forum/viewtopic.php?t=5427254
-
-*Геометрия. 10 класс:*
-
-https://rutracker.org/forum/viewtopic.php?t=5429370
 
 *Подготовка к олимпиадам "Физтех" по математике:*
 
