@@ -8,7 +8,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from subprocess import call
 from platform import machine
-import binascii
+from binascii import hexlify
 from PIL import Image
 
 
@@ -156,7 +156,7 @@ def main():
 
 			driver.execute_script("document.getElementById('headerComponent').setAttribute('style', 'display:none;');")
 
-			string = str(binascii.hexlify(urandom(3))).strip('b').replace("'", "")
+			string = str(hexlify(urandom(3))).strip('b').replace("'", "")
 
 			fullpage_screenshot(driver, "homework_" + string + ".png")
 
