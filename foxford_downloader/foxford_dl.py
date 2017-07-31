@@ -313,8 +313,8 @@ class VideoDownloader:
         with ioopen("links.html", "w", encoding="utf-8") as html_file:
             html_file.write(doc)
 
-        print('Готово. Если хочешь выйти, нажми Ctrl + C.\n')
         self.download()
+        print('Готово. Если хочешь выйти, нажми Ctrl + C.\n')
 
     def download(self):
         self.driver.get('file://' + abspath('links.html'))
@@ -322,7 +322,7 @@ class VideoDownloader:
 
         for link in links:
             link.click()
-            sleep(1.75)
+            sleep(1.5)
 
 
 if __name__ == "__main__":
