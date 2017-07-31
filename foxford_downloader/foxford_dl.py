@@ -297,7 +297,7 @@ class VideoDownloader:
                 print('---\n')
 
             except NoSuchElementException:
-                print("Ссылки нет. Идем дальше...")
+                print("Здесь видео нет. Идем дальше...")
                 continue
 
         self.generate_html_file(self.course_name, self.download_links)
