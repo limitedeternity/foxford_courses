@@ -102,16 +102,20 @@ https://mega.nz/#F!VdMS1QTL!UzidAXtwhfSPXDC8YoUDAQ
 ----------------------------------------------
 **Способы извлечения данных:**
 
-1. Консольный:
+1. Браузерный:
 
-Жмем Ctrl + Shift+ I, чтобы открыть консоль. Заходим в Sources в groups. Там будет пятизначный номер. Клацаем. Ищем такой код src="https://lesson.foxford.ru/archive.html?conf=webinar-36921&amp;session=<тут_много_символов>.
+Жмем Ctrl + Shift+ I, чтобы открыть консоль. Заходим в Sources в groups. Там будет пятизначный номер. Клацаем. Ищем такой код: src="https://lesson.foxford.ru/archive.html?conf=webinar-<номер>&amp;session=<тут_много_символов>".
+
 Отрываем эту длинную ссылку.
-С помощью расширения скачиваем mp4. 
-https://chrome.google.com/webstore/detail/video-downloader-pro/ilppkoakomgpcblpemgbloapenijdcho 
+
+С помощью расширения скачиваем mp4: https://chrome.google.com/webstore/detail/video-downloader-pro/ilppkoakomgpcblpemgbloapenijdcho 
 
 2. Скриптовый:
 
-Позволяет скачивать, как ДЗ, так и ролики.
+Позволяет скачивать, как ДЗ, так и курсы.
+
+Причем качается сразу весь курс (N уроков) с минимальным содействием пользователя.
+
 Все лежит в этом репозитории в папке foxford_downloader.
 
 ----------------------------
