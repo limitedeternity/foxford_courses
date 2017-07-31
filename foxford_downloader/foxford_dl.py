@@ -173,7 +173,7 @@ class HomeworkDownloader:
         rand = str(hexlify(urandom(3))).strip('b').replace("'", "")
 
         self.fullpage_screenshot("homework_" + rand + ".png")
-        print("Скриншот сохранен как " + "'homework_" + rand + ".png'." + " Чтобы выйти, нажми Ctrl + C.\n")
+        print("Скриншот сохранен, как " + "'homework_" + rand + ".png'." + " Чтобы выйти, нажми Ctrl + C.\n")
 
 
 class VideoDownloader:
@@ -225,7 +225,7 @@ class VideoDownloader:
                 else:
                     pass
 
-                if match(r"^((https?):\/\/)(foxford.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
+                if match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
                     self.collect_lesson_links(course_link)
                 else:
                     print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
