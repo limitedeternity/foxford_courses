@@ -61,7 +61,7 @@ def selector():
     elif mode == '2':
         VideoDownloader().run()
 
-    elif mode == '0':
+    else:
         cls()
         sleep(1)
         exit(0)
@@ -182,6 +182,7 @@ class VideoDownloader:
         self.driver_location = self.system_platform()
         self.option = Options()
         self.option.add_argument("user-data-dir=Chrome")
+        self.option.add_extension('./download_manager.crx')
         self.driver = webdriver.Chrome(executable_path=self.driver_location, chrome_options=self.option)
         self.main_window = self.driver.current_window_handle
         self.course_name = ''
@@ -204,14 +205,15 @@ class VideoDownloader:
             exit(0)
 
     def login_to_foxford(self):
+        self.driver.get("about:blank")
+        self.driver.switch_to.window(self.driver.window_handles[0])
         self.driver.get("https://foxford.ru/user/login/")
+        height = self.driver.execute_script("return window.screen.height;")
+        width = self.driver.execute_script("return window.screen.width;")
+        self.driver.set_window_size(width, height)
 
     def run(self):
         self.login_to_foxford()
-
-        height = self.driver.execute_script("return window.screen.height;")
-        width = self.driver.execute_script("return document.body.clientWidth;")
-        self.driver.set_window_size(width, height)
 
         while True:
             try:
@@ -311,8 +313,16 @@ class VideoDownloader:
         with ioopen("links.html", "w", encoding="utf-8") as html_file:
             html_file.write(doc)
 
+        print('Готово. Если хочешь выйти, нажми Ctrl + C.\n')
+        self.download()
+
+    def download(self):
         self.driver.get('file://' + abspath('links.html'))
-        print('Ссылки сгенерированы. Если хочешь выйти, нажми Ctrl + C.\n')
+        links = self.driver.find_elements_by_tag_name("a")
+
+        for link in links:
+            link.click()
+            sleep(1.75)
 
 
 if __name__ == "__main__":
