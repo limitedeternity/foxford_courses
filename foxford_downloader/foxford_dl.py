@@ -321,7 +321,12 @@ class VideoDownloader:
         links = self.driver.find_elements_by_tag_name("a")
 
         for link in links:
-            link.click()
+            try:
+                link.click()
+
+            except ElementNotVisibleException:
+                continue
+
             sleep(1.5)
 
 
