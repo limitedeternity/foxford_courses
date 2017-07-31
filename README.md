@@ -104,7 +104,7 @@ https://mega.nz/#F!VdMS1QTL!UzidAXtwhfSPXDC8YoUDAQ
 
 1. Браузерный:
 
-Жмем Ctrl + Shift+ I, чтобы открыть консоль. Заходим в Sources в groups. Там будет пятизначный номер. Клацаем. Ищем такой код: src="https://lesson.foxford.ru/archive.html?conf=webinar-<номер>&amp;session=<тут_много_символов>".
+Открываем видео. Жмем Ctrl + Shift+ I, чтобы открыть консоль. Заходим в Sources в groups. Там будет пятизначный номер. Клацаем. Ищем такой код: src="https://lesson.foxford.ru/archive.html?conf=webinar-<номер>&amp;session=<тут_много_символов>".
 
 Отрываем эту длинную ссылку.
 
