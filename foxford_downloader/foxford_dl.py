@@ -99,6 +99,7 @@ class HomeworkDownloader:
 
         while True:
             try:
+                cls()
                 homework_link = input("Вставь ссылку на ДЗ сюда: ")
                 self.make_screenshot(homework_link)
 
@@ -173,7 +174,9 @@ class HomeworkDownloader:
         rand = str(hexlify(urandom(3))).strip('b').replace("'", "")
 
         self.fullpage_screenshot("homework_" + rand + ".png")
-        print("Скриншот сохранен, как " + "'homework_" + rand + ".png'." + " Чтобы выйти, нажми Ctrl + C.\n")
+        print("Скриншот сохранен, как " + "'homework_" + rand + ".png'.")
+        print("Переименуй его в приличный вид и обрежь черную полосу.")
+        input("Чтобы сделать еще один, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n")
 
 
 class VideoDownloader:
@@ -217,6 +220,7 @@ class VideoDownloader:
 
         while True:
             try:
+                cls()
                 course_link = input("Вставь ссылку на курс сюда: ")
 
                 if isfile('./links.html'):
@@ -255,6 +259,8 @@ class VideoDownloader:
                 sleep(1)
 
             except ElementNotVisibleException:
+                print("Не дергайся, говорил же.")
+                sleep(1)
                 continue
 
             try:
@@ -262,6 +268,7 @@ class VideoDownloader:
                 print(lesson_name)
 
             except StaleElementReferenceException:
+                print("Название не будет выведено автоматически.")
                 continue
 
             try:
@@ -292,12 +299,15 @@ class VideoDownloader:
                     sleep(1)
 
                 else:
-                    print('Видео не существует.')
+                    print('Видео не существует. Ссылка отключена, или просто не прописана.')
+                    print('Ничего не поделать, идем дальше.')
 
                 print('---\n')
 
             except NoSuchElementException:
-                print("Здесь видео нет. Идем дальше...")
+                print("Видео не будет. Либо потому что его нет, либо потому что ты дергался.")
+                print("Идем дальше.")
+                print('---\n')
                 continue
 
         self.generate_html_file(self.course_name, self.download_links)
@@ -312,22 +322,28 @@ class VideoDownloader:
 
         with ioopen("links.html", "w", encoding="utf-8") as html_file:
             html_file.write(doc)
-
+        
+        print("Список видео сформирован. Скачиваю...")
+        print('---\n')
         self.download()
-        print('Готово. Если хочешь выйти, нажми Ctrl + C.\n')
+        input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
     def download(self):
         self.driver.get('file://' + abspath('links.html'))
         links = self.driver.find_elements_by_tag_name("a")
 
-        for link in links:
+        for num, link in enumerate(links):
             try:
                 link.click()
+                print('#' + str(num + 1) + '. Загрузка запущена.')
 
             except ElementNotVisibleException:
+                print("Из-за того, что ты дергался, видео не скачается автоматически.")
                 continue
 
             sleep(1.5)
+            
+        print('\n---\n')
 
 
 if __name__ == "__main__":
