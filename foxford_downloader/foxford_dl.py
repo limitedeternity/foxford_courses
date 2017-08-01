@@ -105,7 +105,6 @@ class HomeworkDownloader:
                 self.make_screenshot(homework_link)
 
             except KeyboardInterrupt:
-                cls()
                 selector()
 
     def fullpage_screenshot(self, file):
@@ -242,7 +241,6 @@ class VideoDownloader:
                 else:
                     pass
 
-                cls()
                 selector()
 
     def collect_lesson_links(self, course_link):
