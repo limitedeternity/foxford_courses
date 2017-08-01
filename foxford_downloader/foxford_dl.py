@@ -46,6 +46,7 @@ def shutdown_chrome():
 
 def selector():
     shutdown_chrome()
+    cls()
     print("\n------------------------------")
     print("1. Сделать скриншот ДЗ")
     print("2. Скачать курс")
