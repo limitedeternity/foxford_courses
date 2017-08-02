@@ -169,7 +169,11 @@ class HomeworkDownloader:
 
         height = self.driver.execute_script("return window.screen.height;")
         width = self.driver.execute_script("return window.screen.width;")
-        self.driver.set_window_size(width, height)
+        try:
+            self.driver.set_window_size(width, height)
+
+        except:
+            pass
 
         rand = str(hexlify(urandom(3))).strip('b').replace("'", "")
 
@@ -213,7 +217,11 @@ class VideoDownloader:
         self.driver.get("https://foxford.ru/user/login/")
         height = self.driver.execute_script("return window.screen.height;")
         width = self.driver.execute_script("return window.screen.width;")
-        self.driver.set_window_size(width, height)
+        try:
+            self.driver.set_window_size(width, height)
+
+        except:
+            pass
 
     def run(self):
         self.login_to_foxford()
@@ -247,8 +255,11 @@ class VideoDownloader:
         self.driver.get(course_link)
         self.course_name = self.driver.find_element_by_class_name("course_info_title").text
         print(self.course_name)
-        lesson_links = self.driver.find_elements_by_class_name("lesson")
+        self.driver.execute_script("document.getElementsByClassName('lesson active')[0].classList.remove('active');")
         sleep(0.5)
+        lesson_links = self.driver.find_elements_by_class_name("lesson")
+        sleep(1)
+        print('\n---\n')
         self.crawling_links(lesson_links)
 
     def crawling_links(self, lesson_links):
@@ -278,6 +289,7 @@ class VideoDownloader:
 
                     windows = self.driver.window_handles
                     self.driver.switch_to.window(windows[1])
+                    sleep(1)
 
                     html_escape_table = {
                         "&": "&amp;",
@@ -289,8 +301,10 @@ class VideoDownloader:
 
                     video_link = "".join(html_escape_table.get(c, c) for c in self.driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
                     self.driver.execute_script('window.open("{}","_self");'.format(video_link))
+                    sleep(1)
 
                     self.download_links[lesson_name] = self.driver.find_element_by_class_name("vjs-tech").get_attribute("src")
+                    sleep(1)
                     print("Видео получено.")
 
                     self.driver.execute_script('window.close();')
@@ -300,13 +314,15 @@ class VideoDownloader:
                 else:
                     print('Видео не существует. Ссылка отключена, или просто не прописана.')
                     print('Ничего не поделать, идем дальше.')
+                    sleep(1)
 
                 print('---\n')
 
             except NoSuchElementException:
-                print("Видео не будет. Либо потому что его нет, либо потому что ты дергался.")
+                print("Видео не обнаружено.")
                 print("Идем дальше.")
                 print('---\n')
+                sleep(1)
                 continue
 
         self.generate_html_file(self.course_name, self.download_links)
@@ -321,7 +337,7 @@ class VideoDownloader:
 
         with ioopen("links.html", "w", encoding="utf-8") as html_file:
             html_file.write(doc)
-        
+
         print("Список видео сформирован. Скачиваю...")
         print('---\n')
         self.download()
@@ -341,7 +357,7 @@ class VideoDownloader:
                 continue
 
             sleep(1.5)
-            
+
         print('\n---\n')
 
 
