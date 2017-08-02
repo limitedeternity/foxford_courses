@@ -263,9 +263,9 @@ class VideoDownloader:
         self.crawling_links(lesson_links)
 
     def crawling_links(self, lesson_links):
-        for lesson_link in lesson_links:
+        for i in range(len(lesson_links) - 1):
             try:
-                lesson_link.click()
+                lesson_links[i].click()
                 sleep(1)
 
             except ElementNotVisibleException:
