@@ -13,7 +13,14 @@ def lesson_operator(driver, course_link):
     print('\n')
     course_name = driver.find_element_by_class_name("course_info_title").text
     print(course_name)
-    driver.execute_script("document.getElementsByClassName('lesson active')[0].classList.remove('active');")
+
+    try:
+        driver.find_elements_by_class_name("lesson active")
+        driver.execute_script("document.getElementsByClassName('lesson active')[0].classList.remove('active');")
+
+    except NoSuchElementException:
+        pass
+
     sleep(0.5)
     lesson_links = driver.find_elements_by_class_name("lesson")
     print('\n---\n')
@@ -65,17 +72,18 @@ def lesson_operator(driver, course_link):
                 }
 
                 try:
-                    download_links[lesson_name] = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("vjs-tech").get_attribute("src"))
+                    download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
                     print("Видео получено.")
                     sleep(1)
 
                 except NoSuchElementException:
                     try:
+                        sleep(1)
                         video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
                         driver.execute_script('window.open("{}", "_self");'.format(video_link))
                         sleep(1)
 
-                        download_links[lesson_name] = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("vjs-tech").get_attribute("src"))
+                        download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
                         print("Видео получено.")
                         sleep(1)
 
