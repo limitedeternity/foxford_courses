@@ -29,7 +29,10 @@ def selector():
     sleep(0.5)
 
     if mode == '1':
-        homework_downloader()
+        # homework_downloader()
+        print('Пока сломано')
+        sleep(1)
+        exit(0)
 
     elif mode == '2':
         video_downloader()
