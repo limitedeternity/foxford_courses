@@ -15,7 +15,7 @@ def lesson_operator(driver, course_link):
     print(course_name)
 
     try:
-        driver.find_elements_by_class_name("lesson active")
+        driver.find_element_by_class_name("lesson active")
         driver.execute_script("document.getElementsByClassName('lesson active')[0].classList.remove('active');")
 
     except NoSuchElementException:
