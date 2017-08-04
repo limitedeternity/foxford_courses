@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from os import chdir, unlink
-from os.path import dirname, abspath, isfile
+from os.path import dirname, abspath, exists
 from sys import exit
 from time import sleep
 from re import match
@@ -29,10 +29,7 @@ def selector():
     sleep(0.5)
 
     if mode == '1':
-        # homework_downloader()
-        print('Пока сломано')
-        sleep(1)
-        exit(0)
+        homework_downloader()
 
     elif mode == '2':
         video_downloader()
@@ -47,7 +44,7 @@ def homework_downloader():
 
     driver_location = system_platform()
     option = Options()
-    option.add_argument("user-data-dir=Chrome")
+    option.add_argument("user-data-dir=" + abspath("Data"))
     driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
     driver.implicitly_wait(0.1)
 
@@ -68,8 +65,9 @@ def video_downloader():
 
     driver_location = system_platform()
     option = Options()
-    option.add_argument("user-data-dir=Chrome")
-    option.add_extension('./download_manager.crx')
+    option.add_argument("user-data-dir=" + abspath("Data"))
+    prefs = {"download.default_directory": abspath("Downloads")}
+    option.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
     driver.implicitly_wait(0.1)
 
@@ -80,8 +78,8 @@ def video_downloader():
             cls()
             course_link = input("Вставь ссылку на курс сюда: ")
 
-            if isfile('./links.html'):
-                unlink('./links.html')
+            if exists(abspath('links.html')):
+                unlink(abspath('links.html'))
 
             else:
                 pass
@@ -94,8 +92,8 @@ def video_downloader():
                 print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
 
         except KeyboardInterrupt:
-            if isfile('./links.html'):
-                unlink('./links.html')
+            if exists(abspath('links.html')):
+                unlink(abspath('links.html'))
 
             else:
                 pass
