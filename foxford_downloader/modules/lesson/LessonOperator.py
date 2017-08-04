@@ -77,20 +77,21 @@ def lesson_operator(driver, course_link):
                     sleep(1)
 
                 except NoSuchElementException:
-                    try:
-                        sleep(1)
-                        video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
-                        driver.execute_script('window.open("{}", "_self");'.format(video_link))
-                        sleep(1)
+                    pass
 
-                        download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
-                        print("Видео получено.")
-                        sleep(1)
+                try:
+                    video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
+                    driver.execute_script('window.open("{}", "_self");'.format(video_link))
+                    sleep(1)
 
-                    except NoSuchElementException:
-                        print('Изменения, внесенные в сайт, сломали получение видео. Сообщите разработчику.')
-                        sleep(1)
-                        exit(0)
+                    download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
+                    print("Видео получено.")
+                    sleep(1)
+
+                except NoSuchElementException:
+                    print('Что-то пошло не так. Закрой все прочие браузеры и после 3-4 повторных попыток сообщи разработчику о проблеме.')
+                    sleep(1)
+                    exit(0)
 
                 driver.execute_script('window.close();')
                 driver.switch_to.window(main_window)
