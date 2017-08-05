@@ -118,7 +118,6 @@ def operator(driver, course_link):
             print("Идем дальше.")
             print('---\n')
             sleep(1)
-            continue
 
         try:
             homework_link = driver.find_element_by_xpath("//i[@class='fxf_icon_small fxf_icon_tasks_blue']/..")
@@ -170,17 +169,14 @@ def operator(driver, course_link):
                         except ElementNotVisibleException:
                             print("Элемент не виден.")
                             sleep(1)
-                            continue
 
                         except StaleElementReferenceException:
                             print('Ошибка, связанная с большой задержкой ответа. Попробуй еще раз.')
                             sleep(1)
-                            continue
 
                         except NoSuchElementException:
                             print('Что-то не так.')
                             sleep(1)
-                            continue
 
                 except NoSuchElementException:
                     print('Произошла ошибка.')
@@ -261,7 +257,6 @@ def operator(driver, course_link):
             print("Идем дальше.")
             print('---\n')
             sleep(1)
-            continue
 
     generate_html_file(course_name, download_links)
     print("Список видео сформирован. Скачиваю...")
