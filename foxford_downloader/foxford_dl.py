@@ -7,32 +7,32 @@ from time import sleep
 from re import match
 
 from selenium import webdriver
+from webbrowser import open
 from selenium.webdriver.chrome.options import Options
 
 from modules.common import cls, shutdown_chrome, login_to_foxford, system_platform
 
-from modules.homework import homework_operator
-
-from modules.lesson import lesson_operator
+from modules.operations import operator
 
 
 def selector():
     shutdown_chrome()
     cls()
-    print("\n------------------------------")
-    print("1. Сделать скриншот ДЗ")
-    print("2. Скачать курс")
+    print("\n-------------------------------")
+    print("1. Извлечь данные")
+    print("2. Перейти в репозиторий")
     print("0. Выйти")
-    print("------------------------------\n")
+    print("-------------------------------\n")
 
     mode = input("Выбирай: ")
     sleep(0.5)
 
     if mode == '1':
-        homework_downloader()
+        downloader()
 
     elif mode == '2':
-        video_downloader()
+        open("https://github.com/limitedeternity/foxford_courses", new=2)
+        exit(0)
 
     else:
         cls()
@@ -40,28 +40,7 @@ def selector():
         exit(0)
 
 
-def homework_downloader():
-
-    driver_location = system_platform()
-    option = Options()
-    option.add_argument("user-data-dir=" + abspath("Data"))
-    driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
-    driver.implicitly_wait(0.1)
-
-    login_to_foxford(driver)
-
-    while True:
-        try:
-            cls()
-            homework_link = input("Вставь ссылку на ДЗ сюда: ")
-            homework_operator(driver, homework_link)
-            input("Чтобы сохранить еще ДЗ, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n")
-
-        except KeyboardInterrupt:
-            selector()
-
-
-def video_downloader():
+def downloader():
 
     driver_location = system_platform()
     option = Options()
@@ -85,7 +64,7 @@ def video_downloader():
                 pass
 
             if match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
-                lesson_operator(driver, course_link)
+                operator(driver, course_link)
                 input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
             else:
