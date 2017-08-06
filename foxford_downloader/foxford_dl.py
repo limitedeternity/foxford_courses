@@ -58,7 +58,7 @@ def downloader():
             course_link = input("Вставь ссылку на курс сюда: ")
 
             if exists(join(abspath('.'), 'links.html')):
-                unlink(join(abspath('.'), 'links.html')
+                unlink(join(abspath('.'), 'links.html'))
 
             else:
                 pass
@@ -71,8 +71,8 @@ def downloader():
                 print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
 
         except KeyboardInterrupt:
-            if exists(join(abspath('.'), 'links.html'):
-                unlink(join(abspath('.'), 'links.html')
+            if exists(join(abspath('.'), 'links.html')):
+                unlink(join(abspath('.'), 'links.html'))
 
             else:
                 pass
