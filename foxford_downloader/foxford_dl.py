@@ -45,7 +45,7 @@ def downloader():
     driver_location = system_platform()
     option = Options()
     option.add_argument("user-data-dir=" + abspath("Data"))
-    prefs = {"download.default_directory": abspath("Downloads")}
+    prefs = {"download.default_directory": abspath(".")}
     option.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
     driver.implicitly_wait(0.1)
