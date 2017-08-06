@@ -29,15 +29,15 @@ def download(driver):
 
         notloaded = True
         while notloaded:
-            if exists(join(abspath("Downloads"), filename(num))):
+            if exists(join(abspath("."), filename(num))):
                 notloaded = False
 
             sleep(1)
 
-        if exists(join(abspath("Downloads"), str(links[num].text) + ".mp4")):
-            unlink(join(abspath("Downloads"), str(links[num].text) + ".mp4"))
+        if exists(join(abspath("."), str(links[num].text) + ".mp4")):
+            unlink(join(abspath("."), str(links[num].text) + ".mp4"))
 
-        move(join(abspath("Downloads"), filename(num)), join(abspath("Downloads"), str(links[num].text) + ".mp4"))
+        move(join(abspath("."), filename(num)), join(abspath("."), str(links[num].text) + ".mp4"))
         print('Загрузка завершена.')
         print('---\n')
 
