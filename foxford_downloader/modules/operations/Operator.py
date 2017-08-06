@@ -6,6 +6,7 @@ from sys import exit
 
 def operator(driver, course_link):
     lesson_name = ''
+    course_name = ''
     main_window = driver.current_window_handle
     theoretic_data = {}
     download_links = {}
@@ -234,13 +235,14 @@ def operator(driver, course_link):
                         for link in theory:
                             theoretic_data[link.text] = link.get_attribute("href")
 
-                    theory_html_gen(theoretic_data, lesson_name)
                     print("Теория сохранена.")
                     print('---\n')
+                    sleep(1)
 
                 except NoSuchElementException:
                     print('Произошла ошибка.')
                     print('---\n')
+                    sleep(1)
 
                 driver.execute_script('window.close();')
                 driver.switch_to.window(main_window)
@@ -258,6 +260,9 @@ def operator(driver, course_link):
             print('---\n')
             sleep(1)
 
+    theory_html_gen(theoretic_data, course_name)
+    print("Список теории сформирован.")
+    sleep(1)
     generate_html_file(course_name, download_links)
     print("Список видео сформирован. Скачиваю...")
     print('---\n')
