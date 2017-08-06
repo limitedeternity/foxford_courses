@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from os import chdir, unlink
-from os.path import dirname, abspath, exists
+from os.path import dirname, abspath, exists, join
 from sys import exit
 from time import sleep
 from re import match
@@ -57,8 +57,8 @@ def downloader():
             cls()
             course_link = input("Вставь ссылку на курс сюда: ")
 
-            if exists(abspath('links.html')):
-                unlink(abspath('links.html'))
+            if exists(join(abspath('.'), 'links.html')):
+                unlink(join(abspath('.'), 'links.html')
 
             else:
                 pass
@@ -71,8 +71,8 @@ def downloader():
                 print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
 
         except KeyboardInterrupt:
-            if exists(abspath('links.html')):
-                unlink(abspath('links.html'))
+            if exists(join(abspath('.'), 'links.html'):
+                unlink(join(abspath('.'), 'links.html')
 
             else:
                 pass
