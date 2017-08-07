@@ -189,7 +189,6 @@ class VideoDownloader:
         self.driver_location = self.system_platform()
         self.option = Options()
         self.option.add_argument("user-data-dir=Chrome")
-        self.option.add_extension('./download_manager.crx')
         self.driver = webdriver.Chrome(executable_path=self.driver_location, chrome_options=self.option)
         self.main_window = self.driver.current_window_handle
         self.course_name = ''
