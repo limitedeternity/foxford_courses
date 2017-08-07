@@ -45,6 +45,7 @@ def downloader():
     driver_location = system_platform()
     option = Options()
     option.add_argument("user-data-dir=" + abspath("Data"))
+    option.add_argument("--start-maximized")
     prefs = {"download.default_directory": abspath(".")}
     option.add_experimental_option("prefs", prefs)
     driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)

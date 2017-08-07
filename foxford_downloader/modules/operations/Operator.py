@@ -131,60 +131,80 @@ def operator(driver, course_link):
                 sleep(1)
 
                 try:
-                    homework = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[1]/*[1]/*[position()>1]/*[1]")
-                    for i in range(len(homework) - 1):
+                    homework = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[1]/*[1]/*[position()>1]/*[1]/*[2]")
+                    try:
+                        homework[0].click()
+
+                    except ElementNotVisibleException:
+                        print("Элемент не виден.")
+                        print('---\n')
+                        sleep(1)
+
+                    except StaleElementReferenceException:
+                        print('Ошибка, связанная с большой задержкой ответа. Попробуй еще раз.')
+                        print('---\n')
+                        sleep(1)
+
+                    except NoSuchElementException:
+                        print('Что-то не так.')
+                        print('---\n')
+                        sleep(1)
+
+                    for i in range(len(homework)):
+                        wrapper = driver.find_elements_by_xpath("(//div[@class='custom-scroll '])[2]/../..")[0]
+                        content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]")[0]
+                        content_content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")[0]
+                        wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
+
+                        driver.execute_script("arguments[0].setAttribute('style', '');", content)
+                        driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
+                        driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
+
+                        element_screenshot(driver, lesson_name, i, "0")
+                        print("ДЗ без ответов получено.\n")
+                        driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
+                        sleep(1)
+
                         try:
-                            homework[i].click()
+                            driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]").click()
                             sleep(1)
+                            driver.find_element_by_xpath("//div[contains(text(), 'Да')]").click()
+                            sleep(1)
+
+                            driver.get(driver.current_url)
 
                             wrapper = driver.find_elements_by_xpath("(//div[@class='custom-scroll '])[2]/../..")[0]
                             content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]")[0]
                             content_content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")[0]
+                            wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
 
                             driver.execute_script("arguments[0].setAttribute('style', '');", content)
                             driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
                             driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
 
-                            element_screenshot(driver, lesson_name, i, "false")
-                            print("ДЗ без ответов получено.\n")
-                            driver.execute_script("location.reload();")
-                            sleep(3)
-
-                            try:
-                                driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]").click()
-                                sleep(1)
-                                driver.find_element_by_xpath("//div[contains(text(), 'Да')]").click()
-
-                            except NoSuchElementException:
-                                pass
-
-                            driver.execute_script("arguments[0].setAttribute('style', '');", content)
-                            driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
-                            driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
-
-                            element_screenshot(driver, lesson_name, i, "true")
+                            element_screenshot(driver, lesson_name, i, "1")
                             print("ДЗ с ответами получено.\n")
-                            driver.execute_script("location.reload();")
-                            sleep(3)
-
-                        except ElementNotVisibleException:
-                            print("Элемент не виден.")
-                            sleep(1)
-
-                        except StaleElementReferenceException:
-                            print('Ошибка, связанная с большой задержкой ответа. Попробуй еще раз.')
+                            driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
                             sleep(1)
 
                         except NoSuchElementException:
-                            print('Что-то не так.')
-                            sleep(1)
+                            print("ДЗ уже решено.")
+                            pass
+
+                        print('---\n')
+
+                        next_url = driver.execute_script("return location.href.replace(location.href.substr(location.href.lastIndexOf('/')+1), (Number(location.href.substr(location.href.lastIndexOf('/')+1))+1).toString());")
+                        driver.get(next_url)
+                        sleep(2)
 
                 except NoSuchElementException:
                     print('Произошла ошибка.')
+                    print('---\n')
                     sleep(1)
 
                 except IndexError:
                     print('Кажется, ДЗ не оплачено.')
+                    print('---\n')
                     sleep(1)
 
                 driver.execute_script('window.close();')
@@ -215,9 +235,9 @@ def operator(driver, course_link):
                 try:
                     theory_navigator = driver.find_elements_by_xpath("(//ul[@class='page_menu_list block_rounded_shadow'])[1]/*[position()>1]")
 
-                    for i in range(len(theory_navigator)):
+                    for _ in range(len(theory_navigator)):
                         try:
-                            theory_navigator[i].find_element_by_tag_name("a").click
+                            theory_navigator[i].find_element_by_tag_name("a").click()
                             sleep(1)
 
                         except ElementNotVisibleException:
