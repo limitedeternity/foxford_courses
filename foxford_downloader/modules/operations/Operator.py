@@ -189,7 +189,6 @@ def operator(driver, course_link):
 
                         except NoSuchElementException:
                             print("ДЗ уже решено.")
-                            pass
 
                         print('---\n')
 
@@ -235,7 +234,7 @@ def operator(driver, course_link):
                 try:
                     theory_navigator = driver.find_elements_by_xpath("(//ul[@class='page_menu_list block_rounded_shadow'])[1]/*[position()>1]")
 
-                    for _ in range(len(theory_navigator)):
+                    for i in range(len(theory_navigator)):
                         try:
                             theory_navigator[i].find_element_by_tag_name("a").click()
                             sleep(1)
