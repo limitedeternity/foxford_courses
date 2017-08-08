@@ -1,6 +1,7 @@
 from time import sleep
 from . import generate_html_file, download
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
 from sys import exit
 
 
@@ -36,7 +37,7 @@ def operator_shifted(driver, course_link):
 
     for i in range(len(lesson_links) - 1):
         try:
-            lesson_links[i].click()
+            ActionChains(driver).move_to_element(lesson_links[i]).click(lesson_links[i]).perform()
             sleep(1)
 
         except ElementNotVisibleException:

@@ -31,10 +31,11 @@ def selector():
     if mode == '1':
         downloader()
 
-    if mode == '2':
+    elif mode == '2':
         downloader_shifted()
 
     elif mode == '3':
+        cls()
         open("https://github.com/limitedeternity/foxford_courses", new=2)
         exit(0)
 
@@ -60,6 +61,10 @@ def downloader():
     while True:
         try:
             cls()
+            print("Аттеншон! Навигация по ДЗ не работает.")
+            print("Весь функционал реализован: скачивание видео, сохранение теории и фотографирование ДЗ.")
+            print("Не работает только переход, который необходимо починить.")
+            print("Если желаете помочь, свяжитесь со мной в Telegram.")
             course_link = input("Вставь ссылку на курс сюда: ")
 
             if exists(join(abspath('.'), 'links.html')):
