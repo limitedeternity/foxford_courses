@@ -1,5 +1,5 @@
 from time import sleep
-from . import element_screenshot, theory_html_gen, generate_html_file, download
+from . import theory_html_gen, video_html_gen, homework_html_gen, video_download, homework_download
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from sys import exit
@@ -8,9 +8,11 @@ from sys import exit
 def operator(driver, course_link):
     lesson_name = ''
     course_name = ''
+    task_name = ''
     main_window = driver.current_window_handle
     theoretic_data = {}
     download_links = {}
+    homework_links = {}
 
     driver.get(course_link)
     print('\n')
@@ -68,7 +70,7 @@ def operator(driver, course_link):
             webinar_link = driver.find_element_by_xpath("//i[@class='fxf_icon_small fxf_icon_video_blue']/..")
             if webinar_link is not None and webinar_link.get_attribute("class") != 'disabled':
 
-                driver.execute_script('window.open("{}", "_blank");'.format(webinar_link.get_attribute("href")))
+                driver.execute_script('window.open(arguments[0], "_blank");', webinar_link.get_attribute("href"))
 
                 windows = driver.window_handles
                 driver.switch_to.window(windows[1])
@@ -92,7 +94,7 @@ def operator(driver, course_link):
 
                 try:
                     video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
-                    driver.execute_script('window.open("{}", "_self");'.format(video_link))
+                    driver.execute_script('window.open(arguments[0], "_self");', video_link)
                     sleep(1)
 
                     download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
@@ -125,7 +127,7 @@ def operator(driver, course_link):
             homework_link = driver.find_element_by_xpath("//i[@class='fxf_icon_small fxf_icon_tasks_blue']/..")
             if homework_link is not None and homework_link.get_attribute("class") != 'disabled':
 
-                driver.execute_script('window.open("{}", "_blank");'.format(homework_link.get_attribute("href")))
+                driver.execute_script('window.open(arguments[0], "_blank");', homework_link.get_attribute("href"))
 
                 windows = driver.window_handles
                 driver.switch_to.window(windows[1])
@@ -137,7 +139,11 @@ def operator(driver, course_link):
                     for i in range(len(homework)):
                         try:
                             ActionChains(driver).move_to_element(homework[i]).click(homework[i]).perform()
-                            sleep(1)
+                            sleep(1.5)
+                            task_name = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]/*[1]/*[2]/*[1]").text
+                            homework_links[task_name] = driver.current_url
+                            print("ДЗ записано в очередь.")
+                            sleep(1.5)
 
                         except ElementNotVisibleException:
                             print("Элемент не виден.")
@@ -153,48 +159,6 @@ def operator(driver, course_link):
                             print('Что-то не так.')
                             print('---\n')
                             sleep(1)
-
-                        wrapper = driver.find_elements_by_xpath("(//div[@class='custom-scroll '])[2]/../..")[0]
-                        content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]")[0]
-                        content_content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")[0]
-                        wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
-
-                        driver.execute_script("arguments[0].setAttribute('style', '');", content)
-                        driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
-                        driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
-
-                        element_screenshot(driver, lesson_name, i, "0")
-                        print("ДЗ без ответов получено.")
-                        driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
-                        sleep(1)
-
-                        try:
-                            driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]").click()
-                            sleep(1)
-                            driver.find_element_by_xpath("//div[contains(text(), 'Да')]").click()
-                            sleep(1)
-
-                            driver.get(driver.current_url)
-
-                            wrapper = driver.find_elements_by_xpath("(//div[@class='custom-scroll '])[2]/../..")[0]
-                            content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]")[0]
-                            content_content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")[0]
-                            wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
-
-                            driver.execute_script("arguments[0].setAttribute('style', '');", content)
-                            driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
-                            driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
-
-                            element_screenshot(driver, lesson_name, i, "1")
-                            print("ДЗ с ответами получено.\n")
-                            driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
-                            sleep(1)
-
-                        except NoSuchElementException:
-                            print("ДЗ уже решено.")
-
-                        print('---\n')
-                        sleep(1)
 
                 except NoSuchElementException:
                     print('Произошла ошибка.')
@@ -225,7 +189,7 @@ def operator(driver, course_link):
             theory_link = driver.find_element_by_xpath("//i[@class='fxf_icon_small fxf_icon_conspects_blue']/..")
             if theory_link is not None and theory_link.get_attribute("class") != 'disabled':
 
-                driver.execute_script('window.open("{}", "_blank");'.format(theory_link.get_attribute("href")))
+                driver.execute_script('window.open(arguments[0], "_blank");', theory_link.get_attribute("href"))
 
                 windows = driver.window_handles
                 driver.switch_to.window(windows[1])
@@ -279,10 +243,22 @@ def operator(driver, course_link):
             print('---\n')
             sleep(1)
 
-    theory_html_gen(theoretic_data, course_name)
-    print("Список теории сформирован.")
-    sleep(1)
-    generate_html_file(course_name, download_links)
-    print("Список видео сформирован. Скачиваю...")
-    print('---\n')
-    download(driver)
+    if len(theoretic_data.keys()) != 0:
+        theory_html_gen(course_name, theoretic_data)
+        print("Список теории сформирован.")
+        print('---\n')
+        sleep(1)
+
+    if len(homework_links.keys()) != 0:
+        homework_html_gen(course_name, homework_links)
+        print("Список ДЗ сформирован. Скачиваю...")
+        print('---\n')
+        homework_download(driver, course_name, main_window)
+        sleep(1)
+
+    if len(download_links.keys()) != 0:
+        video_html_gen(course_name, download_links)
+        print("Список видео сформирован. Скачиваю...")
+        print('---\n')
+        video_download(driver, course_name)
+        sleep(1)

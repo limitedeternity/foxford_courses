@@ -9,7 +9,7 @@
 
 **Для заблокированных всеми возможными способами я сделал сервис для конвертации ссылки на рутрекер в прямую магнет-ссылку:**
 
-https://rutrackermagnet-webapp.herokuapp.com/
+http://rutrackermagnet-webapp.herokuapp.com/
 
 ----------------------------
 

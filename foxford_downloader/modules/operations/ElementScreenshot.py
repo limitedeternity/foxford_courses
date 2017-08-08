@@ -3,8 +3,8 @@ from time import sleep
 from os import unlink
 
 
-def element_screenshot(driver, lesson_name, i, state):
-    file = lesson_name + '-' + str(i) + '-' + state + ".png"
+def element_screenshot(driver, task_name, state):
+    file = task_name + state + ".png"
 
     total_width = driver.execute_script("return document.body.offsetWidth;")
     total_height = driver.execute_script("return document.body.parentNode.scrollHeight;")
@@ -60,7 +60,7 @@ def element_screenshot(driver, lesson_name, i, state):
 
     stitched_image.save(file)
 
-    element = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]")[0]
+    element = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
     location = element.location
     size = element.size
 

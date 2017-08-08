@@ -1,5 +1,5 @@
 from time import sleep
-from . import generate_html_file, download
+from . import video_html_gen, video_download
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from sys import exit
@@ -67,7 +67,7 @@ def operator_shifted(driver, course_link):
             webinar_link = driver.find_element_by_xpath("//i[@class='fxf_icon_small fxf_icon_video_blue']/..")
             if webinar_link is not None and webinar_link.get_attribute("class") != 'disabled':
 
-                driver.execute_script('window.open("{}", "_blank");'.format(webinar_link.get_attribute("href")))
+                driver.execute_script('window.open(arguments[0], "_blank");', webinar_link.get_attribute("href"))
 
                 windows = driver.window_handles
                 driver.switch_to.window(windows[1])
@@ -91,7 +91,7 @@ def operator_shifted(driver, course_link):
 
                 try:
                     video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
-                    driver.execute_script('window.open("{}", "_self");'.format(video_link))
+                    driver.execute_script('window.open(arguments[0], "_self");', video_link)
                     sleep(1)
 
                     download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
@@ -120,7 +120,7 @@ def operator_shifted(driver, course_link):
             print('---\n')
             sleep(1)
 
-    generate_html_file(course_name, download_links)
+    video_html_gen(course_name, download_links)
     print("Список видео сформирован. Скачиваю...")
     print('---\n')
-    download(driver)
+    video_download(driver, course_name)
