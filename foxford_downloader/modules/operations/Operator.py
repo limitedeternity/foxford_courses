@@ -111,8 +111,8 @@ def operator(driver, course_link):
                 sleep(1)
 
             else:
-                print('Видео не существует. Ссылка отключена, или просто не прописана.')
-                print('Ничего не поделать, идем дальше.')
+                print('Видео отключено.')
+                print('Идем дальше.')
                 sleep(1)
 
             print('---\n')
@@ -160,6 +160,8 @@ def operator(driver, course_link):
                             print('---\n')
                             sleep(1)
 
+                    print('---\n')
+
                 except NoSuchElementException:
                     print('Произошла ошибка.')
                     print('---\n')
@@ -177,6 +179,7 @@ def operator(driver, course_link):
             else:
                 print('ДЗ отключено.')
                 print('Идем дальше.')
+                print('---\n')
                 sleep(1)
 
         except NoSuchElementException:

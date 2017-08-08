@@ -108,8 +108,8 @@ def operator_shifted(driver, course_link):
                 sleep(1)
 
             else:
-                print('Видео не существует. Ссылка отключена, или просто не прописана.')
-                print('Ничего не поделать, идем дальше.')
+                print('Видео отключено.')
+                print('Идем дальше.')
                 sleep(1)
 
             print('---\n')

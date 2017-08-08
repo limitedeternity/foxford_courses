@@ -50,9 +50,9 @@ def homework_download(driver, course_name, main_window):
 
                 driver.get(driver.current_url)
 
-                wrapper = driver.find_elements_by_xpath("(//div[@class='custom-scroll '])[2]/../..")[0]
-                content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]")[0]
-                content_content = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")[0]
+                wrapper = driver.find_element_by_xpath("(//div[@class='custom-scroll '])[2]/../..")
+                content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
+                content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
                 wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
 
                 driver.execute_script("arguments[0].setAttribute('style', '');", content)
