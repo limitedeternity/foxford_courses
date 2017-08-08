@@ -12,15 +12,16 @@ from selenium.webdriver.chrome.options import Options
 
 from modules.common import cls, shutdown_chrome, login_to_foxford, system_platform
 
-from modules.operations import operator
+from modules.operations import operator, operator_shifted
 
 
 def selector():
     shutdown_chrome()
     cls()
     print("\n-------------------------------")
-    print("1. Извлечь данные")
-    print("2. Перейти в репозиторий")
+    print("1. Извлечь ВСЕ данные /beta/")
+    print("2. Извлечь ТОЛЬКО видео")
+    print("3. Перейти в репозиторий")
     print("0. Выйти")
     print("-------------------------------\n")
 
@@ -30,7 +31,10 @@ def selector():
     if mode == '1':
         downloader()
 
-    elif mode == '2':
+    if mode == '2':
+        downloader_shifted()
+
+    elif mode == '3':
         open("https://github.com/limitedeternity/foxford_courses", new=2)
         exit(0)
 
@@ -66,6 +70,46 @@ def downloader():
 
             if match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
                 operator(driver, course_link)
+                input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
+
+            else:
+                print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
+
+        except KeyboardInterrupt:
+            if exists(join(abspath('.'), 'links.html')):
+                unlink(join(abspath('.'), 'links.html'))
+
+            else:
+                pass
+
+            selector()
+
+
+def downloader_shifted():
+
+    driver_location = system_platform()
+    option = Options()
+    option.add_argument("user-data-dir=" + abspath("Data"))
+    prefs = {"download.default_directory": abspath(".")}
+    option.add_experimental_option("prefs", prefs)
+    driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
+    driver.implicitly_wait(0.1)
+
+    login_to_foxford(driver)
+
+    while True:
+        try:
+            cls()
+            course_link = input("Вставь ссылку на курс сюда: ")
+
+            if exists(join(abspath('.'), 'links.html')):
+                unlink(join(abspath('.'), 'links.html'))
+
+            else:
+                pass
+
+            if match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
+                operator_shifted(driver, course_link)
                 input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
             else:
