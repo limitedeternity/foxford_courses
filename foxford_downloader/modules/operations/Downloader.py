@@ -39,6 +39,7 @@ def homework_download(driver, course_name, main_window):
             driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
 
             element_screenshot(driver, xname, "_nil")
+            sleep(1)
             driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
             sleep(1)
 
@@ -60,6 +61,7 @@ def homework_download(driver, course_name, main_window):
                 driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
 
                 element_screenshot(driver, xname, "_solved")
+                sleep(1)
                 driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
                 sleep(1)
 
