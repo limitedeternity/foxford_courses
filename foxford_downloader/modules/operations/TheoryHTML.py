@@ -7,7 +7,7 @@ def theory_html_gen(course_name, theoretic_data):
     content_links = []
 
     for name, link in theoretic_data.items():
-        content_links += p(a({"href": str(link)}, str(name)))
+        content_links += p(a({"href": str(link), "target": "_blank"}, str(name)))
 
     doc = build_doc(body(h3(course_name), content_links))
 
