@@ -61,14 +61,13 @@ def downloader():
     while True:
         try:
             cls()
-            course_link = input("Вставь ссылку на курс сюда: ")
+            print("Выбирай курс.")
 
-            if match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
-                operator(driver, course_link)
-                input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
+            while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
+                sleep(1)
 
-            else:
-                print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
+            operator(driver, driver.current_url)
+            input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
         except KeyboardInterrupt:
 
@@ -90,14 +89,13 @@ def downloader_shifted():
     while True:
         try:
             cls()
-            course_link = input("Вставь ссылку на курс сюда: ")
+            print("Выбирай курс.")
 
-            if match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", course_link):
-                operator_shifted(driver, course_link)
-                input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
+            while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
+                sleep(1)
 
-            else:
-                print('Ссылка должна быть такой: https://foxford.ru/courses/xxx, где xxx - 3 цифры курса.')
+            operator_shifted(driver, driver.current_url)
+            input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
         except KeyboardInterrupt:
 
