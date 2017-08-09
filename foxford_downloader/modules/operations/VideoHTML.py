@@ -3,7 +3,7 @@ from htmlfun.elements import body, h3, a, p
 from htmlfun import build_doc
 
 
-def generate_html_file(course_name, download_links):
+def video_html_gen(course_name, download_links):
     content_links = []
 
     for name, link in download_links.items():
@@ -11,5 +11,5 @@ def generate_html_file(course_name, download_links):
 
     doc = build_doc(body(h3(course_name), content_links))
 
-    with open("links.html", "w", encoding="utf-8") as html_file:
+    with open(course_name + "_videos.html", "w", encoding="utf-8") as html_file:
         html_file.write(doc)
