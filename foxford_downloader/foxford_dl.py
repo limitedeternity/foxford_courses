@@ -19,7 +19,7 @@ def selector():
     shutdown_chrome()
     cls()
     print("\n-------------------------------")
-    print("1. Извлечь ВСЕ данные")
+    print("1. Извлечь ВСЕ данные /beta/")
     print("2. Извлечь ТОЛЬКО видео")
     print("3. Навестить репозиторий автора")
     print("0. Выйти")
@@ -66,6 +66,7 @@ def downloader():
             while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
                 sleep(1)
 
+            cls()
             operator(driver, driver.current_url)
             input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
@@ -94,6 +95,7 @@ def downloader_shifted():
             while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
                 sleep(1)
 
+            cls()
             operator_shifted(driver, driver.current_url)
             input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
