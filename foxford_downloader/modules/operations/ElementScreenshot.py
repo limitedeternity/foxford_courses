@@ -150,3 +150,4 @@ def homework_screenshot(driver, lesson_name, task_name, state):
     im.save(file)
 
     print("Скриншот сохранен, как " + "'" + file + "'.")
+    print("---\n")
