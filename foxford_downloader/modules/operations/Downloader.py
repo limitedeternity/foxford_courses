@@ -33,7 +33,14 @@ def theory_download(driver, course_name):
 
             lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
             sleep(1)
-            driver.execute_script("window.history.go(-1)")
+
+            driver.execute_script('window.close();')
+            driver.switch_to.window(main_window)
+            sleep(1)
+
+            link.click()
+            windows = driver.window_handles
+            driver.switch_to.window(windows[1])
             sleep(1)
 
             info = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
@@ -56,7 +63,6 @@ def theory_download(driver, course_name):
         print('---\n')
 
     print('\n---\n')
-    unlink(join(abspath("."), course_name + '_theory.html'))
 
 
 def homework_download(driver, course_name):
@@ -78,7 +84,14 @@ def homework_download(driver, course_name):
 
             lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
             sleep(1)
-            driver.execute_script("window.history.go(-1)")
+
+            driver.execute_script('window.close();')
+            driver.switch_to.window(main_window)
+            sleep(1)
+
+            link.click()
+            windows = driver.window_handles
+            driver.switch_to.window(windows[1])
             sleep(1)
 
             task_name = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]/*[1]/*[2]/*[1]").text
@@ -135,7 +148,6 @@ def homework_download(driver, course_name):
         print('---\n')
 
     print('\n---\n')
-    unlink(join(abspath("."), course_name + '_homework.html'))
 
 
 def video_download(driver, course_name):
@@ -167,4 +179,3 @@ def video_download(driver, course_name):
         print('---\n')
 
     print('\n---\n')
-    unlink(join(abspath("."), course_name + '_videos.html'))

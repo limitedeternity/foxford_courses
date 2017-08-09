@@ -94,6 +94,7 @@ def operator(driver, course_link):
                         pass
 
                     try:
+                        sleep(1)
                         video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
                         driver.execute_script('window.open(arguments[0], "_self");', video_link)
                         sleep(1)
