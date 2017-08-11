@@ -190,6 +190,6 @@ def operator(driver, course_link):
         video_download(driver, course_name)
         sleep(1)
 
-    print('Сортируем видео и материалы по папкам...')
+    print('Сортируем видео и теорию по папкам...')
     sort_files(course_name)
     sleep(1)
