@@ -3,38 +3,19 @@ import os
 import shutil
 
 
-BASE_PATH = os.path.abspath('.')
-
-
-def sort_videos():
-    for filename in glob.glob(os.path.join('*.mp4')):
-        os.makedir(filename.strip('.mp4'))
+def sort_files(course_name):
+    for filename in glob.glob(os.path.join(os.path.abspath('.'), '*.mp4')):
+        os.makedirs(filename.strip('.mp4'))
         shutil.move(
-            os.path.join(BASE_PATH, filename),
-            os.path.join(BASE_PATH, filename.strip('.mp4'), filename)
+            os.path.join(os.path.abspath('.'), filename),
+            os.path.join(os.path.abspath('.'), course_name, filename.strip('.mp4'), filename)
         )
 
+    for filename in glob.glob(os.path.join(os.path.abspath('.'), '*.png')):
+        if not os.path.isdir("Теория"):
+            os.makedirs("Теория")
 
-def sort_materials(file_ext):
-    FOLDERS = {'html': 'Теория', 'png': 'ДЗ'}
-
-    for filename in glob.glob(os.path.join('*.%s' % file_ext)):
-        folder = os.path.join(filename.split('-')[0], FOLDERS[file_ext])
-        if not os.path.isdir(os.path.join(BASE_PATH, folder)):
-            os.mkdir(folder)
         shutil.move(
-            os.path.join(BASE_PATH, filename),
-            os.path.join(
-                BASE_PATH, filename.split('-')[0], FOLDERS[file_ext], filename
-            )
+            os.path.join(os.path.abspath('.'), filename),
+            os.path.join(os.path.abspath('.'), course_name, "Теория", filename)
         )
-
-def sort():
-    print('Сортируем видео и материалы по папкам...')
-    # sort_videos()
-    sort_materials('html')
-    sort_materials('png')
-    print('Готово.')
-
-
-sort()
