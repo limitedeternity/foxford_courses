@@ -145,7 +145,7 @@ def operator(driver, course_link):
                             url_concat = "/".join(url)
 
                             theory_name = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
-                            theoretic_data[theory_name] = url_concat
+                            theoretic_data[theory_name] = driver.current_url
                             driver.get(url_concat)
                             sleep(1)
 

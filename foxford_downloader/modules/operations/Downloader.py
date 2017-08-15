@@ -45,6 +45,7 @@ def theory_download(driver, course_name):
                 spoilers = driver.find_elements_by_class_name("toggle_element")
                 for i in range(len(spoilers)):
                     ActionChains(driver).move_to_element(spoilers[i]).click(spoilers[i]).perform()
+                    sleep(1)
 
             except NoSuchElementException:
                 pass

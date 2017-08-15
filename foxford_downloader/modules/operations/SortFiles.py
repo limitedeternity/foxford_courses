@@ -1,5 +1,6 @@
 from glob import glob
 from os import unlink
+from io import open as ioopen
 from os.path import join, abspath
 from shutil import move
 
@@ -23,4 +24,5 @@ def sort_files(course_name):
         if filename is not None:
             unlink(join(abspath('.'), filename))
 
-    unlink(join(abspath('.'), 'links.txt'))
+    with ioopen(join(abspath('.'), 'links.txt'), "w") as ph:
+        ph.write("<-- PLACEHOLDER [REPLACE ME] -->")
