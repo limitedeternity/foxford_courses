@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from os import chdir
-from os.path import dirname, abspath
+from io import open as ioopen
+from os.path import dirname, abspath, join
 from sys import exit
 from time import sleep
 from re import match
@@ -57,22 +58,23 @@ def downloader():
     driver.implicitly_wait(0.1)
 
     login_to_foxford(driver)
+    input("Загрузи ссылки на курсы в links.txt - одна ссылка на строку, затем нажми Enter.")
 
-    while True:
-        try:
+    with ioopen(join(abspath("."), "links.txt"), "r") as links:
+        lines = links.readlines()
+
+    for i in range(len(lines)):
+        lines[i] = lines[i].strip()
+
+        if not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", lines[i]):
+                cls()
+                print("...")
+                exit(0)
+
+        else:
             cls()
-            print("Выбирай курс.")
-
-            while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
-                sleep(1)
-
-            cls()
-            operator(driver, driver.current_url)
-            input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
-
-        except KeyboardInterrupt:
-
-            selector()
+            operator(driver, lines[i])
+            sleep(2)
 
 
 def downloader_shifted():
@@ -86,22 +88,23 @@ def downloader_shifted():
     driver.implicitly_wait(0.1)
 
     login_to_foxford(driver)
+    input("Загрузи ссылки на курсы в links.txt - одна ссылка на строку, затем нажми Enter.")
 
-    while True:
-        try:
+    with ioopen(join(abspath("."), "links.txt"), "r") as links:
+        lines = links.readlines()
+
+    for i in range(len(lines)):
+        lines[i] = lines[i].strip()
+
+        if not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", lines[i]):
+                cls()
+                print("Нормальные ссылки, пожалуйста.")
+                exit(0)
+
+        else:
             cls()
-            print("Выбирай курс.")
-
-            while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
-                sleep(1)
-
-            cls()
-            operator_shifted(driver, driver.current_url)
-            input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
-
-        except KeyboardInterrupt:
-
-            selector()
+            operator_shifted(driver, lines[i])
+            sleep(2)
 
 
 if __name__ == "__main__":
