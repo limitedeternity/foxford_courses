@@ -1,4 +1,5 @@
 from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException
+from selenium.webdriver.common.action_chains import ActionChains
 from os.path import abspath, join, exists
 from shutil import move
 from os import unlink
@@ -20,10 +21,10 @@ def theory_download(driver, course_name):
     links = driver.find_elements_by_tag_name("a")
     print('\n')
 
-    for num, link in enumerate(links):
+    for i in range(len(links)):
         try:
 
-            link.click()
+            links[i].click()
             windows = driver.window_handles
             driver.switch_to.window(windows[1])
 
@@ -39,6 +40,14 @@ def theory_download(driver, course_name):
 
             info = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
             sleep(1)
+
+            try:
+                spoilers = driver.find_elements_by_class_name("toggle_element")
+                for i in range(len(spoilers)):
+                    ActionChains(driver).move_to_element(spoilers[i]).click(spoilers[i]).perform()
+
+            except NoSuchElementException:
+                pass
 
             theory_screenshot(driver, lesson_name, info)
             sleep(1)

@@ -1,6 +1,6 @@
 from glob import glob
-from os import makedirs
-from os.path import join, abspath, unlink
+from os import makedirs, unlink
+from os.path import join, abspath
 from shutil import move
 
 
@@ -20,3 +20,5 @@ def sort_files(course_name):
 
     for filename in glob(join(abspath('.'), '*.html')):
         unlink(join(abspath('.'), filename))
+
+    unlink(join(abspath('.'), 'links.txt'))

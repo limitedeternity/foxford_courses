@@ -2,6 +2,8 @@ from time import sleep
 from . import theory_html_gen, video_html_gen, theory_download, video_download, sort_files
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
+from os import makedirs
+from os.path import join, abspath
 from sys import exit
 
 
@@ -17,13 +19,13 @@ def operator(driver, course_link):
 
     try:
         course_name = driver.find_element_by_class_name("course_info_title").text
+        makedirs(course_name)
+        print(course_name)
 
     except ElementNotVisibleException:
         print("Элемент не виден.")
         sleep(1)
         pass
-
-    print(course_name)
 
     try:
         driver.find_element_by_class_name("lesson active")
@@ -54,6 +56,7 @@ def operator(driver, course_link):
 
             try:
                 lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
+                makedirs(join(abspath("."), course_name, lesson_name))
                 print(lesson_name)
 
             except ElementNotVisibleException:
@@ -177,6 +180,7 @@ def operator(driver, course_link):
         exit(0)
 
     if len(theoretic_data.keys()) != 0:
+        makedirs(join(abspath("."), course_name, "Теория"))
         theory_html_gen(course_name, theoretic_data)
         print("Список теории сформирован. Обрабатываю...")
         print('---\n')
