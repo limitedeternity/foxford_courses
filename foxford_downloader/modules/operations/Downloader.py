@@ -8,11 +8,7 @@ from . import theory_screenshot
 
 
 def filename(num):
-    if num == 0:
-        return 'mp4.mp4'
-
-    else:
-        return 'mp4 (' + str(num) + ').mp4'
+    return 'mp4.mp4'
 
 
 def theory_download(driver, course_name):
