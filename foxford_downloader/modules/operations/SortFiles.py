@@ -1,6 +1,6 @@
 from glob import glob
 from os import makedirs
-from os.path import join, abspath, isdir
+from os.path import join, abspath, unlink
 from shutil import move
 
 
@@ -13,10 +13,10 @@ def sort_files(course_name):
         )
 
     for filename in glob(join(abspath('.'), '*.png')):
-        if not isdir("Теория"):
-            makedirs("Теория")
-
         move(
             join(abspath('.'), filename),
             join(abspath('.'), course_name, "Теория", filename)
         )
+
+    for filename in glob(join(abspath('.'), '*.html')):
+        unlink(join(abspath('.'), filename))
