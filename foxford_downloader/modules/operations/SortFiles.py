@@ -20,6 +20,7 @@ def sort_files(course_name):
             )
 
     for filename in glob(join(abspath('.'), '*.html')):
-        unlink(join(abspath('.'), filename))
+        if filename is not None:
+            unlink(join(abspath('.'), filename))
 
     unlink(join(abspath('.'), 'links.txt'))
