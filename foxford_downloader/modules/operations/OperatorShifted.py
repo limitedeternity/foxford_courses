@@ -18,7 +18,13 @@ def operator_shifted(driver, course_link):
 
     try:
         course_name = driver.find_element_by_class_name("course_info_title").text
-        makedirs(join(abspath("."), course_name))
+
+        try:
+            makedirs(join(abspath("."), course_name))
+
+        except FileExistsError:
+            pass
+
         print(course_name)
 
     except ElementNotVisibleException:
@@ -54,7 +60,13 @@ def operator_shifted(driver, course_link):
 
         try:
             lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
-            makedirs(join(abspath("."), course_name, lesson_name))
+
+            try:
+                makedirs(join(abspath("."), course_name, lesson_name))
+
+            except FileExistsError:
+                pass
+
             print(lesson_name)
 
         except ElementNotVisibleException:

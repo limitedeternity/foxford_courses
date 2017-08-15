@@ -19,7 +19,13 @@ def operator(driver, course_link):
 
     try:
         course_name = driver.find_element_by_class_name("course_info_title").text
-        makedirs(join(abspath("."), course_name))
+
+        try:
+            makedirs(join(abspath("."), course_name))
+
+        except FileExistsError:
+            pass
+
         print(course_name)
 
     except ElementNotVisibleException:
@@ -56,7 +62,13 @@ def operator(driver, course_link):
 
             try:
                 lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
-                makedirs(join(abspath("."), course_name, lesson_name))
+
+                try:
+                    makedirs(join(abspath("."), course_name, lesson_name))
+
+                except FileExistsError:
+                    pass
+
                 print(lesson_name)
 
             except ElementNotVisibleException:
@@ -144,11 +156,15 @@ def operator(driver, course_link):
                             url[-1] = str(i + 1)
                             url_concat = "/".join(url)
 
-                            theory_name = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
-                            theoretic_data[theory_name] = driver.current_url
                             driver.get(url_concat)
                             sleep(1)
 
+                            theory_name = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
+                            theoretic_data[theory_name] = url_concat
+
+                            sleep(1)
+
+                        # print(theoretic_data)
                         print("Теория сохранена.")
                         print('---\n')
                         sleep(1)
@@ -180,7 +196,12 @@ def operator(driver, course_link):
         exit(0)
 
     if len(theoretic_data.keys()) != 0:
-        makedirs(join(abspath("."), course_name, "Теория"))
+        try:
+            makedirs(join(abspath("."), course_name, "Теория"))
+
+        except FileExistsError:
+            pass
+
         theory_html_gen(course_name, theoretic_data)
         print("Список теории сформирован. Обрабатываю...")
         print('---\n')
