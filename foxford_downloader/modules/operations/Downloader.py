@@ -24,7 +24,7 @@ def theory_download(driver, course_name):
     for i in range(len(links)):
         try:
 
-            links[i].click()
+            ActionChains(driver).move_to_element(links[i]).click(links[i]).perform()
             windows = driver.window_handles
             driver.switch_to.window(windows[1])
 

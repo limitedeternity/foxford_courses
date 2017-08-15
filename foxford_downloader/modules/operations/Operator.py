@@ -19,7 +19,7 @@ def operator(driver, course_link):
 
     try:
         course_name = driver.find_element_by_class_name("course_info_title").text
-        makedirs(course_name)
+        makedirs(join(abspath("."), course_name))
         print(course_name)
 
     except ElementNotVisibleException:

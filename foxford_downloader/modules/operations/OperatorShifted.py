@@ -1,5 +1,7 @@
 from time import sleep
-from . import video_html_gen, video_download
+from os import makedirs
+from os.path import join, abspath
+from . import video_html_gen, video_download, sort_files
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from sys import exit
@@ -16,13 +18,13 @@ def operator_shifted(driver, course_link):
 
     try:
         course_name = driver.find_element_by_class_name("course_info_title").text
+        makedirs(join(abspath("."), course_name))
+        print(course_name)
 
     except ElementNotVisibleException:
         print("Элемент не виден.")
         sleep(1)
         pass
-
-    print(course_name)
 
     try:
         driver.find_element_by_class_name("lesson active")
@@ -52,6 +54,7 @@ def operator_shifted(driver, course_link):
 
         try:
             lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
+            makedirs(join(abspath("."), course_name, lesson_name))
             print(lesson_name)
 
         except ElementNotVisibleException:
@@ -120,7 +123,13 @@ def operator_shifted(driver, course_link):
             print('---\n')
             sleep(1)
 
-    video_html_gen(course_name, download_links)
-    print("Список видео сформирован. Скачиваю...")
-    print('---\n')
-    video_download(driver, course_name)
+    if len(download_links.keys()) != 0:
+        video_html_gen(course_name, download_links)
+        print("Список видео сформирован. Скачиваю...")
+        print('---\n')
+        video_download(driver, course_name)
+        sleep(1)
+
+    print('Сортируем видео по папкам...')
+    sort_files(course_name)
+    sleep(1)
