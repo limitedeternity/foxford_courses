@@ -1,14 +1,15 @@
 from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from os.path import abspath, join, exists
-from shutil import move
 from os import unlink
+from shutil import move
 from time import sleep
-from . import theory_screenshot
+from .OperatorShifted import operator_shifted
+from .ElementScreenshot import theory_screenshot
 
 
 def theory_download(driver, course_name):
-    driver.get('file:///' + abspath(course_name + '_theory.html'))
+    driver.get('file:///' + join(abspath("."), course_name + '_theory.html'))
     main_window = driver.current_window_handle
     links = driver.find_elements_by_tag_name("a")
     print('\n')
@@ -32,6 +33,14 @@ def theory_download(driver, course_name):
 
             info = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
             sleep(1)
+
+            if exists(join(abspath("."), str(lesson_name).replace('"', '') + "_" + str(info).replace('"', '') + ".png")):
+                driver.execute_script('window.close();')
+                driver.switch_to.window(main_window)
+                continue
+
+            else:
+                pass
 
             try:
                 spoilers = driver.find_elements_by_class_name("toggle_element")
@@ -61,13 +70,27 @@ def theory_download(driver, course_name):
     print('\n---\n')
 
 
-def video_download(driver, course_name):
-    driver.get('file:///' + abspath(course_name + '_videos.html'))
+def video_download(driver, course_name, course_link):
+    driver.get('file:///' + join(abspath("."), course_name + '_videos.html'))
     links = driver.find_elements_by_tag_name("a")
     print('\n')
 
+    skips = 0
     for i in range(len(links)):
         try:
+            if exists(join(abspath("."), str(links[i].text) + ".mp4")):
+                skips += 1
+                continue
+
+            else:
+                pass
+
+            if skips > 0:
+                unlink(join(abspath("."), course_name + '_videos.html'))
+                operator_shifted(driver, course_link, skips)
+                sleep(1)
+                return True
+
             ActionChains(driver).move_to_element(links[i]).click(links[i]).perform()
             print(str(links[i].text) + '. \nЗагрузка запущена.')
 
@@ -81,9 +104,6 @@ def video_download(driver, course_name):
                 notloaded = False
 
             sleep(1)
-
-        if exists(join(abspath("."), str(links[i].text) + ".mp4")):
-            unlink(join(abspath("."), str(links[i].text) + ".mp4"))
 
         move(join(abspath("."), 'mp4.mp4'), join(abspath("."), str(links[i].text) + ".mp4"))
         print('Загрузка завершена.')
