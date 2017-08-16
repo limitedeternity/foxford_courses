@@ -54,7 +54,7 @@ https://rutracker.org/forum/viewtopic.php?t=5418196
 
 *Подготовка к олимпиадам "Физтех" по физике:*
 
-https://rutracker.org/forum/viewtopic.php?t=5541240
+http://rgho.st/7ClFm7HSc
 
 *Подготовка к олимпиадам по математике:*
 
