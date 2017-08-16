@@ -64,7 +64,7 @@ def downloader():
     login_to_foxford(driver)
     input("Загрузи ссылки на курсы в links.txt - одна ссылка на строку, затем нажми Enter.")
 
-    with ioopen(join(abspath("."), "links.txt"), "r") as links:
+    with ioopen(join(abspath("."), "links.txt"), "r", encoding="utf-8") as links:
         lines = links.readlines()
 
     for i in range(len(lines)):
@@ -94,7 +94,7 @@ def downloader_shifted():
     login_to_foxford(driver)
     input("Загрузи ссылки на курсы в links.txt - одна ссылка на строку, затем нажми Enter.")
 
-    with ioopen(join(abspath("."), "links.txt"), "r") as links:
+    with ioopen(join(abspath("."), "links.txt"), "r", encoding="utf-8") as links:
         lines = links.readlines()
 
     for i in range(len(lines)):
