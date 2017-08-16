@@ -1,6 +1,6 @@
 from os import unlink, listdir
 from io import open as ioopen
-from os.path import join, abspath
+from os.path import join, abspath, splitext
 from shutil import move
 
 
@@ -9,7 +9,7 @@ def sort_files(course_name):
         if filename.endswith(".mp4"):
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.strip('.mp4'), filename)
+                join(abspath('.'), course_name, splitext(filename)[0], filename)
             )
 
         elif filename.endswith(".png"):
