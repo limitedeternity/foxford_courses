@@ -42,9 +42,9 @@ def theory_download(driver, course_name):
                 pass
 
             try:
-                spoilers = driver.find_elements_by_class_name("toggle_element")
+                spoilers = driver.find_elements_by_class_name("toggle_content")
                 for i in range(len(spoilers)):
-                    ActionChains(driver).move_to_element(spoilers[i]).click(spoilers[i]).perform()
+                    driver.execute_script("arguments[0].style.display = 'block';", spoilers[i])
                     sleep(1)
 
             except NoSuchElementException:
