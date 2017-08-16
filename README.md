@@ -60,6 +60,10 @@ http://rgho.st/7ClFm7HSc
 
 https://rutracker.org/forum/viewtopic.php?t=5418108
 
+*Программирование (9-11 классы). Подготовка к олимпиадам, базовый уровень:*
+
+http://rgho.st/8ZzLPPm6H
+
 *Программирование (9-11 классы). Подготовка к олимпиадам, продвинутый уровень:*
 
 https://rutracker.org/forum/viewtopic.php?t=5417314
