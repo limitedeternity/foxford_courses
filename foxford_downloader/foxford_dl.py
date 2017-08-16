@@ -11,9 +11,13 @@ from selenium import webdriver
 from webbrowser import open
 from selenium.webdriver.chrome.options import Options
 
-from modules.common import cls, shutdown_chrome, login_to_foxford, system_platform
+from modules.common.CleanScreen import cls
+from modules.common.ShutdownChrome import shutdown_chrome
+from modules.common.FoxfordLogin import login_to_foxford
+from modules.common.PlatformDetector import system_platform
 
-from modules.operations import operator, operator_shifted
+from modules.operations.Operator import operator
+from modules.operations.OperatorShifted import operator_shifted
 
 
 def selector():
@@ -98,12 +102,12 @@ def downloader_shifted():
 
         if not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", lines[i]):
                 cls()
-                print("Нормальные ссылки, пожалуйста.")
+                print("...")
                 exit(0)
 
         else:
             cls()
-            operator_shifted(driver, lines[i])
+            operator_shifted(driver, lines[i], 0)
             sleep(2)
 
 
