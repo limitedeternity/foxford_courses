@@ -4,7 +4,6 @@ from os.path import abspath, join, exists
 from os import unlink
 from shutil import move
 from time import sleep
-from .OperatorShifted import operator_shifted
 from .ElementScreenshot import theory_screenshot
 
 
@@ -87,6 +86,7 @@ def video_download(driver, course_name, course_link):
 
             if skips > 0:
                 unlink(join(abspath("."), course_name + '_videos.html'))
+                from .OperatorShifted import operator_shifted
                 operator_shifted(driver, course_link, skips)
                 sleep(1)
                 return True

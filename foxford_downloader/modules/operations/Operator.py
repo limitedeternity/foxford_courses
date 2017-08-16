@@ -4,7 +4,6 @@ from .TheoryHTML import theory_html_gen
 from .VideoHTML import video_html_gen
 from .Downloader import theory_download, video_download
 from .SortFiles import sort_files
-from .OperatorShifted import operator_shifted
 
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -61,6 +60,7 @@ def operator(driver, course_link):
                 return True
 
             else:
+                from .OperatorShifted import operator_shifted
                 operator_shifted(driver, course_link, 0)
                 sleep(1)
                 return True
