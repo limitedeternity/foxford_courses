@@ -33,7 +33,7 @@ def operator_shifted(driver, course_link, skips):
         pass
 
     try:
-        course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "")
+        course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
         try:
             makedirs(join(abspath("."), course_name))
@@ -86,7 +86,7 @@ def operator_shifted(driver, course_link, skips):
             continue
 
         try:
-            lesson_name = str(driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text).replace('"', '').replace("»", "").replace("«", "")
+            lesson_name = str(driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
             try:
                 makedirs(join(abspath("."), course_name, lesson_name))

@@ -4,7 +4,7 @@ from os import unlink
 
 
 def theory_screenshot(driver, lesson_name, info):
-    file = lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "") + ".png"
+    file = lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "") + ".png"
 
     total_width = driver.execute_script("return document.body.offsetWidth;")
     total_height = driver.execute_script("return document.body.parentNode.scrollHeight;")

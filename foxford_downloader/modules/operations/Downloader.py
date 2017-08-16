@@ -33,7 +33,7 @@ def theory_download(driver, course_name):
             info = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
             sleep(1)
 
-            if exists(join(abspath("."), lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "") + ".png")):
+            if exists(join(abspath("."), lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "") + ".png")):
                 driver.execute_script('window.close();')
                 driver.switch_to.window(main_window)
                 continue
