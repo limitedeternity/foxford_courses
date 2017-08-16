@@ -69,7 +69,7 @@ def theory_download(driver, course_name):
     print('\n---\n')
 
 
-def video_download(driver, course_name, course_link):
+def video_download(driver, course_name, course_link, html_repair=False):
     driver.get('file:///' + join(abspath("."), course_name + '_videos.html'))
     links = driver.find_elements_by_tag_name("a")
     print('\n')
@@ -84,7 +84,7 @@ def video_download(driver, course_name, course_link):
             else:
                 pass
 
-            if skips > 0:
+            if skips > 0 and html_repair is True:
                 unlink(join(abspath("."), course_name + '_videos.html'))
                 from .OperatorShifted import operator_shifted
                 operator_shifted(driver, course_link, skips)

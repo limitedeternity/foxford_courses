@@ -46,7 +46,7 @@ def operator_shifted(driver, course_link, skips):
 
         if exists(join(abspath("."), course_name + "_videos.html")):
             print("Обнаружены предыдущие видео. Верифицирую...")
-            video_download(driver, course_name, course_link)
+            video_download(driver, course_name, course_link, html_repair=True)
             print("Верификация видео завершена.")
             sleep(1)
             return True
@@ -166,7 +166,7 @@ def operator_shifted(driver, course_link, skips):
         video_html_gen(course_name, download_links)
         print("Список видео сформирован. Скачиваю...")
         print('---\n')
-        video_download(driver, course_name)
+        video_download(driver, course_name, course_link)
         sleep(1)
 
     print('Сортируем видео по папкам...')

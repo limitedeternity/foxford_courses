@@ -54,7 +54,7 @@ def operator(driver, course_link):
 
             if exists(join(abspath("."), course_name + "_videos.html")):
                 print("Обнаружены предыдущие видео. Верифицирую...")
-                video_download(driver, course_name, course_link)
+                video_download(driver, course_name, course_link, html_repair=True)
                 print("Верификация видео завершена.")
                 sleep(1)
                 return True
