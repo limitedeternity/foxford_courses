@@ -1,13 +1,17 @@
 from time import sleep
-from os import makedirs
-from os.path import join, abspath
-from . import video_html_gen, video_download, sort_files
+from os import makedirs, unlink
+from os.path import join, abspath, exists
+
+from .VideoHTML import video_html_gen
+from .Downloader import video_download
+from .SortFiles import sort_files
+
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from sys import exit
 
 
-def operator_shifted(driver, course_link):
+def operator_shifted(driver, course_link, skips):
     lesson_name = ''
     course_name = ''
     main_window = driver.current_window_handle
@@ -16,8 +20,20 @@ def operator_shifted(driver, course_link):
     driver.get(course_link)
     print('\n')
 
+    if exists(join(abspath("."), "mp4.mp4.crdownload")):
+        unlink(join(abspath("."), "mp4.mp4.crdownload"))
+
+    else:
+        pass
+
+    if exists(join(abspath("."), "mp4.mp4")):
+        unlink(join(abspath("."), "mp4.mp4"))
+
+    else:
+        pass
+
     try:
-        course_name = driver.find_element_by_class_name("course_info_title").text
+        course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
         try:
             makedirs(join(abspath("."), course_name))
@@ -26,6 +42,17 @@ def operator_shifted(driver, course_link):
             pass
 
         print(course_name)
+        sleep(1)
+
+        if exists(join(abspath("."), course_name + "_videos.html")):
+            print("Обнаружены предыдущие видео. Верифицирую...")
+            video_download(driver, course_name, course_link, html_repair=True)
+            print("Верификация видео завершена.")
+            sleep(1)
+            return True
+
+        else:
+            pass
 
     except ElementNotVisibleException:
         print("Элемент не виден.")
@@ -40,7 +67,7 @@ def operator_shifted(driver, course_link):
         pass
 
     sleep(0.5)
-    lesson_links = driver.find_elements_by_class_name("lesson")
+    lesson_links = driver.find_elements_by_class_name("lesson")[skips:]
     print('\n---\n')
 
     for i in range(len(lesson_links) - 1):
@@ -59,7 +86,7 @@ def operator_shifted(driver, course_link):
             continue
 
         try:
-            lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
+            lesson_name = str(driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
             try:
                 makedirs(join(abspath("."), course_name, lesson_name))
@@ -139,7 +166,7 @@ def operator_shifted(driver, course_link):
         video_html_gen(course_name, download_links)
         print("Список видео сформирован. Скачиваю...")
         print('---\n')
-        video_download(driver, course_name)
+        video_download(driver, course_name, course_link)
         sleep(1)
 
     print('Сортируем видео по папкам...')
