@@ -7,10 +7,6 @@ from time import sleep
 from . import theory_screenshot
 
 
-def filename(num):
-    return 'mp4.mp4'
-
-
 def theory_download(driver, course_name):
     driver.get('file:///' + abspath(course_name + '_theory.html'))
     main_window = driver.current_window_handle
@@ -70,10 +66,10 @@ def video_download(driver, course_name):
     links = driver.find_elements_by_tag_name("a")
     print('\n')
 
-    for num, link in enumerate(links):
+    for i in range(len(links)):
         try:
-            link.click()
-            print(str(links[num].text) + '. \nЗагрузка запущена.')
+            ActionChains(driver).move_to_element(links[i]).click(links[i]).perform()
+            print(str(links[i].text) + '. \nЗагрузка запущена.')
 
         except ElementNotVisibleException:
             print("Элемент не виден.")
@@ -81,15 +77,15 @@ def video_download(driver, course_name):
 
         notloaded = True
         while notloaded:
-            if exists(join(abspath("."), filename(num))):
+            if exists(join(abspath("."), 'mp4.mp4')):
                 notloaded = False
 
             sleep(1)
 
-        if exists(join(abspath("."), str(links[num].text) + ".mp4")):
-            unlink(join(abspath("."), str(links[num].text) + ".mp4"))
+        if exists(join(abspath("."), str(links[i].text) + ".mp4")):
+            unlink(join(abspath("."), str(links[i].text) + ".mp4"))
 
-        move(join(abspath("."), filename(num)), join(abspath("."), str(links[num].text) + ".mp4"))
+        move(join(abspath("."), 'mp4.mp4'), join(abspath("."), str(links[i].text) + ".mp4"))
         print('Загрузка завершена.')
         print('---\n')
 
