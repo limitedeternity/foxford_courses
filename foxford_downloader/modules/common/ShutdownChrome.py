@@ -1,7 +1,6 @@
 from subprocess import call
 from sys import platform, exit
 from time import sleep
-from . import cls
 
 
 def shutdown_chrome():
@@ -19,5 +18,4 @@ def shutdown_chrome():
     else:
         print("Поставь нормальную систему.")
         sleep(1)
-        cls()
         exit(0)

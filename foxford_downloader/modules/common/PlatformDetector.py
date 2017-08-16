@@ -1,7 +1,6 @@
 from platform import machine
 from sys import platform, exit
 from time import sleep
-from . import cls
 
 
 def system_platform():
@@ -19,5 +18,4 @@ def system_platform():
     else:
         print("Поставь нормальную систему.")
         sleep(1)
-        cls()
         exit(0)
