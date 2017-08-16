@@ -21,5 +21,5 @@ def sort_files(course_name):
         elif filename.endswith(".html"):
             unlink(join(abspath('.'), filename))
 
-    with ioopen(join(abspath('.'), 'links.txt'), "w") as ph:
+    with ioopen(join(abspath('.'), 'links.txt'), "w", encoding="utf-8") as ph:
         ph.write("<-- PLACEHOLDER [REPLACE ME] -->")
