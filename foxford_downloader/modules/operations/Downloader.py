@@ -24,16 +24,16 @@ def theory_download(driver, course_name):
             driver.find_element_by_xpath("(//ul[@class='page_menu_list block_rounded_shadow'])[1]/*[1]").click()
             sleep(1)
 
-            lesson_name = driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text
+            lesson_name = str(driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
             sleep(1)
 
             driver.execute_script("window.history.go(-1)")
             sleep(1)
 
-            info = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
+            info = str(driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
             sleep(1)
 
-            if exists(join(abspath("."), lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "") + ".png")):
+            if exists(join(abspath("."), lesson_name + "_" + info + ".png")):
                 driver.execute_script('window.close();')
                 driver.switch_to.window(main_window)
                 continue
