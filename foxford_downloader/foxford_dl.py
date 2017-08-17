@@ -8,7 +8,7 @@ from time import sleep
 from re import match
 
 from selenium import webdriver
-from webbrowser import open
+from webbrowser import open as webopen
 from selenium.webdriver.chrome.options import Options
 
 from modules.common.CleanScreen import cls
@@ -41,7 +41,7 @@ def selector():
 
     elif mode == '3':
         cls()
-        open("https://github.com/limitedeternity/foxford_courses", new=2)
+        webopen("https://github.com/limitedeternity/foxford_courses", new=2)
         exit(0)
 
     else:
