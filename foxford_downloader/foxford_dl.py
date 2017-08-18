@@ -3,8 +3,7 @@
 '''Imports'''
 
 from os import chdir
-from io import open as ioopen
-from os.path import dirname, abspath, join
+from os.path import dirname, abspath
 from sys import exit
 from time import sleep
 from re import match
@@ -78,32 +77,25 @@ def downloader():
     driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
     driver.implicitly_wait(0.1)  # <--- Implict wait for each element
 
-    login_to_foxford(driver)
-
-    # Waiting for links
-    input("Загрузи ссылки на курсы в links.txt - одна ссылка на строку, затем нажми Enter.")
-
-    # Read links
-    with ioopen(join(abspath("."), "links.txt"), "r", encoding="utf-8") as links:
-        lines = links.readlines()
-
-    # Iterate over each link and download contents
-    for i in range(len(lines)):
-        lines[i] = lines[i].strip()
-
-        if not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", lines[i]):
-                cls()
-                print("...")
-                exit(0)
-
-        else:
+    while True:
+        try:
+            # Show login page or dashboard
+            login_to_foxford(driver)
             cls()
-            operator(driver, lines[i])
-            sleep(2)
+            print("Выбирай курс.")
 
-    # Restoring placeholder when finished
-    with ioopen(join(abspath('.'), 'links.txt'), "w", encoding="utf-8") as ph:
-        ph.write("<-- PLACEHOLDER [REPLACE ME] -->")
+            # Wait until user navigates to URL matching regex
+            while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
+                sleep(1)
+
+            cls()
+            operator(driver, driver.current_url)
+            sleep(1)
+            input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
+
+        except KeyboardInterrupt:
+            # On 'Ctrl + C' return to menu.
+            selector()
 
 
 def downloader_shifted():
@@ -121,32 +113,25 @@ def downloader_shifted():
     driver = webdriver.Chrome(executable_path=driver_location, chrome_options=option)
     driver.implicitly_wait(0.1)  # <--- Implict wait for each element
 
-    login_to_foxford(driver)
-
-    # Waiting for links
-    input("Загрузи ссылки на курсы в links.txt - одна ссылка на строку, затем нажми Enter.")
-
-    # Read them
-    with ioopen(join(abspath("."), "links.txt"), "r", encoding="utf-8") as links:
-        lines = links.readlines()
-
-    # Use Operator on each link
-    for i in range(len(lines)):
-        lines[i] = lines[i].strip()
-
-        if not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", lines[i]):
-                cls()
-                print("...")
-                exit(0)
-
-        else:
+    while True:
+        try:
+            # Show login page or dashboard
+            login_to_foxford(driver)
             cls()
-            operator_shifted(driver, lines[i], 0)  # <--- "0" means 0 skips. Read more in operations directory.
-            sleep(2)
+            print("Выбирай курс.")
 
-    # Restoring placeholder when finished
-    with ioopen(join(abspath('.'), 'links.txt'), "w", encoding="utf-8") as ph:
-        ph.write("<-- PLACEHOLDER [REPLACE ME] -->")
+            # Wait until user navigates to URL matching regex
+            while not match(r"^((https?):\/\/)(foxford\.ru\/)(courses\/)(\d{3})(\/?)$", driver.current_url):
+                sleep(1)
+
+            cls()
+            operator_shifted(driver, driver.current_url, 0)
+            sleep(1)
+            input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
+
+        except KeyboardInterrupt:
+            # On 'Ctrl + C' return to menu.
+            selector()
 
 
 if __name__ == "__main__":
