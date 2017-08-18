@@ -3,15 +3,18 @@ from time import sleep
 from os import unlink
 
 
-def theory_screenshot(driver, lesson_name, info):
-    file = lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "") + ".png"
+def theory_screenshot(driver, file):
 
+    '''Screenshot module for theory'''
+
+    # Get page parameters
     total_width = driver.execute_script("return document.body.offsetWidth;")
     total_height = driver.execute_script("return document.body.parentNode.scrollHeight;")
     viewport_width = driver.execute_script("return document.body.clientWidth;")
     viewport_height = driver.execute_script("return window.innerHeight;")
     rectangles = []
 
+    # Screenshot module. Handles scrolling and making a fullpage screenshot.
     i = 0
     while i < total_height:
         ii = 0
@@ -51,6 +54,7 @@ def theory_screenshot(driver, lesson_name, info):
         else:
             offset = (rectangle[0], rectangle[1])
 
+        # Adding visible block to existing
         stitched_image.paste(screenshot, offset)
 
         del screenshot
@@ -58,20 +62,26 @@ def theory_screenshot(driver, lesson_name, info):
         part += 1
         previous = rectangle
 
+    # Saving glued image
     stitched_image.save(file)
 
+    # element is a block, containing theory, in page DOM. So, we are getting its parameters.
     element = driver.find_element_by_class_name("page_content")
     location = element.location
     size = element.size
 
     im = Image.open(file)
 
+    # Preparing a crop mask to cut off unnecessary contents
     left = location['x']
     top = location['y']
     right = location['x'] + size['width']
     bottom = location['y'] + size['height']
 
+    # Applying crop
     im = im.crop((left, top, right, bottom))
+
+    # Saving result
     im.save(file)
 
     print("Скриншот сохранен, как " + "'" + file + "'.")

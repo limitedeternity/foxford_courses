@@ -16,6 +16,6 @@ def system_platform():
         else:
             return 'modules/driver/linux/x86/chromedriver'
     else:
-        print("Поставь нормальную систему.")
+        print("Ошибка идентификации системы.")
         sleep(1)
         exit(0)

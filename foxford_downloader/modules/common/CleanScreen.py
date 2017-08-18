@@ -3,9 +3,9 @@ from sys import platform
 
 
 def cls():
-	'''Visual workaround'''
+	'''Cross-platform clean screen'''
 
 	if platform.startswith('win'):
-		system('cls')
+		system('cls')  # <--- "cls" on Windows
 	else:
-		system('clear')
+		system('clear')  # <--- "clear" on Unix

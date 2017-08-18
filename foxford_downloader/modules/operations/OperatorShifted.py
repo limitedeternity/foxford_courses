@@ -1,3 +1,6 @@
+'''Imports'''
+
+
 from time import sleep
 from os import makedirs, unlink
 from os.path import join, abspath, exists
@@ -10,10 +13,14 @@ from selenium.common.exceptions import ElementNotVisibleException, StaleElementR
 from selenium.webdriver.common.action_chains import ActionChains
 from sys import exit
 
+# Note, that everything below repeats contents of Operator.py. If you want to get to know, what happens here, read Operator.py and compare.
+
 
 def operator_shifted(driver, course_link, skips):
-    lesson_name = ''
-    course_name = ''
+    '''Operator module, which handles all actions to extract only videos'''
+
+    lesson_name = None
+    course_name = None
     main_window = driver.current_window_handle
     download_links = {}
 
@@ -24,13 +31,21 @@ def operator_shifted(driver, course_link, skips):
         unlink(join(abspath("."), "mp4.mp4.crdownload"))
 
     else:
-        pass
+        if exists(join(abspath("."), "mp4.crdownload")):
+            unlink(join(abspath("."), "mp4.crdownload"))
+
+        else:
+            pass
 
     if exists(join(abspath("."), "mp4.mp4")):
         unlink(join(abspath("."), "mp4.mp4"))
 
     else:
-        pass
+        if exists(join(abspath("."), "mp4")):
+            unlink(join(abspath("."), "mp4"))
+
+        else:
+            pass
 
     try:
         course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
@@ -67,6 +82,8 @@ def operator_shifted(driver, course_link, skips):
         pass
 
     sleep(0.5)
+
+    # This one is handling skips for HTML repair. Look in Operator.py, verification stage.
     lesson_links = driver.find_elements_by_class_name("lesson")[skips:]
     print('\n---\n')
 
@@ -129,21 +146,20 @@ def operator_shifted(driver, course_link, skips):
                     sleep(1)
 
                 except NoSuchElementException:
-                    pass
+                    try:
+                        sleep(1)
+                        video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
+                        driver.execute_script('window.open(arguments[0], "_self");', video_link)
+                        sleep(1)
 
-                try:
-                    video_link = "".join(html_escape_table.get(c, c) for c in driver.find_element_by_class_name("full_screen").find_element_by_tag_name("iframe").get_attribute("src"))
-                    driver.execute_script('window.open(arguments[0], "_self");', video_link)
-                    sleep(1)
+                        download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
+                        print("Видео получено.")
+                        sleep(1)
 
-                    download_links[lesson_name] = driver.find_element_by_class_name("vjs-tech").get_attribute("src")
-                    print("Видео получено.")
-                    sleep(1)
-
-                except NoSuchElementException:
-                    print('Что-то пошло не так. Закрой все прочие браузеры и после 3-4 повторных попыток сообщи разработчику о проблеме.')
-                    sleep(1)
-                    exit(0)
+                    except NoSuchElementException:
+                        print('Что-то пошло не так. Закрой все прочие браузеры и после 3-4 повторных попыток сообщи разработчику о проблеме.')
+                        sleep(1)
+                        exit(0)
 
                 driver.execute_script('window.close();')
                 driver.switch_to.window(main_window)
