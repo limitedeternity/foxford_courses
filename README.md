@@ -62,6 +62,10 @@ http://rgho.st/7ClFm7HSc
 
 https://rutracker.org/forum/viewtopic.php?t=5418108
 
+*Подготовка к олимпиадам по физике:*
+
+https://rutracker.org/forum/viewtopic.php?t=5442687
+
 *Программирование (9-11 классы). Подготовка к олимпиадам, базовый уровень:*
 
 http://rgho.st/7HD2z7k6n
