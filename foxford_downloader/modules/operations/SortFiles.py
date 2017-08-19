@@ -17,7 +17,7 @@ def sort_files(course_name):
                 join(abspath('.'), course_name, filename[:-4], filename)
             )
 
-        # If file is screenshot
+        # check if file is screenshot
         elif filename.endswith(".png"):
             # move it to theory directory
             move(
