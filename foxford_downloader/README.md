@@ -82,7 +82,7 @@
 
 --------
 
-*Current version*: v4.rstable-1
+*Current version*: v4.1-beta5
 
 --------
 
