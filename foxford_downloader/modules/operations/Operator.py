@@ -85,9 +85,13 @@ def operator(driver, course_link):
 
                 else:
                     # Repair hw, if broken. Mechanism described in Download.py
-                    homework_download(driver, course_name)
-                    print("Верификация ДЗ завершена. Начата загрузка видео.")
-                    sleep(1)
+                    try:
+                        homework_download(driver, course_name)
+                        print("Верификация ДЗ завершена. Начата загрузка видео.")
+                        sleep(1)
+
+                    except KeyboardInterrupt:
+                        print("Получение ДЗ сброшено. Продолжаю...")
 
                     from .OperatorShifted import operator_shifted
                     operator_shifted(driver, course_link, 0)
@@ -98,16 +102,17 @@ def operator(driver, course_link):
 
             else:
                 # Repair theory, if broken. Mechanism described in Download.py
-                theory_download(driver, course_name)
-                print("Верификация теории завершена. Начата проверка ДЗ.")
-                sleep(1)
+                try:
+                    theory_download(driver, course_name)
+                    print("Верификация теории завершена. Начата проверка ДЗ.")
+                    sleep(1)
 
-                homework_download(driver, course_name)
-                print("Верификация ДЗ завершена. Начата загрузка видео.")
-                sleep(1)
+                except KeyboardInterrupt:
+                    print("Получение теории сброшено. Продолжаю...")
 
-                from .OperatorShifted import operator_shifted
-                operator_shifted(driver, course_link, 0)
+                from .OperatorHomework import operator_homework
+
+                operator_homework(driver, course_link)
                 sleep(1)
 
                 # Everything downloaded, going to next link
@@ -389,27 +394,33 @@ def operator(driver, course_link):
 
     # If dictionary with theory is not empty...
     if len(theoretic_data.keys()) != 0:
+        try:
+            # Generate HTML from dictionary data
+            theory_html_gen(course_name, theoretic_data)
+            print("Список теории сформирован. Обрабатываю...")
+            print('---\n')
 
-        # Generate HTML from dictionary data
-        theory_html_gen(course_name, theoretic_data)
-        print("Список теории сформирован. Обрабатываю...")
-        print('---\n')
+            # Make screenshots
+            theory_download(driver, course_name)
+            sleep(1)
 
-        # Make screenshots
-        theory_download(driver, course_name)
-        sleep(1)
+        except KeyboardInterrupt:
+            print("Получение теории сброшено. Продолжаю...")
 
     # If dictionary with hw is not empty...
     if len(homework_links.keys()) != 0:
+        try:
+            # Generate HTML from dictionary data
+            homework_html_gen(course_name, homework_links)
+            print("Список ДЗ сформирован. Скачиваю...")
+            print('---\n')
 
-        # Generate HTML from dictionary data
-        homework_html_gen(course_name, homework_links)
-        print("Список ДЗ сформирован. Скачиваю...")
-        print('---\n')
+            # Make screenshots
+            homework_download(driver, course_name)
+            sleep(1)
 
-        # Make screenshots
-        homework_download(driver, course_name)
-        sleep(1)
+        except KeyboardInterrupt:
+            print("Получение ДЗ сброшено. Продолжаю...")
 
     # If dictionary with videos is not empty...
     if len(download_links.keys()) != 0:
@@ -423,7 +434,5 @@ def operator(driver, course_link):
         video_download(driver, course_name, course_link)
         sleep(1)
 
-    # And finally sort everything
-    print('Сортируем видео и теорию по папкам...')
     sort_files(course_name)
     sleep(1)
