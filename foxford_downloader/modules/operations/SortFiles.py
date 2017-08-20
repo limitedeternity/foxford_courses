@@ -14,15 +14,15 @@ def sort_files(course_name):
             # move it to corresponding directory
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename[:-4], "Видео.mp4")
+                join(abspath('.'), course_name, filename[:-4], filename)
             )
 
-        # we move homework after all, because we are sorting theory before calling sort_files() to avoid conflicts
+        # check if file is screenshot
         elif filename.endswith(".png"):
-            # move it to hw directory
+            # move it to theory directory
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.split('_')[0], "ДЗ-" + filename.split('_')[2])
+                join(abspath('.'), course_name, "Теория", filename)
             )
 
         # HTML cleanup for next session
