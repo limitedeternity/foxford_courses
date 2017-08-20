@@ -82,6 +82,7 @@ def downloader():
             # Show login page or dashboard
             login_to_foxford(driver)
             cls()
+            print("(Помни, что если хочешь пропустить загрузку чего-либо, кроме видео, жми Ctrl + C. Во время загрузки.)")
             print("Выбирай курс.")
 
             # Wait until user navigates to URL matching regex
