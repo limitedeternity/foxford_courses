@@ -73,7 +73,7 @@ def screenshot(driver, file, mode):
         element = driver.find_element_by_class_name("page_content")
 
     elif mode == 'homework':
-        element = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
+        element = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
 
     else:
         return False

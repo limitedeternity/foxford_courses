@@ -117,12 +117,10 @@ def homework_download(driver, course_name):
             content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
             content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
             wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
-            footer = driver.find_element_by_css_selector("div[class^='Footer__footer__']")
 
             driver.execute_script("arguments[0].setAttribute('style', '');", content)
             driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
             driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
-            driver.execute_script("arguments[0].remove();", footer)
 
             sleep(1)
 
@@ -144,12 +142,10 @@ def homework_download(driver, course_name):
                 content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
                 content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
                 wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
-                footer = driver.find_element_by_css_selector("div[class^='Footer__footer__']")
 
                 driver.execute_script("arguments[0].setAttribute('style', '');", content)
                 driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
                 driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
-                driver.execute_script("arguments[0].remove();", footer)
 
                 sleep(1)
 
