@@ -4,7 +4,8 @@ from time import sleep
 
 from .TheoryHTML import theory_html_gen
 from .VideoHTML import video_html_gen
-from .Downloader import theory_download, video_download
+from .HomeworkHTML import homework_html_gen
+from .Downloader import theory_download, video_download, homework_download
 from .SortFiles import sort_files
 
 from selenium.common.exceptions import ElementNotVisibleException, StaleElementReferenceException, NoSuchElementException
@@ -22,6 +23,7 @@ def operator(driver, course_link):
     main_window = driver.current_window_handle
     theoretic_data = {}
     download_links = {}
+    homework_links = {}
 
     driver.get(course_link)  # <--- Make GET request towards course link
     print('\n')
@@ -68,28 +70,36 @@ def operator(driver, course_link):
 
             # Repair theory, if broken. Mechanism described in Download.py
             theory_download(driver, course_name)
-            print("Верификация теории завершена. Начата проверка видео.")
+            print("Верификация теории завершена. Начата проверка ДЗ.")
             sleep(1)
 
-            # Repair videos if HTML is presents
-            if exists(join(abspath("."), course_name + "_videos.html")):
-                print("Обнаружены предыдущие видео. Верифицирую...")
-                video_download(driver, course_name, course_link, html_repair=True)
-                print("Верификация видео завершена.")
+            if exists(join(abspath("."), course_name + "_homework.html")):
+                print("Предыдущее ДЗ обнаружено. Верифицирую...")
+
+                # Repair hw, if broken. Mechanism described in Download.py
+                homework_download(driver, course_name)
+                print("Верификация ДЗ завершена. Начата проверка видео.")
                 sleep(1)
 
-                # Everything downloaded, going to next link
-                return True
+                # Repair videos if HTML is presents
+                if exists(join(abspath("."), course_name + "_videos.html")):
+                    print("Обнаружены предыдущие видео. Верифицирую...")
+                    video_download(driver, course_name, course_link, html_repair=True)
+                    print("Верификация видео завершена.")
+                    sleep(1)
 
-            else:
-                # Because screenshots are verified, but no videos here, we need video-only downloader with 0 skips.
-                print("Видео не обнаружено. Начинаю получение...")
-                from .OperatorShifted import operator_shifted
-                operator_shifted(driver, course_link, 0)
-                sleep(1)
+                    # Everything downloaded, going to next link
+                    return True
 
-                # Everything downloaded, going to next link
-                return True
+                else:
+                    # Because screenshots are verified, but no videos here, we need video-only downloader with 0 skips.
+                    print("Видео не обнаружено. Начинаю получение...")
+                    from .OperatorShifted import operator_shifted
+                    operator_shifted(driver, course_link, 0)
+                    sleep(1)
+
+                    # Everything downloaded, going to next link
+                    return True
 
         # Nothing was downloaded, going next
         else:
@@ -222,7 +232,78 @@ def operator(driver, course_link):
             # No video (Yeah, that happens too)
             except NoSuchElementException:
                 print("Видео не обнаружено.")
-                print("Идем дальше.")
+                print("Ищу ДЗ.")
+                print('---\n')
+                sleep(1)
+
+            # HW getting
+            try:
+                # XPATH for homework link
+                homework_link = driver.find_element_by_xpath("//i[@class='fxf_icon_small fxf_icon_tasks_blue']/..")
+                if homework_link is not None and homework_link.get_attribute("class") != 'disabled':
+
+                    driver.execute_script('window.open(arguments[0], "_blank");', homework_link.get_attribute("href"))
+
+                    windows = driver.window_handles
+                    driver.switch_to.window(windows[1])
+                    sleep(1)
+
+                    # Write to dictionary current url after each click.
+                    try:
+                        homework = driver.find_elements_by_xpath("(//div[@class='content-wrapper'])[1]/*[1]/*[position()>1]/*[1]/*[2]")
+
+                        for i in range(len(homework)):
+                            try:
+                                ActionChains(driver).move_to_element(homework[i]).click(homework[i]).perform()
+                                sleep(2)
+                                task_name = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]/*[1]/*[2]/*[1]").text
+                                homework_links[lesson_name + "_" + str(task_name).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")] = driver.current_url
+                                sleep(1)
+
+                            except ElementNotVisibleException:
+                                print("Элемент не виден.")
+                                print('---\n')
+                                sleep(1)
+
+                            except StaleElementReferenceException:
+                                print('Ошибка, связанная с большой задержкой ответа. Попробуй еще раз.')
+                                print('---\n')
+                                sleep(1)
+
+                            except NoSuchElementException:
+                                print('Что-то не так.')
+                                print('---\n')
+                                sleep(1)
+
+                        print("ДЗ записано в очередь.")
+                        print('---\n')
+
+                    except NoSuchElementException:
+                        print('Произошла ошибка.')
+                        print('---\n')
+                        sleep(1)
+
+                    # Opening in new tab redirects to dashboard, if HW is not payed
+                    except IndexError:
+                        print('Кажется, ДЗ не оплачено.')
+                        print('---\n')
+                        sleep(1)
+
+                    driver.execute_script('window.close();')
+                    driver.switch_to.window(main_window)
+                    sleep(1)
+
+                # HW disabled
+                else:
+                    print('ДЗ отключено.')
+                    print('Идем дальше.')
+                    print('---\n')
+                    sleep(1)
+
+            # No HW
+            except NoSuchElementException:
+                print("ДЗ не обнаружено.")
+                print("Ищу теорию.")
                 print('---\n')
                 sleep(1)
 
@@ -312,6 +393,24 @@ def operator(driver, course_link):
 
         # Make screenshots
         theory_download(driver, course_name)
+        sleep(1)
+
+    # If dictionary with hw is not empty...
+    if len(homework_links.keys()) != 0:
+        try:
+            # Make hw directory
+            makedirs(join(abspath("."), course_name, "ДЗ"))
+
+        # Just in case.
+        except FileExistsError:
+            pass
+
+        homework_html_gen(course_name, homework_links)
+        print("Список ДЗ сформирован. Скачиваю...")
+        print('---\n')
+
+        # Make screenshots
+        homework_download(driver, course_name)
         sleep(1)
 
     # If dictionary with videos is not empty...

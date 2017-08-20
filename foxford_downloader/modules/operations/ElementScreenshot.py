@@ -3,9 +3,9 @@ from time import sleep
 from os import unlink
 
 
-def theory_screenshot(driver, file):
+def screenshot(driver, file, mode):
 
-    '''Screenshot module for theory'''
+    '''Screenshot module'''
 
     # Get page parameters
     total_width = driver.execute_script("return document.body.offsetWidth;")
@@ -65,8 +65,19 @@ def theory_screenshot(driver, file):
     # Saving glued image
     stitched_image.save(file)
 
-    # element is a block, containing theory, in page DOM. So, we are getting its parameters.
-    element = driver.find_element_by_class_name("page_content")
+    # element is a block with contents in page DOM. So, we are getting its parameters, depending on mode
+
+    element = None
+
+    if mode == 'theory':
+        element = driver.find_element_by_class_name("page_content")
+
+    elif mode == 'homework':
+        element = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
+
+    else:
+        return False
+
     location = element.location
     size = element.size
 
