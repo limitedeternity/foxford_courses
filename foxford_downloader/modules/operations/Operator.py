@@ -68,21 +68,13 @@ def operator(driver, course_link):
         if exists(join(abspath("."), course_name + "_theory.html")):
             print("Найдены предыдущие теоретические данные. Верифицирую...\n")
 
-            # Repair theory, if broken. Mechanism described in Download.py
-            theory_download(driver, course_name)
-            print("Верификация теории завершена. Начата проверка ДЗ.")
-            sleep(1)
-
             if exists(join(abspath("."), course_name + "_homework.html")):
+                print("Теория в порядке.")
                 print("Предыдущее ДЗ обнаружено. Верифицирую...")
-
-                # Repair hw, if broken. Mechanism described in Download.py
-                homework_download(driver, course_name)
-                print("Верификация ДЗ завершена. Начата проверка видео.")
-                sleep(1)
 
                 # Repair videos if HTML is presents
                 if exists(join(abspath("."), course_name + "_videos.html")):
+                    print("ДЗ в порядке.")
                     print("Обнаружены предыдущие видео. Верифицирую...")
                     video_download(driver, course_name, course_link, html_repair=True)
                     print("Верификация видео завершена.")
@@ -92,8 +84,11 @@ def operator(driver, course_link):
                     return True
 
                 else:
-                    # Because screenshots are verified, but no videos here, we need video-only downloader with 0 skips.
-                    print("Видео не обнаружено. Начинаю получение...")
+                    # Repair hw, if broken. Mechanism described in Download.py
+                    homework_download(driver, course_name)
+                    print("Верификация ДЗ завершена. Начата загрузка видео.")
+                    sleep(1)
+
                     from .OperatorShifted import operator_shifted
                     operator_shifted(driver, course_link, 0)
                     sleep(1)
@@ -101,7 +96,23 @@ def operator(driver, course_link):
                     # Everything downloaded, going to next link
                     return True
 
-        # Nothing was downloaded, going next
+            else:
+                # Repair theory, if broken. Mechanism described in Download.py
+                theory_download(driver, course_name)
+                print("Верификация теории завершена. Начата проверка ДЗ.")
+                sleep(1)
+
+                homework_download(driver, course_name)
+                print("Верификация ДЗ завершена. Начата загрузка видео.")
+                sleep(1)
+
+                from .OperatorShifted import operator_shifted
+                operator_shifted(driver, course_link, 0)
+                sleep(1)
+
+                # Everything downloaded, going to next link
+                return True
+
         else:
             pass
 
