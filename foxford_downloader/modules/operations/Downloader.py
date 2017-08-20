@@ -79,10 +79,10 @@ def theory_download(driver, course_name):
 
     for filename in listdir(abspath(".")):
         if filename.endswith(".png"):
-            # move screenshots to theory directory
+            # move screenshots to directory
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, "Теория", filename)
+                join(abspath('.'), course_name, filename.split('_')[0], "Теория.png")
             )
 
 

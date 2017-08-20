@@ -145,7 +145,7 @@ def operator(driver, course_link):
 
             try:
                 # Set lesson_name...
-                lesson_name = str(driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
+                lesson_name = str(driver.find_element_by_class_name("lesson_content").find_element_by_tag_name('h2').text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "").replace("_", "")
 
                 try:
                     # ...and make a folder for video from this lesson
@@ -257,7 +257,7 @@ def operator(driver, course_link):
                                 ActionChains(driver).move_to_element(homework[i]).click(homework[i]).perform()
                                 sleep(2)
                                 task_name = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]/*[1]/*[2]/*[1]").text
-                                homework_links[lesson_name + "_" + str(task_name).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")] = driver.current_url
+                                homework_links[lesson_name + "_" + str(task_name).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "").replace("_", "")] = driver.current_url
                                 sleep(1)
 
                             except ElementNotVisibleException:
@@ -336,7 +336,7 @@ def operator(driver, course_link):
 
                             # Get name of theory (lesson_name + info) and bind it to link using dictionary
                             info = driver.find_element_by_class_name("info").find_element_by_tag_name('h1').text
-                            theoretic_data[lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")] = url_concat
+                            theoretic_data[lesson_name + "_" + str(info).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "").replace("_", "")] = url_concat
 
                             sleep(1)
 
@@ -378,14 +378,7 @@ def operator(driver, course_link):
 
     # If dictionary with theory is not empty...
     if len(theoretic_data.keys()) != 0:
-        try:
-            # Make theory directory
-            makedirs(join(abspath("."), course_name, "Теория"))
-
-        # Just in case.
-        except FileExistsError:
-            pass
-
+        
         # Generate HTML from dictionary data
         theory_html_gen(course_name, theoretic_data)
         print("Список теории сформирован. Обрабатываю...")
@@ -397,14 +390,8 @@ def operator(driver, course_link):
 
     # If dictionary with hw is not empty...
     if len(homework_links.keys()) != 0:
-        try:
-            # Make hw directory
-            makedirs(join(abspath("."), course_name, "ДЗ"))
-
-        # Just in case.
-        except FileExistsError:
-            pass
-
+        
+        # Generate HTML from dictionary data
         homework_html_gen(course_name, homework_links)
         print("Список ДЗ сформирован. Скачиваю...")
         print('---\n')
