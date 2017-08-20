@@ -78,7 +78,7 @@ def theory_download(driver, course_name):
 
     for filename in listdir(abspath(".")):
         if filename.endswith(".png"):
-            # move screenshots to directory
+            # move theory to directory
             move(
                 join(abspath('.'), filename),
                 join(abspath('.'), course_name, filename.split('_')[0], "Теория.png")
@@ -168,6 +168,14 @@ def homework_download(driver, course_name):
         print('---\n')
 
     print('\n---\n')
+
+    for filename in listdir(abspath(".")):
+        if filename.endswith(".png"):
+            # move hw to directory
+            move(
+                join(abspath('.'), filename),
+                join(abspath('.'), course_name, filename.split('_')[0], "ДЗ-" + filename.split('_')[2])
+            )
 
 
 def video_download(driver, course_name, course_link, html_repair=False):
