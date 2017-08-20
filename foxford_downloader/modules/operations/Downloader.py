@@ -3,9 +3,11 @@
 from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 from os.path import abspath, join, exists
+from os import listdir
 from shutil import move
 from time import sleep
-from .ElementScreenshot import theory_screenshot
+from shutil import move
+from .ElementScreenshot import screenshot
 
 
 def theory_download(driver, course_name):
@@ -23,7 +25,7 @@ def theory_download(driver, course_name):
         try:
             # If theory with this name already exists...
             if exists(join(abspath("."), str(links[i].text) + ".png")):
-                # ...increase counter and go to another link
+                # ... go to another link
                 continue
 
             # ...else go next
@@ -55,7 +57,7 @@ def theory_download(driver, course_name):
                 pass
 
             # Screenshot theory area (see ElementScreenshot.py)
-            theory_screenshot(driver, file)
+            screenshot(driver, file, 'theory')
             sleep(1)
 
             print("Теория получена.")
@@ -71,6 +73,101 @@ def theory_download(driver, course_name):
         driver.execute_script('window.close();')
         driver.switch_to.window(main_window)
         sleep(1)
+        print('---\n')
+
+    print('\n---\n')
+
+    for filename in listdir(abspath(".")):
+        if filename.endswith(".png"):
+            # move screenshots to directory
+            move(
+                join(abspath('.'), filename),
+                join(abspath('.'), course_name, filename.split('_')[0], "Теория.png")
+            )
+
+
+def homework_download(driver, course_name):
+    '''Downloader for hw module'''
+
+    driver.get('file:///' + abspath(course_name + '_homework.html'))
+    main_window = driver.current_window_handle
+    links = driver.find_elements_by_tag_name("a")
+    print('\n')
+
+    for i in range(len(links)):
+        try:
+            # If hw with this name already exists...
+            if exists(join(abspath("."), str(links[i].text) + "_0" + ".png")) or exists(join(abspath("."), str(links[i].text) + "_1" + ".png")):
+                # ...go to another link
+                continue
+
+            # ...else go next
+            else:
+                pass
+
+            
+            link_text = str(links[i].text)
+            links[i].click()
+            windows = driver.window_handles
+            driver.switch_to.window(windows[1])
+
+            # This should break custom scroll so we can make screenshot properly
+            # before "try:" goes screenshot of homework, which is probably unsolved. After "try:" we are clicking "give up" button to reveal answers
+            # And making screenshot again. If location of "give up" button fails, then it means, that hw is solved. We are renaming HW.
+
+            task_name = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]/*[1]/*[2]/*[1]").text
+            wrapper = driver.find_element_by_xpath("(//div[@class='custom-scroll '])[2]/../..")
+            content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
+            content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
+            wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
+
+            driver.execute_script("arguments[0].setAttribute('style', '');", content)
+            driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
+            driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
+            sleep(1)
+
+            file = link_text + "_0" + ".png"
+            screenshot(driver, file, 'homework')
+            sleep(1)
+            driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
+            sleep(1)
+
+            try:
+                driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]").click()
+                sleep(1)
+                driver.find_element_by_xpath("//div[contains(text(), 'Да')]").click()
+                sleep(1)
+
+                driver.get(driver.current_url)
+
+                wrapper = driver.find_element_by_xpath("(//div[@class='custom-scroll '])[2]/../..")
+                content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
+                content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
+                wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
+
+                driver.execute_script("arguments[0].setAttribute('style', '');", content)
+                driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
+                driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
+                sleep(1)
+
+                file = link_text + "_1" + ".png"
+                screenshot(driver, file, 'homework')
+                sleep(1)
+                driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
+                sleep(1)
+
+            except NoSuchElementException:
+                print("ДЗ уже решено.")
+                move(join(abspath("."), link_text + "_0" + ".png"), join(abspath("."), link_text + "_1" + ".png"))
+
+            print("ДЗ получено.")
+            sleep(1)
+
+        except ElementNotVisibleException:
+            print("Элемент не виден.")
+
+        driver.execute_script('window.close();')
+        driver.switch_to.window(main_window)
         print('---\n')
 
     print('\n---\n')

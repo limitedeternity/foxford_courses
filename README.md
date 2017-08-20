@@ -94,6 +94,10 @@ https://rutracker.org/forum/viewtopic.php?t=5418437
 
 magnet:?xt=urn:btih:7175BB1D0FC5FC07214975692D338199FC879608
 
+*Стань сильнее. Pre-Intermediate (A2-B1):*
+
+https://mega.nz/#!FmhQiBDa!YXSrid3BBL8iboQJgKKWakqFm9ZODhu9VzCzBlYroNQ
+
 ...
 
 *Биология. Подготовка к ЕГЭ:*
