@@ -6,7 +6,6 @@ from os.path import abspath, join, exists
 from os import listdir
 from shutil import move
 from time import sleep
-from shutil import move
 from .ElementScreenshot import screenshot
 
 
@@ -105,7 +104,6 @@ def homework_download(driver, course_name):
             else:
                 pass
 
-            
             link_text = str(links[i].text)
             links[i].click()
             windows = driver.window_handles
@@ -115,7 +113,6 @@ def homework_download(driver, course_name):
             # before "try:" goes screenshot of homework, which is probably unsolved. After "try:" we are clicking "give up" button to reveal answers
             # And making screenshot again. If location of "give up" button fails, then it means, that hw is solved. We are renaming HW.
 
-            task_name = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]/*[1]/*[2]/*[1]").text
             wrapper = driver.find_element_by_xpath("(//div[@class='custom-scroll '])[2]/../..")
             content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
             content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")

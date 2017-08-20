@@ -389,7 +389,7 @@ def operator(driver, course_link):
 
     # If dictionary with theory is not empty...
     if len(theoretic_data.keys()) != 0:
-        
+
         # Generate HTML from dictionary data
         theory_html_gen(course_name, theoretic_data)
         print("Список теории сформирован. Обрабатываю...")
@@ -401,7 +401,7 @@ def operator(driver, course_link):
 
     # If dictionary with hw is not empty...
     if len(homework_links.keys()) != 0:
-        
+
         # Generate HTML from dictionary data
         homework_html_gen(course_name, homework_links)
         print("Список ДЗ сформирован. Скачиваю...")
