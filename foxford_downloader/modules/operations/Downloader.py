@@ -2,6 +2,9 @@
 
 from selenium.common.exceptions import ElementNotVisibleException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from os.path import abspath, join, exists
 from os import listdir
 from shutil import move
@@ -131,9 +134,10 @@ def homework_download(driver, course_name):
             sleep(1)
 
             try:
-                driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]").click()
+                give_up = driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]")
+                ActionChains(driver).move_to_element(give_up).click(give_up).perform()
                 sleep(1)
-                driver.find_element_by_xpath("//div[contains(text(), 'Да')]").click()
+                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Да')]"))).click()
                 sleep(1)
 
                 driver.get(driver.current_url)
