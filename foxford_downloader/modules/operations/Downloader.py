@@ -137,7 +137,8 @@ def homework_download(driver, course_name):
                 give_up = driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]")
                 ActionChains(driver).move_to_element(give_up).click(give_up).perform()
                 sleep(1)
-                WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Да')]"))).click()
+                agree = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Да')]")))
+                ActionChains(driver).move_to_element(agree).click(agree).perform()
                 sleep(1)
 
                 driver.get(driver.current_url)
