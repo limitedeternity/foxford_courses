@@ -230,7 +230,7 @@ def video_download(driver, course_name, course_link, html_repair=False):
 
                 # ...we need another list with ONLY videos. Giving skips parameter to OperatorShited.py function
                 from .OperatorShifted import operator_shifted
-                operator_shifted(driver, course_link, skips)
+                operator_shifted(driver, course_link, skips, called=True)
                 sleep(1)
 
                 # Finish video_download, when operator_shifted and new instance of video_download are finished their work

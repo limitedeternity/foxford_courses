@@ -16,7 +16,7 @@ from sys import exit
 # Note, that everything below repeats contents of Operator.py. If you want to get to know, what happens here, read Operator.py and compare.
 
 
-def operator_shifted(driver, course_link, skips):
+def operator_shifted(driver, course_link, skips, called=False):
     '''Operator module, which handles all actions to extract only videos'''
 
     lesson_name = None
@@ -59,12 +59,13 @@ def operator_shifted(driver, course_link, skips):
         print(course_name)
         sleep(1)
 
-        if exists(join(abspath("."), course_name + "_videos.html")):
-            print("Обнаружены предыдущие видео. Верифицирую...")
-            video_download(driver, course_name, course_link, html_repair=True)
-            print("Верификация видео завершена.")
-            sleep(1)
-            return True
+        if called is False:
+            if exists(join(abspath("."), course_name + "_videos.html")):
+                print("Обнаружены предыдущие видео. Верифицирую...")
+                video_download(driver, course_name, course_link, html_repair=True)
+                print("Верификация видео завершена.")
+                sleep(1)
+                return True
 
         else:
             pass

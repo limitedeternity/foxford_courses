@@ -70,7 +70,7 @@ def operator(driver, course_link):
 
             if exists(join(abspath("."), course_name + "_homework.html")):
                 print("Теория в порядке.")
-                print("Предыдущее ДЗ обнаружено. Верифицирую...")
+                print("Предыдущее ДЗ обнаружено. Верифицирую...\n")
 
                 # Repair videos if HTML is presents
                 if exists(join(abspath("."), course_name + "_videos.html")):
