@@ -102,16 +102,17 @@ def homework_download(driver, course_name):
     links = driver.find_elements_by_tag_name("a")
     print('\n')
 
+    swap = False
     for i in range(len(links)):
         try:
             # If hw with this name already exists...
-            if exists(join(abspath("."), str(links[i].text) + "_0" + ".png")) or exists(join(abspath("."), str(links[i].text) + "_1" + ".png")):
+            if exists(join(abspath("."), str(links[i].text) + "_1" + ".png")):
                 # ...go to another link
                 continue
 
             # ...else go next
-            else:
-                pass
+            elif exists(join(abspath("."), str(links[i].text) + "_0" + ".png")):
+                swap = True
 
             link_text = str(links[i].text)
             links[i].click()
@@ -122,6 +123,21 @@ def homework_download(driver, course_name):
             # This should break custom scroll so we can make screenshot properly
             # before "try:" goes screenshot of homework, which is probably unsolved. After "try:" we are clicking "give up" button to reveal answers
             # And making screenshot again. If location of "give up" button fails, then it means, that hw is solved. We are renaming HW.
+
+            if swap is True:
+                try:
+                    give_up = driver.find_element_by_xpath("//a[contains(text(), 'Сдаюсь!')]")
+                    ActionChains(driver).move_to_element(give_up).click(give_up).perform()
+                    sleep(1)
+                    agree = WebDriverWait(driver, 20).until(EC.element_to_be_clickable((By.XPATH, "//div[contains(text(), 'Да')]")))
+                    ActionChains(driver).move_to_element(agree).click(agree).perform()
+                    sleep(1)
+
+                    driver.get(driver.current_url)
+                    sleep(1)
+
+                except NoSuchElementException:
+                    pass
 
             wrapper = driver.find_element_by_xpath("(//div[@class='custom-scroll '])[2]/../..")
             content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
@@ -134,6 +150,20 @@ def homework_download(driver, course_name):
             driver.execute_script("arguments[0].innerHTML = arguments[1];", wrapper, content.get_attribute("outerHTML"))
 
             sleep(1)
+
+            if swap is True:
+                file = link_text + "_1" + ".png"
+                screenshot(driver, file, 'homework')
+                sleep(1)
+                driver.execute_script("arguments[0].innerHTML = arguments[1]", wrapper, wrapper_orig)
+                sleep(1)
+
+                driver.execute_script('window.close();')
+                driver.switch_to.window(main_window)
+                print('---\n')
+                sleep(1)
+                swap = False
+                continue
 
             file = link_text + "_0" + ".png"
             screenshot(driver, file, 'homework')
