@@ -85,7 +85,7 @@ def theory_download(driver, course_name):
             # move theory to directory
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.split('_')[0], "Теория" + str(counter) + ".png")
+                join(abspath('.'), course_name, filename.split('_')[0], "Теория-" + str(counter) + ".png")
             )
             counter += 1
 
