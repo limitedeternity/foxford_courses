@@ -79,13 +79,15 @@ def theory_download(driver, course_name):
 
     print('\n---\n')
 
+    counter = 0
     for filename in listdir(abspath(".")):
         if filename.endswith(".png"):
             # move theory to directory
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.split('_')[0], "Теория.png")
+                join(abspath('.'), course_name, filename.split('_')[0], "Теория" + str(counter) + ".png")
             )
+            counter += 1
 
 
 def homework_download(driver, course_name):
@@ -111,6 +113,7 @@ def homework_download(driver, course_name):
             links[i].click()
             windows = driver.window_handles
             driver.switch_to.window(windows[1])
+            sleep(1)
 
             # This should break custom scroll so we can make screenshot properly
             # before "try:" goes screenshot of homework, which is probably unsolved. After "try:" we are clicking "give up" button to reveal answers
@@ -120,6 +123,7 @@ def homework_download(driver, course_name):
             content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
             content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
             wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
+            sleep(1)
 
             driver.execute_script("arguments[0].setAttribute('style', '');", content)
             driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
@@ -142,11 +146,13 @@ def homework_download(driver, course_name):
                 sleep(1)
 
                 driver.get(driver.current_url)
+                sleep(1)
 
                 wrapper = driver.find_element_by_xpath("(//div[@class='custom-scroll '])[2]/../..")
                 content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]")
                 content_content = driver.find_element_by_xpath("(//div[@class='content-wrapper'])[2]/*[1]")
                 wrapper_orig = driver.execute_script("return arguments[0].innerHTML;", wrapper)
+                sleep(1)
 
                 driver.execute_script("arguments[0].setAttribute('style', '');", content)
                 driver.execute_script("arguments[0].setAttribute('style', '');", content_content)
@@ -176,13 +182,15 @@ def homework_download(driver, course_name):
 
     print('\n---\n')
 
+    counter = 0
     for filename in listdir(abspath(".")):
         if filename.endswith(".png"):
             # move hw to directory
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.split('_')[0], "ДЗ-" + filename.split('_')[2])
+                join(abspath('.'), course_name, filename.split('_')[0], str(counter) + ". " + "ДЗ-" + filename.split('_')[2])
             )
+            counter += 1
 
 
 def video_download(driver, course_name, course_link, html_repair=False):
