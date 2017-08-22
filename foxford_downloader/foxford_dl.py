@@ -96,6 +96,7 @@ def downloader():
 
         except KeyboardInterrupt:
             # On 'Ctrl + C' return to menu.
+            driver.quit()
             selector()
 
 
