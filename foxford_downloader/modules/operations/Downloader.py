@@ -6,7 +6,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from os.path import abspath, join, exists
-from os import listdir
+from os import listdir, makedirs
 from shutil import move
 from time import sleep
 from .ElementScreenshot import screenshot
@@ -79,15 +79,19 @@ def theory_download(driver, course_name):
 
     print('\n---\n')
 
-    counter = 0
     for filename in listdir(abspath(".")):
         if filename.endswith(".png"):
             # move theory to directory
+            try:
+                makedirs(join(abspath("."), course_name, filename.split("_")[0], "Теория"))
+
+            except FileExistsError:
+                pass
+
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.split('_')[0], "Теория-" + str(counter) + ".png")
+                join(abspath('.'), course_name, filename.split('_')[0], "Теория", filename.split('_')[1])
             )
-            counter += 1
 
 
 def homework_download(driver, course_name):
@@ -182,15 +186,19 @@ def homework_download(driver, course_name):
 
     print('\n---\n')
 
-    counter = 0
     for filename in listdir(abspath(".")):
         if filename.endswith(".png"):
             # move hw to directory
+            try:
+                makedirs(join(abspath("."), course_name, filename.split("_")[0], "ДЗ"))
+
+            except FileExistsError:
+                pass
+
             move(
                 join(abspath('.'), filename),
-                join(abspath('.'), course_name, filename.split('_')[0], str(counter) + ". " + "ДЗ-" + filename.split('_')[2])
+                join(abspath('.'), course_name, filename.split('_')[0], "ДЗ", "_".join(filename.split('_')[1:]))
             )
-            counter += 1
 
 
 def video_download(driver, course_name, course_link, html_repair=False):
