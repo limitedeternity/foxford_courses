@@ -21,6 +21,7 @@ def operator_shifted(driver, course_link, skips, called=False):
 
     lesson_name = None
     course_name = None
+    subject_name = None
     main_window = driver.current_window_handle
     download_links = {}
 
@@ -50,13 +51,17 @@ def operator_shifted(driver, course_link, skips, called=False):
     try:
         course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
+        sleep(1)
+
+        subject_name = str(driver.find_element_by_class_name("course_info_subtitle").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
+
         try:
             makedirs(join(abspath("."), course_name))
 
         except FileExistsError:
             pass
 
-        print(course_name)
+        print(course_name + '. ' + subject_name)
         sleep(1)
 
         if called is False:
@@ -187,5 +192,5 @@ def operator_shifted(driver, course_link, skips, called=False):
         sleep(1)
 
     print('Сортируем видео по папкам...')
-    sort_files(course_name)
+    sort_files(course_name, subject_name)
     sleep(1)

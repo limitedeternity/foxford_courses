@@ -16,6 +16,7 @@ from sys import exit
 def operator_homework(driver, course_link):
 	lesson_name = None
 	course_name = None
+	subject_name = None
 	main_window = driver.current_window_handle
 	homework_links = {}
 	download_links = {}
@@ -25,6 +26,10 @@ def operator_homework(driver, course_link):
 
 	try:
 		course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
+
+		sleep(1)
+
+		subject_name = str(driver.find_element_by_class_name("course_info_subtitle").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
 	except ElementNotVisibleException:
 		print("Элемент не виден.")
@@ -242,5 +247,5 @@ def operator_homework(driver, course_link):
 			video_download(driver, course_name, course_link)
 			sleep(1)
 
-	sort_files(course_name)
+	sort_files(course_name, subject_name)
 	sleep(1)

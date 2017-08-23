@@ -20,6 +20,7 @@ def operator(driver, course_link):
 
     lesson_name = None
     course_name = None
+    subject_name = None
     main_window = driver.current_window_handle
     theoretic_data = {}
     download_links = {}
@@ -53,6 +54,10 @@ def operator(driver, course_link):
         # Remove unsupported chars from course name and save it
         course_name = str(driver.find_element_by_class_name("course_info_title").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
 
+        sleep(1)
+
+        subject_name = str(driver.find_element_by_class_name("course_info_subtitle").text).replace('"', '').replace("»", "").replace("«", "").replace("!", "").replace("?", "").replace(",", ".").replace("/", "").replace("\\", "").replace(":", "").replace("<", "").replace(">", "").replace("*", "")
+
         try:
             # Make directory with course name (SortFiles.py)
             makedirs(join(abspath("."), course_name))
@@ -61,7 +66,7 @@ def operator(driver, course_link):
         except FileExistsError:
             pass
 
-        print(course_name)
+        print(course_name + '. ' + subject_name)
         sleep(1)
 
         # Starting check if download was really broken. Because video download goes exactly after theory, we check video after theory
@@ -434,5 +439,5 @@ def operator(driver, course_link):
         video_download(driver, course_name, course_link)
         sleep(1)
 
-    sort_files(course_name)
+    sort_files(course_name, subject_name)
     sleep(1)

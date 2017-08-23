@@ -1,9 +1,9 @@
-from os import unlink, listdir
+from os import unlink, listdir, rename
 from os.path import join, abspath
 from shutil import move
 
 
-def sort_files(course_name):
+def sort_files(course_name, subject_name):
     '''Sorting for materials'''
 
     # listing all files
@@ -20,3 +20,5 @@ def sort_files(course_name):
         # HTML cleanup for next session
         elif filename.endswith(".html"):
             unlink(join(abspath('.'), filename))
+
+    rename(join(abspath('.'), course_name), join(abspath('.'), course_name + '. ' + subject_name))
