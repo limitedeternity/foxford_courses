@@ -10,7 +10,7 @@ def video_html_gen(course_name, download_links):
 
 	# Read name and link from dictionary, made by Operator
 	for name, link in download_links.items():
-		content_links += p(a({"href": str(link), "download": 'mp4.mp4'}, str(name)))
+		content_links += p(a({"href": str(link), "download": ''}, str(name)))
 
 	# Build HTML data
 	doc = build_doc(body(h3(course_name), content_links))
