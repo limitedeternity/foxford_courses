@@ -19,7 +19,7 @@ def video_html_gen(course_name, download_links):
 		with ioopen('video.skips', 'r', encoding='utf-8') as video_skips:
 			skips = int(video_skips.read())
 
-		content_links = content_links[skips:]
+		content_links = content_links[skips + 1:]
 		unlink(join(abspath("."), 'video.skips'))
 
 	# Build HTML data
