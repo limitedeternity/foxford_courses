@@ -88,15 +88,15 @@ https://rutracker.org/forum/viewtopic.php?t=5444510
 
 *Математика. Экспресс-подготовка к ЕГЭ / Часть B:*
 
-[в процессе]
+https://rutracker.org/forum/viewtopic.php?t=5444960
 
 *Физика. Экспресс-подготовка к ЕГЭ / Часть С:*
 
-[в процессе]
+https://rutracker.org/forum/viewtopic.php?t=5444953
 
 *Физика. Экспресс-подготовка к ЕГЭ / Часть B:*
 
-[в процессе]
+https://rutracker.org/forum/viewtopic.php?t=5444954
 
 *Информатика. Подготовка к ЕГЭ:*
 
@@ -128,7 +128,7 @@ https://rutracker.org/forum/viewtopic.php?t=5444414
 
 *Биология. Подготовка к олимпиадам:*
 
-[в процессе]
+https://rutracker.org/forum/viewtopic.php?t=5445005
 
 *Химия. Подготовка к ЕГЭ:*
 
@@ -152,7 +152,7 @@ https://rutracker.org/forum/viewtopic.php?t=5444409
 
 *Русский язык. Экспресс-подготовка к ЕГЭ. Часть 1:*
 
-[в процессе]
+https://rutracker.org/forum/viewtopic.php?t=5444957
 
 *Русский язык. Сочинение. Экспресс-подготовка к ЕГЭ:*
 
