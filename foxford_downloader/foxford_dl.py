@@ -92,7 +92,6 @@ def downloader():
             cls()
             operator(driver, driver.current_url)
             sleep(1)
-            driver.get("about:blank")
             input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
         except KeyboardInterrupt:
@@ -129,7 +128,6 @@ def downloader_shifted():
             cls()
             operator_shifted(driver, driver.current_url, 0)
             sleep(1)
-            driver.get("about:blank")
             input('Готово. Чтобы скачать еще курс, нажми Enter. Чтобы вернуться к меню, нажми Ctrl + C.\n')
 
         except KeyboardInterrupt:
