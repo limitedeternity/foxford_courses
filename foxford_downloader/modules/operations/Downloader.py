@@ -294,3 +294,5 @@ def video_download(driver, course_name, course_link, html_repair=False):
         print('---\n')
 
     print('\n---\n')
+    sleep(1)
+    driver.quit()
