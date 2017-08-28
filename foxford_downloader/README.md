@@ -2,13 +2,57 @@
  Настройка
 ====================
 
+Windows
+-------
+
 1. Скачай Python 3 для своей платформы (https://www.python.org) и установи, как показано ниже:
 
 ![Screenshot1](https://i.imgur.com/24fZCce.png)
 ![Screenshot2](https://i.imgur.com/BDjiTsJ.png)
 ![Screenshot3](https://i.imgur.com/fyLH7tD.png)
 
-2. Запусти "python install.py". Если ты на Windows, то импортируй *longpath_fixer.reg*, на всякий случай.
+2. Импортируй *longpath_fixer.reg* на всякий случай.
+3. Запусти "python install.py". 
+
+Linux
+-----
+
+1. "sudo apt-get update && sudo apt-get install python3.6 python3.6-dev python3.6-venv"
+
+2. "wget https://bootstrap.pypa.io/get-pip.py && sudo python3.6 get-pip.py"
+
+3. "sudo ln -s /usr/bin/python3.6 /usr/local/bin/python3"
+
+4. "sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3"
+
+5. "sudo pip3 install --upgrade pip setuptools wheel"
+
+6."python3 --version && $(head -1 `which pip3` | tail -c +3) --version". Если вывод - 3.6.2, или что-то близкое, то ты победил.
+
+7. "sudo pip3 install selenium Pillow htmlfun"
+
+Mac OSX
+-------
+
+1. "xcode-select -p && xcode-select --install"
+
+2. Убедись, что никаких Python не установлено командой "ls /Library/Frameworks/Python.framework/Versions/". Если установлены, то делаешь следующее: "sudo rm -rf /Library/Frameworks/Python.framework && cd /usr/local/bin && ls -l . | grep '../Library/Frameworks/Python.framework' | awk '{print $9}' | xargs sudo rm", а затем удаляешь из папки Applications все, что хотя бы отдаленно напоминает Python (папки, приложения).
+
+3. "/usr/bin/ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'"
+
+4. "brew prune && brew doctor"
+
+5. "brew install python3"
+
+6. "sudo pip3 install --upgrade pip setuptools wheel" и перезапусти терминал.
+
+7. "nano ~/.bash_profile". Стираешь все Backspace'ом, переносясь стрелками, если надо, и вписываешь единственное "export PATH=/usr/local/bin:$PATH". Жмешь Ctrl + O, затем Enter, затем Ctrl + X.
+
+8. "source ~/.bash_profile"
+
+9. "python3 --version". Если вывод - 3.6.2, или что-то близкое, то ты победил.
+
+10. "sudo pip3 install selenium Pillow htmlfun"
 
 --------------------
 
@@ -17,9 +61,12 @@
 
 1. Установи Google Chrome(v58-60). Потом удалишь, если захочешь.
 
-2. Запусти скрипт ("python foxford_dl.py"). Откроется окно Chrome. Если запустил в первый раз, то залогинься. Разверни окно так, чтобы содержимое сайта помещалось, и перейди на страницу курса.
+2. Запусти скрипт ("python foxford_dl.py" - на Windows, "python3 foxford_dl.py" - на Mac OSX, "python3.6 foxford_dl.py" - на Linux). Откроется окно Chrome. Если запустил в первый раз, то залогинься. Разверни окно так, чтобы содержимое сайта помещалось, и перейди на страницу курса.
 
 3. Сходи попей чаю. Ты поймешь, если нужно будет что-то сделать.
+
+!! Полностью тестировался скрипт только на OS Windows. 
+!! Максимальное разрешение для работы скриншотов - 1920x1080.
 
 --------------------
 
