@@ -27,9 +27,11 @@ Linux
 
 5. "sudo pip3 install --upgrade pip setuptools wheel"
 
-6."python3 --version && $(head -1 `which pip3` | tail -c +3) --version". Если вывод - 3.6.2, или что-то близкое, то ты победил.
+6. "python3 --version". Если вывод - 3.6.2, или что-то близкое, то ты победил.
 
-7. "sudo pip3 install selenium Pillow htmlfun"
+7. "pip3 -V". Если вывело что-то, значит, все хорошо.
+
+8. "sudo pip3 install selenium Pillow htmlfun"
 
 Mac OSX
 -------
