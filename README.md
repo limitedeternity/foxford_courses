@@ -57,10 +57,18 @@ https://rutracker.org/forum/viewtopic.php?t=5429370
 https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 ----------------------------
+
 ***2017 г.***
 ------------------
 
+***Разное***
+------------
 
+...
+
+*Словесность. Работа с информацией:*
+
+https://rutracker.org/forum/viewtopic.php?t=5446832
 
 ***ОГЭ***
 ---------
