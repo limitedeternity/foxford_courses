@@ -411,6 +411,7 @@ def operator(driver, course_link):
 
         except KeyboardInterrupt:
             print("Получение теории сброшено. Продолжаю...")
+            pass
 
     # If dictionary with hw is not empty...
     if len(homework_links.keys()) != 0:
@@ -426,18 +427,23 @@ def operator(driver, course_link):
 
         except KeyboardInterrupt:
             print("Получение ДЗ сброшено. Продолжаю...")
+            pass
 
     # If dictionary with videos is not empty...
     if len(download_links.keys()) != 0:
+        try:
+            # Generate HTML from dictionary data
+            video_html_gen(course_name, download_links)
+            print("Список видео сформирован. Скачиваю...")
+            print('---\n')
 
-        # Generate HTML from dictionary data
-        video_html_gen(course_name, download_links)
-        print("Список видео сформирован. Скачиваю...")
-        print('---\n')
+            # Start video download
+            video_download(driver, course_name, course_link)
+            sleep(1)
 
-        # Start video download
-        video_download(driver, course_name, course_link)
-        sleep(1)
+        except KeyboardInterrupt:
+            print("Получение видео сброшено.")
+            pass
 
     sort_files(course_name, subject_name)
     sleep(1)
