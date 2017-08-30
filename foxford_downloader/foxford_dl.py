@@ -2,9 +2,10 @@
 
 '''Imports'''
 
-from os import chdir
+from os import chdir, getcwd, environ
 from os.path import dirname, abspath
-from sys import exit
+from sys import exit, platform
+from subprocess import call
 from time import sleep
 from re import match
 
@@ -57,6 +58,11 @@ def selector():
         # Exit
         cls()
         sleep(1)
+
+        if platform.startswith('win'):
+            chdir(environ.get("WINDIR"))
+            call("subst X: /d")
+
         exit(0)
 
 
@@ -139,6 +145,12 @@ if __name__ == "__main__":
 
     # Small setup for paths
     chdir(dirname(abspath(__file__)))
+
+    if platform.startswith('win'):
+        if getcwd() != "X:\\":
+            call('subst X: "."')
+            sleep(1)
+            chdir("X:\\")
 
     # Startup
     selector()
