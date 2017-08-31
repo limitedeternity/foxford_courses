@@ -11,50 +11,52 @@ Windows
 ![Screenshot2](https://i.imgur.com/BDjiTsJ.png)
 ![Screenshot3](https://i.imgur.com/fyLH7tD.png)
 
-2. Импортируй *longpath_fixer.reg* на всякий случай.
-3. Запусти "python install.py". 
+2. Импортируй `longpath_fixer.reg` на всякий случай.
+3. Запусти `pip install selenium Pillow htmlfun`. 
 
 Linux
 -----
 
-1. "sudo apt-get update && sudo apt-get install python3.6 python3.6-dev python3.6-venv"
+1. `sudo apt-get update && sudo apt-get install python3.6 python3.6-dev python3.6-venv`
 
-2. "wget https://bootstrap.pypa.io/get-pip.py && sudo python3.6 get-pip.py"
+2. `wget https://bootstrap.pypa.io/get-pip.py && sudo python3.6 get-pip.py`
 
-3. "sudo ln -s /usr/bin/python3.6 /usr/local/bin/python3"
+3. `sudo ln -s /usr/bin/python3.6 /usr/local/bin/python3`
 
-4. "sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3"
+4. `sudo ln -s /usr/local/bin/pip /usr/local/bin/pip3`
 
-5. "sudo pip3 install --upgrade pip setuptools wheel"
+5. `python3 --version`. Если вывод - 3.6.2, или что-то близкое, то ты победил.
 
-6. "python3 --version". Если вывод - 3.6.2, или что-то близкое, то ты победил.
+6. `pip3 -V`. Если вывело что-то, значит, все хорошо.
 
-7. "pip3 -V". Если вывело что-то, значит, все хорошо.
+7. `sudo pip3 install --upgrade pip setuptools wheel`
 
-8. "sudo pip3 install selenium Pillow htmlfun"
+8. `sudo pip3 install selenium Pillow htmlfun`
 
 Mac OSX
 -------
 
-1. "xcode-select -p && xcode-select --install"
+1. `xcode-select -p && xcode-select --install`
 
-2. Убедись, что никаких Python не установлено командой "ls /Library/Frameworks/Python.framework/Versions/". Если установлены, то делаешь следующее: "sudo rm -rf /Library/Frameworks/Python.framework && cd /usr/local/bin && ls -l . | grep '../Library/Frameworks/Python.framework' | awk '{print $9}' | xargs sudo rm", а затем удаляешь из папки Applications все, что хотя бы отдаленно напоминает Python (папки, приложения).
+2. Убедись, что никаких Python не установлено командой:  `ls /Library/Frameworks/Python.framework/Versions/`. 
 
-3. "/usr/bin/ruby -e '$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)'"
+2.1 Если установлено, то делаешь следующее: `sudo rm -rf /Library/Frameworks/Python.framework && cd /usr/local/bin && ls -l . | grep '../Library/Frameworks/Python.framework' | awk '{print $9}' | xargs sudo rm`. Затем удаляешь из папки Applications все, что хотя бы отдаленно напоминает Python (папки, приложения).
 
-4. "brew prune && brew doctor"
+3. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
-5. "brew install python3"
+4. `brew prune && brew doctor`
 
-6. "sudo pip3 install --upgrade pip setuptools wheel" и перезапусти терминал.
+5. `brew install python3`
 
-7. "nano ~/.bash_profile". Стираешь все Backspace'ом, переносясь стрелками, если надо, и вписываешь единственное "export PATH=/usr/local/bin:$PATH". Жмешь Ctrl + O, затем Enter, затем Ctrl + X.
+6. `sudo pip3 install --upgrade pip setuptools wheel`
 
-8. "source ~/.bash_profile"
+7. `nano ~/.bash_profile`. Стираешь все Backspace'ом, переносясь стрелками, если надо, и вписываешь единственное `export PATH=/usr/local/bin:$PATH`. Жмешь Ctrl + O, затем Enter, затем Ctrl + X.
 
-9. "python3 --version". Если вывод - 3.6.2, или что-то близкое, то ты победил.
+8. `source ~/.bash_profile`
 
-10. "sudo pip3 install selenium Pillow htmlfun"
+9. `python3 --version`. Если вывод - 3.6.2, или что-то близкое, то ты победил.
+
+10. `sudo pip3 install selenium Pillow htmlfun`
 
 --------------------
 
