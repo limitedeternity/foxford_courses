@@ -38,9 +38,7 @@ Mac OSX
 
 1. `xcode-select -p && xcode-select --install`
 
-2. Убедись, что никаких Python не установлено командой:  `ls /Library/Frameworks/Python.framework/Versions/`. 
-
-2.1 Если установлено, то делаешь следующее: `sudo rm -rf /Library/Frameworks/Python.framework && cd /usr/local/bin && ls -l . | grep '../Library/Frameworks/Python.framework' | awk '{print $9}' | xargs sudo rm`. Затем удаляешь из папки Applications все, что хотя бы отдаленно напоминает Python (папки, приложения).
+2. Убедись, что никаких Python не установлено командой:  `ls /Library/Frameworks/Python.framework/Versions/`. Если установлено, то делаешь следующее: `sudo rm -rf /Library/Frameworks/Python.framework && cd /usr/local/bin && ls -l . | grep '../Library/Frameworks/Python.framework' | awk '{print $9}' | xargs sudo rm` И удаляешь из папки Applications все, что хотя бы отдаленно напоминает Python (папки, приложения).
 
 3. `/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"`
 
