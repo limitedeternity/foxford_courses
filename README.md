@@ -274,7 +274,7 @@ https://rutracker.org/forum/viewtopic.php?t=5444303
 * Язык С++
 * Физика (Часть В и С)
 
-[в процессе]
+https://mega.nz/#F!T9pR3STQ!pjIy_jvZOMvg9ucrMENKSw
 
 ...
 
