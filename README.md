@@ -262,15 +262,31 @@ https://rutracker.org/forum/viewtopic.php?t=5444303
 
 ...
 
+-------------------------
+
+**Дополнительно**
+
+*Недостающая теория для:*
+
+* Подготовка к олимпиадам по математике (11 класс)
+* Подготовка к олимпиаде "Физтех" по математике
+* Подготовка к олимпиадам по программированию. Продвинутый уровень (9-11 класс)
+* Язык С++
+* Физика (Часть В и С)
+
+[в процессе]
+
+...
+
 --------------------------
 
 **Теория для мобильных устройств**
 
-Android:
+*Android:*
 
 https://play.google.com/store/apps/details?id=ru.foxford.foxfordtextbook
 
-iOS:
+*iOS:*
 
 https://itunes.apple.com/us/app/foksford.ucebnik/id930911649?l=ru&ls=1&mt=8
 
@@ -284,11 +300,11 @@ https://repl.it/JnEL/1
 
 **Учебные материалы**
 
-ВМК, Поляков, Ткаучук и прочее:
+*ВМК, Поляков, Ткаучук и прочее:*
 
 https://mega.nz/#F!Ei4GmBCL!eKqBEOF9fmCwnOnuSELowQ
 
-Разное вперемешку:
+*Разное вперемешку:*
 
 https://mega.nz/#F!VdMS1QTL!UzidAXtwhfSPXDC8YoUDAQ
 
