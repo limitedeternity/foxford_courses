@@ -256,10 +256,6 @@ https://rutracker.org/forum/viewtopic.php?t=5444307
 
 https://rutracker.org/forum/viewtopic.php?t=5444303
 
-*История. Подготовка к ЕГЭ:*
-
-[в процессе]
-
 ...
 
 -------------------------
