@@ -260,6 +260,14 @@ https://rutracker.org/forum/viewtopic.php?t=5444307
 
 https://rutracker.org/forum/viewtopic.php?t=5444303
 
+*Обществознание. Подготовка к олимпиадам:*
+
+https://mega.nz/#F!Vv4AmCpS!ClUpGarpD8yXyrx1MEoeLQ
+
+*История. Подготовка к ЕГЭ:*
+
+https://mega.nz/#F!NyxmnDzT!x9kTW9VsdY28oCT4KvNBBA
+
 ...
 
 -------------------------
