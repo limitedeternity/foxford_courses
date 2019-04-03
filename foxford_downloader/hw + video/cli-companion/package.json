@@ -1,0 +1,20 @@
+{
+  "name": "task-server",
+  "version": "5.6.0",
+  "private": true,
+  "bin": "index.js",
+  "scripts": {
+    "build": "pkg . --targets node10-linux-x64,node10-linux-x86,node10-macos-x64,node10-win-x64,node10-win-x86 --out-path build/"
+  },
+  "dependencies": {
+    "ffbinaries": "^1.1.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "fs-extra": "^7.0.1",
+    "listr": "^0.14.3",
+    "listr-verbose-renderer": "^0.5.0",
+    "micro": "^9.3.3",
+    "pkg": "^4.3.7",
+    "request": "^2.88.0",
+    "zen-observable": "^0.8.13"
+  }
+}
