@@ -81,6 +81,21 @@ class VideoMixin {
         task: `
         () => {
           return new Observable(async taskObserver => {
+            if (
+              fs.existsSync(
+                path.join(
+                  cwd,
+                  "output",
+                  "${this.courseId}",
+                  "${video.lessonId}",
+                  "${video.fname}.skip"
+                )
+              )
+            ) {
+              taskObserver.complete();
+              return Promise.resolve();
+            }
+
             let mp4FilePath = path.join(
               cwd,
               "output",
