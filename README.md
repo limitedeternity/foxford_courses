@@ -356,6 +356,14 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Мини-курс по физике "Магнетизм и электромагнитная индукция"](https://mega.nz/#F!ckkhTIRY!D0WREaqE2jCCk8op0BfDfw)
 
+- [Курсы Пифагора: Часть С](https://mega.nz/#F!t0EW2ACT!fY-ATw0lvjzY6wpiqloimw)
+
+- [Физика. Подготовка к ЕГЭ. Часть С](https://yadi.sk/d/xjco_AKXdTx99A)
+
+- [Физика. Подготовка к ЕГЭ. Часть Б](https://yadi.sk/d/1oARnGevJVwAew)
+
+- [Информатика. Подготовка к ЕГЭ](https://mega.nz/#F!M0sWlSyK!x2o0BcBymqJ9yEF54WnIZw)
+
 </details>
 <br>
 
