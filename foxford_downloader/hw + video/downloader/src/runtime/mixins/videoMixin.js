@@ -81,17 +81,15 @@ class VideoMixin {
         task: `
         () => {
           return new Observable(async taskObserver => {
-            if (
-              fs.existsSync(
-                path.join(
-                  cwd,
-                  "output",
-                  "${this.courseId}",
-                  "${video.lessonId}",
-                  "${video.fname}.skip"
-                )
-              )
-            ) {
+            let skipFilePath = path.join(
+              cwd,
+              "output",
+              "${this.courseId}",
+              "${video.lessonId}",
+              "${video.fname}.skip"
+            );
+
+            if (fs.existsSync(skipFilePath)) {
               taskObserver.complete();
               return Promise.resolve();
             }
@@ -104,25 +102,15 @@ class VideoMixin {
               "${video.fname}.mp4"
             );
 
-            let m3u8FilePath = path.join(
-              cwd,
-              "output",
-              "${this.courseId}",
-              "${video.lessonId}",
-              "${video.fname}.m3u8"
-            );
-
             fs.ensureFileSync(mp4FilePath);
-            fs.ensureFileSync(m3u8FilePath);
-
-            let m3u8WriteStream = fs.createWriteStream(m3u8FilePath);
-            request("${video.url}").pipe(m3u8WriteStream);
 
             await new Promise((resolve, reject) => {
-              let command = ffmpeg({ source: "${video.url}" })
+              let command = ffmpeg()
+                .input("${video.url}")
+                .inputOptions(["-protocol_whitelist", "file,http,https,tcp,tls"])
+                .outputOptions(["-bsf:a", "aac_adtstoasc", "-preset", "superfast"])
                 .audioCodec("copy")
                 .videoCodec("copy")
-                .outputOptions(["-bsf:a aac_adtstoasc", "-preset superfast"])
                 .save(mp4FilePath);
 
               command.on("start", () => {
@@ -143,6 +131,7 @@ class VideoMixin {
               });
 
               command.on("end", () => {
+                fs.ensureFileSync(skipFilePath);
                 taskObserver.complete();
                 resolve();
               });
@@ -159,7 +148,7 @@ class VideoMixin {
         path.join(nw.App.startPath, "task-server*")
       )[0];
 
-      let downloaderSlave = child_process.spawn(`${taskServer}`);
+      let downloaderSlave = child_process.spawn(taskServer);
 
       downloaderSlave.stdout.on("data", data => {
         window.xterm.writeln(data.toString());
@@ -167,7 +156,7 @@ class VideoMixin {
 
       downloaderSlave.on("exit", resolve);
 
-      await waitPort({ host: "localhost", port: 3001 });
+      await waitPort({ host: "localhost", port: 3001, output: "silent" });
 
       await fetch("http://localhost:3001/", {
         method: "POST",

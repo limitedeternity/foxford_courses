@@ -1,6 +1,5 @@
 const path = require("path");
 const fs = require("fs-extra");
-const request = require("request");
 const Observable = require("zen-observable");
 const VerboseRenderer = require("listr-verbose-renderer");
 const Listr = require("listr");
@@ -53,7 +52,7 @@ function processTasks(data) {
             return taskObject;
           });
 
-          return new Listr(downloadTasks, { concurrent: true });
+          return new Listr(downloadTasks, { concurrent: 5 });
         }
       },
       {

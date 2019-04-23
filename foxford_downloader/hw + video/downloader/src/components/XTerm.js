@@ -12,9 +12,8 @@ class XTerm extends Component {
 
     Terminal.applyAddon(fullscreen);
     window.xterm = new Terminal();
-
     window.xterm.setOption("fontSize", 15);
-    setInterval(() => window.xterm.clear(), 3000);
+    setInterval(() => window.xterm.clear(), 10000);
   }
 
   render() {

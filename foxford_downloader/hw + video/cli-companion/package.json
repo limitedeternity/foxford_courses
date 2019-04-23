@@ -14,7 +14,6 @@
     "listr-verbose-renderer": "^0.5.0",
     "micro": "^9.3.3",
     "pkg": "^4.3.7",
-    "request": "^2.88.0",
     "zen-observable": "^0.8.13"
   }
 }
