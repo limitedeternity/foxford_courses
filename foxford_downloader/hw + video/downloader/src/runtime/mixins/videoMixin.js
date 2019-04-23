@@ -150,14 +150,14 @@ class VideoMixin {
 
       let downloaderSlave = child_process.spawn(taskServer);
 
-      downloaderSlave.stdout.on("data", data => {
-        window.xterm.writeln(data.toString());
+      downloaderSlave.on("exit", resolve);
+      [downloaderSlave.stdout, downloaderSlave.stderr].forEach(ioStream => {
+        ioStream.on("data", data => {
+          window.xterm.writeln(data.toString());
+        });
       });
 
-      downloaderSlave.on("exit", resolve);
-
       await waitPort({ host: "localhost", port: 3001, output: "silent" });
-
       await fetch("http://localhost:3001/", {
         method: "POST",
         headers: {
