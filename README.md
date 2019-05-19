@@ -364,10 +364,6 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Информатика. Подготовка к ЕГЭ](https://mega.nz/#F!M0sWlSyK!x2o0BcBymqJ9yEF54WnIZw)
 
-- [Wild Mathing. Подготовка к ЕГЭ по математике (модуль 2)](https://mega.nz/#F!rDQVUShQ!q_pJTpTF4m1L8LyHQUFaaA)
-
-- [Wild Mathing. Подготовка к ЕГЭ по математике (модуль 3)](https://yadi.sk/d/dWt690hBAKpMeA)
-
 </details>
 <br>
 
