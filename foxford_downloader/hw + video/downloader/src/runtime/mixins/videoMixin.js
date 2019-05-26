@@ -71,6 +71,8 @@ class VideoMixin {
         lessonId: id,
         fname: webinarId
       });
+
+      this.foxFrame.contentWindow.location.href = "about:blank";
     }
   }
 

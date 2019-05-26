@@ -4,7 +4,7 @@
 
 Донаты принимаются на телефон +79956009255 (не киви, просто телефон).
 
-Текущий тред: https://2ch.hk/un/res/658799.html
+Текущий тред: https://2ch.hk/un/res/668939.html
 
 ---
 
@@ -371,7 +371,7 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 _Канал в телеге (чего нет тут - всё там):_
 
-https://t.me/joinchat/AAAAAFAGr85J0HoH_uq9NQ
+https://t.me/joinchat/AAAAAFAGr86CHo5-FRQkdA
 
 ---
 
