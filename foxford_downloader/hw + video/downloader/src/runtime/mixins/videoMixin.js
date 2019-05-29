@@ -1,5 +1,6 @@
 import path from "path";
 import glob from "glob";
+import fs from "fs-extra";
 import child_process from "child_process";
 import waitPort from "wait-port";
 
@@ -11,7 +12,7 @@ class VideoMixin {
     this.downloadTasks = [];
   }
 
-  async createVideoList() {
+  async createVideoList({ shouldSaveData }) {
     for (let lesson of this.lessonList) {
       let id = lesson.id;
 
@@ -74,6 +75,18 @@ class VideoMixin {
 
       this.foxFrame.contentWindow.location.href = "about:blank";
     }
+
+    if (shouldSaveData) {
+      let linksFile = path.join(
+        nw.App.startPath,
+        "output",
+        String(this.courseId),
+        "links.json"
+      );
+
+      fs.ensureFileSync(linksFile);
+      fs.writeFileSync(linksFile, JSON.stringify(this.videoList, null, 2));
+    }
   }
 
   async createDownloadTasksList() {
@@ -121,9 +134,7 @@ class VideoMixin {
 
               command.on("progress", progress =>
                 taskObserver.next(
-                  \`${
-                    video.lessonId
-                  }: \${progress.timemark} [\${progress.currentKbps} kbps]\`
+                  \`${video.lessonId}: \${progress.timemark} [\${progress.currentKbps} kbps]\`
                 )
               );
 

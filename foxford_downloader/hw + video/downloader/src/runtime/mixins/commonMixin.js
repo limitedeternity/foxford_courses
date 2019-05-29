@@ -15,9 +15,7 @@ class CommonMixin {
 
     while (cursorBefore) {
       json = await fetch(
-        `https://foxford.ru/api/courses/${
-          this.courseId
-        }/lessons?before=${cursorBefore}`
+        `https://foxford.ru/api/courses/${this.courseId}/lessons?before=${cursorBefore}`
       ).then(r => r.json());
 
       this.lessonList = [...json.lessons, ...this.lessonList];
@@ -26,9 +24,7 @@ class CommonMixin {
 
     while (cursorAfter) {
       json = await fetch(
-        `https://foxford.ru/api/courses/${
-          this.courseId
-        }/lessons?after=${cursorAfter}`
+        `https://foxford.ru/api/courses/${this.courseId}/lessons?after=${cursorAfter}`
       ).then(r => r.json());
 
       this.lessonList = [...this.lessonList, ...json.lessons];

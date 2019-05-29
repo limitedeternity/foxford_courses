@@ -14,17 +14,27 @@ class FoxfordRetrieverBase {
     this.infoEl.style.display = "block";
 
     await this.createLessonList();
-    await this.createHomeworkList();
 
-    this.foxFrame.style.display = "block";
-    this.infoEl.style.display = "none";
+    let homeworkIsSkipped = nw.App.argv.includes("--skip-homework");
+    if (!homeworkIsSkipped) {
+      await this.createHomeworkList();
 
-    await this.retrieveHomework();
+      this.foxFrame.style.display = "block";
+      this.infoEl.style.display = "none";
 
-    this.foxFrame.style.display = "none";
-    this.infoEl.style.display = "block";
+      await this.retrieveHomework();
 
-    await this.createVideoList();
+      this.foxFrame.style.display = "none";
+      this.infoEl.style.display = "block";
+    }
+
+    let manualDownloadIsChosen = nw.App.argv.includes("--no-video-download");
+    await this.createVideoList({ shouldSaveData: manualDownloadIsChosen });
+
+    if (manualDownloadIsChosen) {
+      return;
+    }
+
     await this.createDownloadTasksList();
 
     this.foxFrame.src = "about:blank";
@@ -38,6 +48,6 @@ class FoxfordRetrieverBase {
   }
 }
 
-class FoxfordRetriever extends mix(FoxfordRetrieverBase).with(...mixins) {}
+class FoxfordRetriever extends mix(FoxfordRetrieverBase).with(...mixins) { }
 
 export default FoxfordRetriever;

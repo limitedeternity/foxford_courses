@@ -1,5 +1,4 @@
 import path from "path";
-import glob from "glob";
 import fs from "fs-extra";
 
 import helpers from "../helpers";
@@ -27,19 +26,6 @@ class HomeworkMixin {
   }
 
   async retrieveHomework() {
-    if (
-      glob.sync(
-        path.join(
-          nw.App.startPath,
-          "output",
-          String(this.courseId),
-          "skipHomework*"
-        )
-      ).length
-    ) {
-      return;
-    }
-
     for (let task of this.homeworkList) {
       let taskId = task.id;
       let lessonId = task.lessonId;
@@ -79,7 +65,7 @@ class HomeworkMixin {
         if (response.ok) {
           this.foxFrame.contentWindow.location.href = `https://foxford.ru/lessons/${lessonId}/tasks/${taskId}?reload=true`;
         }
-      } catch (e) {}
+      } catch (e) { }
 
       await helpers.waitFor(() =>
         this.foxFrame.contentWindow.document.querySelector("#taskContent")
