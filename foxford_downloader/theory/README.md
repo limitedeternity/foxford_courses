@@ -6,4 +6,4 @@
 
 3. Нажать `Shift + Ctrl + I` и выполнить в консоли `window.print();`. Откроется диалог печати, в котором нужно выставить всё, как показано на скриншоте ниже, и нажать "Save".
 
-![Screenshot1](Screenshot_1.png)
+![Screenshot_1](https://user-images.githubusercontent.com/24318966/58759964-b43ced80-853a-11e9-85bb-b2fe0c578993.png)
