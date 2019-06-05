@@ -3,6 +3,7 @@ import glob from "glob";
 import fs from "fs-extra";
 import child_process from "child_process";
 import waitPort from "wait-port";
+import getPort from "get-port";
 
 import helpers from "../helpers";
 
@@ -161,7 +162,8 @@ class VideoMixin {
         path.join(nw.App.startPath, "task-server*")
       )[0];
 
-      let downloaderSlave = child_process.spawn(taskServer);
+      let port = await getPort();
+      let downloaderSlave = child_process.spawn(taskServer, ["-p", String(port)]);
 
       downloaderSlave.on("exit", resolve);
       [downloaderSlave.stdout, downloaderSlave.stderr].forEach(ioStream => {
@@ -170,8 +172,8 @@ class VideoMixin {
         });
       });
 
-      await waitPort({ host: "localhost", port: 3001, output: "silent" });
-      await fetch("http://localhost:3001/", {
+      await waitPort({ host: "localhost", port, output: "silent" });
+      await fetch(`http://localhost:${port}/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

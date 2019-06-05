@@ -40,6 +40,7 @@ function processTasks(data) {
           });
 
           ffmpeg.setFfmpegPath(locatedFf.ffmpeg.path);
+          return true;
         }
       },
       {
@@ -52,12 +53,15 @@ function processTasks(data) {
             return taskObject;
           });
 
-          return new Listr(downloadTasks, { concurrent: 5 });
+          return new Listr(downloadTasks, { concurrent: true, exitOnError: false });
         }
       },
       {
-        title: "Finishing",
-        task: () => Promise.resolve()
+        title: "Exiting",
+        task: () => {
+          new Promise(resolve => setTimeout(resolve, 5000)).then(() => process.exit(0));
+          return Promise.resolve();
+        }
       }
     ],
     {

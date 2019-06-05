@@ -3,13 +3,14 @@
   "version": "5.6.0",
   "private": true,
   "dependencies": {
-    "fs-extra": "^7.0.1",
-    "glob": "^7.1.3",
+    "fs-extra": "^8.0.1",
+    "get-port": "^5.0.0",
+    "glob": "^7.1.4",
     "nw-react-scripts": "github:limitedeternity/nw-react-scripts#master",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "wait-port": "^0.2.2",
-    "xterm": "^3.12.0"
+    "xterm": "^3.14.2"
   },
   "scripts": {
     "start": "nw-react-scripts start",
@@ -30,9 +31,7 @@
     "//": "https://github.com/limitedeternity/nw-builder",
     "platforms": [
       "osx64",
-      "win32",
       "win64",
-      "linux32",
       "linux64"
     ],
     "version": "latest",

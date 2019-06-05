@@ -1,5 +1,7 @@
 const micro = require("micro");
+const port = Number(require("minimist")(process.argv.slice(2)).p);
 
+let downloadStarted = false;
 micro(async (req, res) => {
   let data = await micro.json(req);
 
@@ -13,8 +15,13 @@ micro(async (req, res) => {
     return micro.send(res, 422, "UNPROCESSABLE ENTITY");
   }
 
-  require("./processTasks")(data).then(() => setTimeout(process.exit, 1000));
-  return micro.send(res, 200, "OK");
-}).listen(3001);
+  if (!downloadStarted) {
+    require("./processTasks")(data);
+    downloadStarted = true;
+    return micro.send(res, 200, "OK");
+  } else {
+    return micro.send(res, 410, "ALREADY STARTED");
+  }
+}).listen(port);
 
-console.log("Listening on http://localhost:3001");
+console.log(`Listening on http://localhost:${port}`);
