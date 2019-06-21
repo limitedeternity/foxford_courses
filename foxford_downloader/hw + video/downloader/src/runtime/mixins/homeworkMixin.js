@@ -45,7 +45,10 @@ class HomeworkMixin {
         continue;
       }
 
-      this.foxFrame.contentWindow.location.href = `https://foxford.ru/lessons/${lessonId}/tasks/${taskId}`;
+      this.foxFrame.src = "about:blank";
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      this.foxFrame.src = `https://foxford.ru/lessons/${lessonId}/tasks/${taskId}`;
       await new Promise(resolve => setTimeout(resolve, 500));
 
       try {
@@ -63,13 +66,17 @@ class HomeworkMixin {
         );
 
         if (response.ok) {
-          this.foxFrame.contentWindow.location.href = `https://foxford.ru/lessons/${lessonId}/tasks/${taskId}?reload=true`;
+          this.foxFrame.contentWindow.location.reload(true);
+          await new Promise(resolve => setTimeout(resolve, 100));
         }
       } catch (e) { }
 
       await helpers.waitFor(() =>
         this.foxFrame.contentWindow.document.querySelector("#taskContent")
       );
+
+      nw.Window.get().resizeTo(this.foxFrame.contentWindow.screen.width, this.foxFrame.contentWindow.screen.height);
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       await helpers.waitFor(() => this.foxFrame.contentWindow.MathJax);
 
@@ -81,11 +88,6 @@ class HomeworkMixin {
           resolve
         );
       });
-
-      let contentHeight = this.foxFrame.contentWindow.document.body
-        .scrollHeight;
-
-      nw.Window.get().resizeTo(1200, contentHeight);
 
       let i = 0;
       do {
@@ -103,21 +105,27 @@ class HomeworkMixin {
         nw.Window.get().print({
           pdf_path,
           marginsType: 1,
+          landscape: true,
           mediaSize: {
-            name: "iPad",
-            width_microns: 1200 * 263.6,
-            height_microns: 1080 * 263.6,
-            custom_display_name: "A4",
+            name: "Responsive",
+            width_microns: this.foxFrame.contentWindow.screen.width * 263.6,
+            height_microns: this.foxFrame.contentWindow.screen.height * 263.6,
+            custom_display_name: "Screen",
             is_default: true
           },
           headerFooterEnabled: false,
           shouldPrintBackgrounds: true
         });
 
-        this.foxFrame.contentWindow.scrollBy(0, 1080);
-        contentHeight -= 1080;
-        i += 1;
-      } while (contentHeight > 0);
+        if (this.foxFrame.contentWindow.document.body
+          .scrollHeight - i * this.foxFrame.contentWindow.screen.height >= this.foxFrame.contentWindow.screen.height) {
+          this.foxFrame.contentWindow.scrollBy(0, this.foxFrame.contentWindow.screen.height);
+        } else {
+          this.foxFrame.contentWindow.scrollTo(0, this.foxFrame.contentWindow.document.body.scrollHeight);
+        }
+
+      } while (this.foxFrame.contentWindow.document.body
+        .scrollHeight - ++i * this.foxFrame.contentWindow.screen.height > 0);
     }
   }
 }

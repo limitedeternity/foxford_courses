@@ -38,7 +38,11 @@ class VideoMixin {
 
       let erlyFrame = webinarDOM.querySelector("div.full_screen > iframe");
 
-      this.foxFrame.contentWindow.location.href = erlyFrame.src;
+      this.foxFrame.src = "about:blank";
+      await new Promise(resolve => setTimeout(resolve, 100));
+
+      this.foxFrame.src = erlyFrame.src;
+      await new Promise(resolve => setTimeout(resolve, 100));
 
       await helpers.waitFor(() =>
         this.foxFrame.contentWindow.document.querySelector("video")
@@ -73,8 +77,6 @@ class VideoMixin {
         lessonId: id,
         fname: webinarId
       });
-
-      this.foxFrame.contentWindow.location.href = "about:blank";
     }
 
     if (shouldSaveData) {

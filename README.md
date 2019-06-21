@@ -342,9 +342,13 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 <details>
 <summary>⚛️ <b>[Технические]</b></summary>
     
-* [Подготовка к олимпиадам "Физтех", "Росатом", "Ломоносов"](https://mega.nz/#F!phNGGCSA!bOnNCKQqNFRuuCC6C2ceRQ)
-    
-* [Математика. Подготовка к ЕГЭ. Часть С](https://mega.nz/#F!IZ9CDarJ!ol_8oe2BQRSWz6L3_ps8IA)
+- [Подготовка к олимпиадам "Физтех", "Росатом", "Ломоносов" по физике](https://mega.nz/#F!phNGGCSA!bOnNCKQqNFRuuCC6C2ceRQ)
+
+- [Подготовка к олимпиаде "Физтех" по математике](https://mega.nz/#F!LO5ThIyJ!O2bAf058daQ_z57fXxhpyQ)
+
+- [Математика. Подготовка к ЕГЭ. Часть С](https://mega.nz/#F!IZ9CDarJ!ol_8oe2BQRSWz6L3_ps8IA)
+
+- [Математика. Подготовка к ЕГЭ. Часть Б](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/cD03NzU0NjE5MQ==)
 
 - [Мини-курс по математике "Векторный метод в пространстве"](https://yadi.sk/d/VpO8uoXWqzfwVg)
 
@@ -356,13 +360,15 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Мини-курс по физике "Магнетизм и электромагнитная индукция"](https://mega.nz/#F!ckkhTIRY!D0WREaqE2jCCk8op0BfDfw)
 
-- [Курсы Пифагора: Часть С](https://mega.nz/#F!t0EW2ACT!fY-ATw0lvjzY6wpiqloimw)
-
 - [Физика. Подготовка к ЕГЭ. Часть С](https://yadi.sk/d/xjco_AKXdTx99A)
 
 - [Физика. Подготовка к ЕГЭ. Часть Б](https://yadi.sk/d/1oARnGevJVwAew)
 
+- [Информатика. Экспресс-подготовка к ЕГЭ](https://t.me/joinchat/AAAAAEZLIl-XWzOC5SIpEw)
+
 - [Информатика. Подготовка к ЕГЭ](https://mega.nz/#F!M0sWlSyK!x2o0BcBymqJ9yEF54WnIZw)
+
+- [Язык Python для начинающих](https://t.me/joinchat/AAAAAFFbpvBSQ0NRqvYK3g)
 
 </details>
 <br>
@@ -371,7 +377,7 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - Русский Язык. Подготовка к ЕГЭ. Часть 1.
 
-- -
+- [Подготовка к олимпиадам и международным экзаменам по английскому языку](https://mega.nz/#F!S3oCSIhC!AXXh5rl-Tt5vvZTlQ0rYhA)
 
 </details>
 <br>
