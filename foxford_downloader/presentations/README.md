@@ -12,10 +12,6 @@
 
 ![Screenshot from 2019-06-05 15-39-43](https://user-images.githubusercontent.com/24318966/58957313-0c792700-87a9-11e9-8a4c-a3eee72453c2.png)
 
-Копируешь ссылку на него, вставляешь в следующий фрагмент кода:
+Копируешь ссылку на него, вставляешь в [этот фрагмент кода](https://gist.github.com/limitedeternity/e88c1a375ca8ebb97329ee758431dc0a)
 
-```
-console.dir(await fetch("ссылку_сюда").then(res => res.json()).then(json => json.filter(obj => obj.meta.action === "add_tab" || obj.meta.action === "change_tab").map(each => each.meta.content_type === "pdf" ? each.meta.url : each.meta)));
-```
-
-Выполняешь фрагмент кода во вкладке Console. Вернется массив со ссылками на презентации.
+Выполняешь фрагмент кода во вкладке Console в DevTools, а затем - `downloadPdfFiles(createPdfFileList(json));`.
