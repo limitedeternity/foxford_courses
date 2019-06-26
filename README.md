@@ -381,6 +381,15 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 </details>
 <br>
+<details>
+<summary>🔬 <b>[Естественно-научные]</b></summary>
+
+- [Химия. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NzQ2MTAw)
+
+- []()
+
+</details>
+<br>
 
 ---
 
