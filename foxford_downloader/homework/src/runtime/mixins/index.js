@@ -1,6 +1,5 @@
 import CommonMixin from "./commonMixin";
 import HomeworkMixin from "./homeworkMixin";
-import VideoMixin from "./videoMixin";
 
 const mix = baseClass => {
   return {
@@ -42,6 +41,6 @@ const mix = baseClass => {
   };
 };
 
-const mixins = [CommonMixin, HomeworkMixin, VideoMixin];
+const mixins = [CommonMixin, HomeworkMixin];
 
 export default { mix, mixins };

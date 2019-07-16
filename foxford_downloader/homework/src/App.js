@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
 
-import XTerm from "./components/XTerm";
 import FoxfordRetriever from "./runtime";
 import helpers from "./runtime/helpers";
 
@@ -45,7 +44,6 @@ class App extends Component {
           src="https://foxford.ru/user/login?redirect=/dashboard"
         />
         <h1 id="infoEl">Background processes are running. Please wait.</h1>
-        <XTerm />
       </div>
     );
   }
