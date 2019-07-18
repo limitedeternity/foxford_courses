@@ -5,7 +5,6 @@ from datetime import datetime
 from functools import reduce
 from pathlib import Path
 from re import Match, match
-from shutil import which
 from typing import Any, Callable, Dict, Iterable, Tuple, Union
 from urllib import parse
 
@@ -314,13 +313,12 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, lesson_titles: I
             lambda filtered_char_list: filtered_char_list.strip()[:30]
         )(string)
 
-    @error_handler
-    def create_path(lesson_title: str) -> Path:
+    def create_path(idx: int, lesson_title: str) -> Path:
         constructed_path: Path = Path(
             Path.cwd(),
             sanitize_string(course_name) + " - " +
             sanitize_string(course_subtitle),
-            sanitize_string(lesson_title)
+            f"({idx}) " + sanitize_string(lesson_title)
         )
 
         if not constructed_path.exists():
@@ -328,7 +326,14 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, lesson_titles: I
 
         return constructed_path
 
-    return tuple(map(create_path, lesson_titles))
+    return pipe(
+        lambda titles: enumerate(titles, 1),
+        lambda enumed_titles: map(
+            lambda item: create_path(*item),
+            enumed_titles
+        ),
+        tuple
+    )(lesson_titles)
 
 
 def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -> None:
@@ -518,11 +523,6 @@ def main() -> None:
         ),
         session
     )
-
-    if not which("ffmpeg"):
-        Logger.warn(
-            "You'll probably need ffmpeg to make actual videos from playlists"
-        )
 
     Logger.log("Done!")
 
