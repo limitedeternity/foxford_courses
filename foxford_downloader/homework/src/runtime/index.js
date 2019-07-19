@@ -14,7 +14,6 @@ class FoxfordRetrieverBase {
     this.infoEl.style.display = "block";
 
     await this.createLessonList();
-
     await this.createHomeworkList();
 
     this.foxFrame.style.display = "block";

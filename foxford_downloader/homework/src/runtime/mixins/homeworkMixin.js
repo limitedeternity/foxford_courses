@@ -9,7 +9,7 @@ class HomeworkMixin {
   }
 
   async createHomeworkList() {
-    for (let lesson of this.lessonList) {
+    for (let [idx, lesson] of this.lessonList.entries()) {
       let json = await fetch(
         `https://foxford.ru/api/lessons/${lesson.id}/tasks`
       ).then(r => r.json());
@@ -17,8 +17,8 @@ class HomeworkMixin {
       if (json) {
         json.forEach(task => {
           let modTask = task;
-
           modTask.lessonId = lesson.id;
+          modTask.lessonIdx = idx;
           this.homeworkList.push(modTask);
         });
       }
@@ -27,18 +27,13 @@ class HomeworkMixin {
 
   async retrieveHomework() {
     for (let task of this.homeworkList) {
-      let taskId = task.id;
-      let lessonId = task.lessonId;
-
       if (
         fs.existsSync(
           path.join(
             nw.App.startPath,
-            "output",
             String(this.courseId),
-            String(lessonId),
-            "homework",
-            `${taskId}-0.pdf`
+            String(task.lessonIdx + 1),
+            `${task.id}-part1.pdf`
           )
         )
       ) {
@@ -48,12 +43,12 @@ class HomeworkMixin {
       this.foxFrame.src = "about:blank";
       await new Promise(resolve => setTimeout(resolve, 100));
 
-      this.foxFrame.src = `https://foxford.ru/lessons/${lessonId}/tasks/${taskId}`;
+      this.foxFrame.src = `https://foxford.ru/lessons/${task.lessonId}/tasks/${task.id}`;
       await new Promise(resolve => setTimeout(resolve, 500));
 
       try {
         let response = await fetch(
-          `https://foxford.ru/api/lessons/${lessonId}/tasks/${taskId}/fails`,
+          `https://foxford.ru/api/lessons/${task.lessonId}/tasks/${task.id}/fails`,
           {
             method: "POST",
             headers: {
@@ -93,11 +88,9 @@ class HomeworkMixin {
       do {
         let pdf_path = path.join(
           nw.App.startPath,
-          "output",
           String(this.courseId),
-          String(lessonId),
-          "homework",
-          `${taskId}-${i}.pdf`
+          String(task.lessonIdx + 1),
+          `${task.id}-part${i + 1}.pdf`
         );
 
         fs.ensureFileSync(pdf_path);

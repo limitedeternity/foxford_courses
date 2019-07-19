@@ -10,6 +10,7 @@ from urllib import parse
 
 import requests
 from bs4 import BeautifulSoup, Tag
+from more_itertools import unique_everseen
 from PyInquirer import prompt
 
 from requests_cache import CachedResponse, CachedSession
@@ -200,15 +201,26 @@ class get_course_lessons():
         if "id" not in lesson_list_at_direction_response.json()["lessons"][0]:
             return {"fatal_error": "Lesson structure is unknown"}
 
-        return (
-            *lesson_list_at_direction_response.json()["lessons"],
-            *self.recursive_collection(
-                self,
-                direction,
-                lesson_list_at_direction_response
-                .json()["cursors"][direction]
+        if direction == "before":
+            return (
+                *self.recursive_collection(
+                    self,
+                    direction,
+                    lesson_list_at_direction_response
+                    .json()["cursors"][direction]
+                ),
+                *lesson_list_at_direction_response.json()["lessons"]
             )
-        )
+        else:
+            return (
+                *lesson_list_at_direction_response.json()["lessons"],
+                *self.recursive_collection(
+                    self,
+                    direction,
+                    lesson_list_at_direction_response
+                    .json()["cursors"][direction]
+                )
+            )
 
     @error_handler
     def lesson_extension(self, lesson: Dict) -> Dict:
@@ -399,6 +411,7 @@ def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -
                 lambda pdf: pdf["meta"]["url"],
                 pdfs
             ),
+            unique_everseen,
             lambda urls: enumerate(urls, 1),
             lambda enumed_urls: map(
                 lambda item: download_url(
