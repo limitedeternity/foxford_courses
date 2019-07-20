@@ -385,7 +385,7 @@ def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -
         if events_response.status_code != 200:
             return {"fatal_error": "Events fetch has failed"}
 
-        with current_iter_object["destination"].joinpath("message_log.txt").open("w") as f:
+        with current_iter_object["destination"].joinpath("message_log.txt").open("w", errors="replace") as f:
             pipe(
                 lambda json: filter(
                     lambda obj: obj["meta"]["action"] == "message",
