@@ -1,7 +1,13 @@
+/* eslint-disable no-loop-func */
+
 import path from "path";
 import fs from "fs-extra";
+import Jimp from "jimp/es";
+import mergeImg from "merge-img";
 
 import helpers from "../helpers";
+
+const sizeOf = require("image-size");
 
 class HomeworkMixin {
   constructor() {
@@ -27,16 +33,14 @@ class HomeworkMixin {
 
   async retrieveHomework() {
     for (let task of this.homeworkList) {
-      if (
-        fs.existsSync(
-          path.join(
-            nw.App.startPath,
-            String(this.courseId),
-            String(task.lessonIdx + 1),
-            `${task.id}-part1.pdf`
-          )
-        )
-      ) {
+      let targetPath = path.join(
+        nw.App.startPath,
+        String(this.courseId),
+        String(task.lessonIdx + 1),
+        `${task.id}.png`
+      );
+
+      if (fs.existsSync(targetPath)) {
         continue;
       }
 
@@ -71,6 +75,7 @@ class HomeworkMixin {
       );
 
       nw.Window.get().resizeTo(this.foxFrame.contentWindow.screen.width, this.foxFrame.contentWindow.screen.height);
+
       await new Promise(resolve => setTimeout(resolve, 100));
 
       await helpers.waitFor(() => this.foxFrame.contentWindow.MathJax);
@@ -84,41 +89,51 @@ class HomeworkMixin {
         );
       });
 
+      let screenshotPaths = [];
       let i = 0;
-      do {
-        let pdf_path = path.join(
+      let offset = 0;
+      let scrollHeight = Math.max(
+        this.foxFrame.contentWindow.document.body.scrollHeight,
+        this.foxFrame.contentWindow.document.body.offsetHeight,
+        this.foxFrame.contentWindow.document.documentElement.clientHeight,
+        this.foxFrame.contentWindow.document.documentElement.scrollHeight,
+        this.foxFrame.contentWindow.document.documentElement.offsetHeight
+      );
+
+      while (offset < scrollHeight) {
+        this.foxFrame.contentWindow.scrollTo(0, offset);
+        await new Promise(resolve => setTimeout(resolve, 100));
+
+        let screenshotPath = path.join(
           nw.App.startPath,
           String(this.courseId),
           String(task.lessonIdx + 1),
-          `${task.id}-part${i + 1}.pdf`
+          `${task.id}-part${i++ + 1}.png`
         );
 
-        fs.ensureFileSync(pdf_path);
+        await fs.ensureFile(screenshotPath);
+        screenshotPaths.push(screenshotPath);
 
-        nw.Window.get().print({
-          pdf_path,
-          marginsType: 1,
-          landscape: true,
-          mediaSize: {
-            name: "Responsive",
-            width_microns: this.foxFrame.contentWindow.screen.width * 263.6,
-            height_microns: this.foxFrame.contentWindow.screen.height * 263.6,
-            custom_display_name: "Screen",
-            is_default: true
-          },
-          headerFooterEnabled: false,
-          shouldPrintBackgrounds: true
+        let imgBuffer = await new Promise(resolve => {
+          nw.Window.get().capturePage(resolve, { format: "png", datatype: "buffer" });
         });
 
-        if (this.foxFrame.contentWindow.document.body
-          .scrollHeight - i * this.foxFrame.contentWindow.screen.height >= this.foxFrame.contentWindow.screen.height) {
-          this.foxFrame.contentWindow.scrollBy(0, this.foxFrame.contentWindow.screen.height);
-        } else {
-          this.foxFrame.contentWindow.scrollTo(0, this.foxFrame.contentWindow.document.body.scrollHeight);
-        }
+        await fs.writeFile(screenshotPath, imgBuffer);
+        offset += sizeOf(imgBuffer).height;
 
-      } while (this.foxFrame.contentWindow.document.body
-        .scrollHeight - ++i * this.foxFrame.contentWindow.screen.height > 0);
+        if (scrollHeight - offset < 0) {
+          await new Promise(resolve => {
+            new Jimp(imgBuffer, function () {
+              this.crop(0, offset - scrollHeight, sizeOf(imgBuffer).width, sizeOf(imgBuffer).height - (offset - scrollHeight))
+                .write(screenshotPath, resolve);
+            });
+          });
+        }
+      }
+
+      let targetImg = await mergeImg(screenshotPaths, { direction: true });
+      targetImg.write(targetPath);
+      screenshotPaths.forEach(async p => await fs.unlink(p));
     }
   }
 }

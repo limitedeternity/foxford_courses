@@ -5,6 +5,7 @@ from datetime import datetime
 from functools import reduce
 from pathlib import Path
 from re import Match, match
+from traceback import format_exc
 from typing import Any, Callable, Dict, Iterable, Tuple, Union
 from urllib import parse
 
@@ -51,8 +52,8 @@ def error_handler(fn: Callable) -> Callable:
                 print_error_and_exit(result["fatal_error"])
 
             return result
-        except Exception as e:
-            print_error_and_exit(e)
+        except Exception:
+            print_error_and_exit(format_exc())
 
     return wrapper
 
@@ -322,7 +323,7 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, lesson_titles: I
                 lambda char: char.isalpha() or char.isdigit() or char == " ", char_list
             ),
             lambda iterable: "".join(iterable),
-            lambda filtered_char_list: filtered_char_list.strip()[:30]
+            lambda filtered_char_list: filtered_char_list[:30].strip()
         )(string)
 
     def create_path(idx: int, lesson_title: str) -> Path:

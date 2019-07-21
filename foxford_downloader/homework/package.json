@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "fs-extra": "^8.0.1",
-    "glob": "^7.1.4",
+    "image-size": "^0.7.4",
+    "jimp": "^0.6.4",
+    "merge-img": "^2.1.3",
     "nw-react-scripts": "github:limitedeternity/nw-react-scripts#master",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"
@@ -32,6 +34,7 @@
       "win64",
       "linux64"
     ],
+    "zip": true,
     "version": "latest",
     "flavor": "normal",
     "buildDir": "./build",

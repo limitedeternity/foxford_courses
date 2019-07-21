@@ -339,10 +339,14 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 <details>
 <summary>⚛️ <b>[Технические]</b></summary>
-    
-- [Подготовка к олимпиадам "Физтех", "Росатом", "Ломоносов" по физике](https://mega.nz/#F!phNGGCSA!bOnNCKQqNFRuuCC6C2ceRQ)
 
 - [Подготовка к олимпиаде "Физтех" по математике](https://mega.nz/#F!LO5ThIyJ!O2bAf058daQ_z57fXxhpyQ)
+
+- [Подготовка к олимпиадам «Ломоносов», ОММО, ПВГ](https://yadi.sk/d/QOIk2Kqovc0yTA)
+
+- [Подготовка к региональному этапу Всероссийской олимпиады по математике](https://yadi.sk/d/AxRwHbEx9gJnqg)
+
+- [Подготовка к ДВИ в МГУ по математике](https://mega.nz/#F!upoWxSpD!k1oTK1U0p6t4wLZFFS6naQ)
 
 - [Математика. Подготовка к ЕГЭ. Часть С](https://mega.nz/#F!IZ9CDarJ!ol_8oe2BQRSWz6L3_ps8IA)
 
@@ -356,6 +360,8 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Интенсивный курс по математике "Задачи по теории чисел на ЕГЭ"](https://yadi.sk/d/p5EdqMRD8xLZBA)
 
+- [Подготовка к олимпиадам "Физтех", "Росатом", "Ломоносов" по физике](https://mega.nz/#F!phNGGCSA!bOnNCKQqNFRuuCC6C2ceRQ)
+
 - [Мини-курс по физике "Магнетизм и электромагнитная индукция"](https://mega.nz/#F!ckkhTIRY!D0WREaqE2jCCk8op0BfDfw)
 
 - [Физика. Подготовка к ЕГЭ. Часть С](https://yadi.sk/d/xjco_AKXdTx99A)
@@ -366,14 +372,26 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Информатика. Подготовка к ЕГЭ](https://mega.nz/#F!M0sWlSyK!x2o0BcBymqJ9yEF54WnIZw)
 
+- [Программирование. Подготовка к окружному этапу олимпиады](https://yadi.sk/d/INsWH9BHTFapXQ)
+
+- [Программирование. Подготовка к региональному этапу олимпиады](https://yadi.sk/d/MK4m1lvIM3jmIw)
+
+- [Программирование. Курс подготовки к олимпиадам, продвинутый уровень](https://yadi.sk/d/_1HXesluVTZp9Q)
+
 - [Язык Python для начинающих](https://t.me/joinchat/AAAAAFFbpvBSQ0NRqvYK3g)
+
+- [Язык Python для продолжающих](https://mega.nz/#F!uiQGUY5Y!uJaqRZ2C6IRzOYIzXyUfjQ)
+
+- [Информатика за пределами ЕГЭ](https://mega.nz/#F!PvIQHYDD!UrgW5M6--ttg-vnnhrNbDQ)
 
 </details>
 <br>
 <details>
 <summary>✊ <b>[Гуманитарные]</b></summary>
 
-- Русский Язык. Подготовка к ЕГЭ. Часть 1.
+- [Два выпускных сочинения - декабрьское и ЕГЭ](https://mega.nz/#F!a3xXCQKB!ScDw8eROMoq5tGW9-tyZzA)
+
+- [Русский язык. Тест](https://mega.nz/#F!S3gTXKQL!18qfHt1NtecA3mLxfjK0Sg)
 
 - [Подготовка к олимпиадам и международным экзаменам по английскому языку](https://mega.nz/#F!S3oCSIhC!AXXh5rl-Tt5vvZTlQ0rYhA)
 
@@ -388,12 +406,6 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 </details>
 <br>
-
----
-
-_Канал в телеге (чего нет тут - всё там):_
-
-https://t.me/joinchat/AAAAAFAGr86CHo5-FRQkdA
 
 ---
 
@@ -414,15 +426,21 @@ https://mega.nz/#F!T9pR3STQ!pjIy_jvZOMvg9ucrMENKSw
 
 ---
 
+**Каналы**
+
+- [_47-я Пирожковая (бывает не только Фоксфорд)_](https://t.me/joinchat/AAAAAFAGr86CHo5-FRQkdA)
+
+- [_Курлык (uchus.online)_](https://t.me/qurlik)
+
+- [_Сливы со сливы (умскул)_](https://t.me/shokavosliv)
+
+---
+
 **Теория для мобильных устройств**
 
-_Android:_
+- [_Android_](https://play.google.com/store/apps/details?id=ru.foxford.foxfordtextbook)
 
-https://play.google.com/store/apps/details?id=ru.foxford.foxfordtextbook
-
-_iOS:_
-
-https://itunes.apple.com/us/app/foksford.ucebnik/id930911649?l=ru&ls=1&mt=8
+- [_iOS_](https://itunes.apple.com/us/app/foksford.ucebnik/id930911649?l=ru&ls=1&mt=8)
 
 ---
 
@@ -434,21 +452,21 @@ https://russianpy.marisehayashi.repl.run/
 
 **Учебные материалы**
 
-_ВМК, Поляков, Ткаучук и прочее:_
+- _ВМК, Поляков, Ткаучук и прочее:_
 
-https://mega.nz/#F!Ei4GmBCL!eKqBEOF9fmCwnOnuSELowQ
+  https://mega.nz/#F!Ei4GmBCL!eKqBEOF9fmCwnOnuSELowQ
 
-_Разное вперемешку:_
+- _Разное вперемешку:_
 
-https://mega.nz/#F!VdMS1QTL!UzidAXtwhfSPXDC8YoUDAQ
+  https://mega.nz/#F!VdMS1QTL!UzidAXtwhfSPXDC8YoUDAQ
 
-_Платина разного рода:_
+- _Платина разного рода:_
 
-https://github.com/tanookki/FizMatInf
+  https://github.com/tanookki/FizMatInf
 
 ---
 
-[**Способы извлечения данных**](https://github.com/limitedeternity/foxford_courses/tree/master/foxford_downloader/hw%20%2B%20video)
+[**Извлечение данных**](https://github.com/limitedeternity/foxford_courses/tree/master/foxford_downloader/)
 
 ---
 
