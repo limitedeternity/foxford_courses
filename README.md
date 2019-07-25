@@ -356,6 +356,10 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Мини-курс по математике "Логарифм и экспонента"](https://yadi.sk/d/ZjwU9gwjjsRP3g)
 
+- [Мини-курс по математике "Сравнения по модулю"](https://mega.nz/#F!wWhAzS7J!yFx74dbv66CZGLWkTiFgjQ)
+
+- [Мини-курс по математике "Свойства пределов последовательности"](https://mega.nz/#F!tSonXY6J!GE75bbyXw7cF0P4y1yJTdg)
+
 - [Интенсивный курс по математике "Задачи с параметрами на ЕГЭ"](https://yadi.sk/d/KBOGGfuw4EGfkA)
 
 - [Интенсивный курс по математике "Задачи по теории чисел на ЕГЭ"](https://yadi.sk/d/p5EdqMRD8xLZBA)
@@ -402,7 +406,9 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Химия. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NzQ2MTAw)
 
-- []()
+- [Биология. Базовый Курс](https://mega.nz/#F!n7AWTQrA!YYPfc_l10RaJ_Ir5liuD0w)
+
+- [Биология. Подготовка к ЕГЭ](https://mega.nz/#F!z3whlCDI!7WllZIhXidu9yEeFnkXa_g)
 
 </details>
 <br>
