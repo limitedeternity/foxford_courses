@@ -1,5 +1,6 @@
 # pylint: disable = too-many-function-args
 
+from argparse import ArgumentParser, Namespace
 from collections import deque
 from datetime import datetime
 from functools import reduce
@@ -329,9 +330,15 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, lesson_titles: I
     def create_path(idx: int, lesson_title: str) -> Path:
         constructed_path: Path = Path(
             Path.cwd(),
-            sanitize_string(course_name) + " - " +
-            sanitize_string(course_subtitle),
-            f"({idx}) " + sanitize_string(lesson_title)
+            (
+                sanitize_string(course_name) +
+                " - " +
+                sanitize_string(course_subtitle)
+            ).strip(),
+            (
+                f"({idx}) " +
+                sanitize_string(lesson_title)
+            ).strip()
         )
 
         if not constructed_path.exists():
@@ -444,9 +451,9 @@ def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -
     recursive_iteration()
 
 
-def main() -> None:
+def main(params: Dict) -> None:
     session: CachedSession = CachedSession()
-    credential_query: Dict = prompt([
+    credential_query: Dict = params if params["email"] and params["password"] else prompt([
         {
             "type": "input",
             "name": "email",
@@ -542,4 +549,8 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    parser: ArgumentParser = ArgumentParser()
+    parser.add_argument("--email", type=str, required=False)
+    parser.add_argument("--password", type=str, required=False)
+    args: Namespace = parser.parse_args()
+    main(args.__dict__)
