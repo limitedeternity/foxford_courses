@@ -317,7 +317,7 @@ class get_resources_for_lessons():
         }
 
 
-def build_dir_hierarchy(course_name: str, course_subtitle: str, lesson_titles: Iterable[str]) -> Tuple[Path]:
+def build_dir_hierarchy(course_name: str, course_subtitle: str, grade: str, lesson_titles: Iterable[str]) -> Tuple[Path]:
     def sanitize_string(string: str) -> str:
         return pipe(
             lambda char_list: filter(
@@ -331,6 +331,7 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, lesson_titles: I
         constructed_path: Path = Path(
             Path.cwd(),
             (
+                f"({grade}) " +
                 sanitize_string(course_name) +
                 " - " +
                 sanitize_string(course_subtitle)
@@ -481,13 +482,13 @@ def main(params: Dict) -> None:
             "type": "list",
             "name": "course",
             "message": "Select course",
-            "choices": map(lambda obj: f"{obj['name']} - {obj['subtitle']}", user_courses)
+            "choices": map(lambda obj: f"({obj['grades_range']}) {obj['name']} - {obj['subtitle']}", user_courses)
         }
     ])
 
     selected_course: Dict = next(
         filter(
-            lambda obj: f"{obj['name']} - {obj['subtitle']}" == course_query["course"],
+            lambda obj: f"({obj['grades_range']}) {obj['name']} - {obj['subtitle']}" == course_query["course"],
             user_courses
         )
     )
@@ -525,6 +526,7 @@ def main(params: Dict) -> None:
     paths: Tuple[Path] = build_dir_hierarchy(
         selected_course["name"],
         selected_course["subtitle"],
+        selected_course["grades_range"],
         map(
             lambda obj: obj["title"],
             available_course_lessons
