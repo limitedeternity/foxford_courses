@@ -368,6 +368,18 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Мини-курс по физике "Магнетизм и электромагнитная индукция"](https://mega.nz/#F!ckkhTIRY!D0WREaqE2jCCk8op0BfDfw)
 
+- [Физика. Классическая астрономия](https://mega.nz/#F!dWZ3ESAJ!7AvKeNfd-dDPH9b0LwEihw)
+
+- [Физика. Геометрическая оптика](https://mega.nz/#F!W7QUDayS!YgJiM2rU45TVpokrZTLeKQ)
+
+- [Физика. Методы расчёта разветвлённых цепей](https://mega.nz/#F!D3QGQCKS!RCcL2gdroOETqR8CYqW-rA)
+
+- [Физика. Тепловые явления](https://mega.nz/#F!SmQmmCjD!knIpGZMIDEXgS5rVmDUxsg)
+
+- [Мини-курс "Экспериментальная физика"](https://mega.nz/#F!TrBk0I6R!K2DtfwTMUeVj-wddZZx-VA)
+
+- [Физика. Кинематические связи в задачах](https://mega.nz/#F!anB2xIaZ!BwslrBueo0utACSnGXL8ZA)
+
 - [Физика. Подготовка к ЕГЭ. Часть С](https://yadi.sk/d/xjco_AKXdTx99A)
 
 - [Физика. Подготовка к ЕГЭ. Часть Б](https://yadi.sk/d/1oARnGevJVwAew)
@@ -381,6 +393,8 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 - [Программирование. Подготовка к региональному этапу олимпиады](https://yadi.sk/d/MK4m1lvIM3jmIw)
 
 - [Программирование. Курс подготовки к олимпиадам, продвинутый уровень](https://yadi.sk/d/_1HXesluVTZp9Q)
+
+- [Языки С/С++](https://mega.nz/#F!qjIwhQ6T!vwjiDExbiiDLjTO6vsCULA)
 
 - [Язык Python для начинающих](https://t.me/joinchat/AAAAAFFbpvBSQ0NRqvYK3g)
 
@@ -399,16 +413,39 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Подготовка к олимпиадам и международным экзаменам по английскому языку](https://mega.nz/#F!S3oCSIhC!AXXh5rl-Tt5vvZTlQ0rYhA)
 
+- [История. Базовый уровень](https://mega.nz/#F!T7xxUKbD!Nvd5DWo2z2bXReMqmFnXDg)
+
+- [История. Подготовка к ЕГЭ](https://mega.nz/#F!WmpTEYhS!0JNn1OGL0fq48qtWCiE5RA)
+
+- [Обществознание. Базовый уровень](https://mega.nz/#F!wHBE3YQY!FocKT3Lt8sLUIBgACGgw3w)
+
+- [Обществознание. Подготовка к ЕГЭ](https://mega.nz/#F!wDw3HaAZ!XtxUVJDg_eVFFBfxFqSyHQ)
+
+- [Литература. Базовый уровень](https://mega.nz/#F!cKwGwSLB!1zdADwaRsRaqEWdkZNfJug)
+
+- [Литература без границ. Читательский дайвинг клуб](https://mega.nz/#F!FOAXhKjR!Jn9ki9KNEDYErfN4O7Wmng)
+
 </details>
 <br>
 <details>
 <summary>🔬 <b>[Естественно-научные]</b></summary>
 
+- [Химия. Базовый уровень](https://mega.nz/#F!DvZAwSaJ!-wkNQlzKPGuSeF5Yop9ogw)
+
 - [Химия. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NzQ2MTAw)
 
-- [Биология. Базовый Курс](https://mega.nz/#F!n7AWTQrA!YYPfc_l10RaJ_Ir5liuD0w)
+- [Биология. Базовый уровень](https://mega.nz/#F!n7AWTQrA!YYPfc_l10RaJ_Ir5liuD0w)
 
 - [Биология. Подготовка к ЕГЭ](https://mega.nz/#F!z3whlCDI!7WllZIhXidu9yEeFnkXa_g)
+
+</details>
+<br>
+<details>
+<summary>💡 <b>[Другое]</b></summary>
+
+- [Шахматы. Продвинутый уровень](https://mega.nz/#F!H6I0hY7Z!5an9b-wzH_-llTWqSZY7PA)
+
+- []()
 
 </details>
 <br>
