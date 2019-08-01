@@ -34,8 +34,7 @@
       "win64",
       "linux64"
     ],
-    "zip": true,
-    "version": "latest",
+    "version": "0.39.3",
     "flavor": "normal",
     "buildDir": "./build",
     "cacheDir": "./cache",

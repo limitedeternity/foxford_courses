@@ -51,7 +51,7 @@ class HomeworkMixin {
       await new Promise(resolve => setTimeout(resolve, 500));
 
       try {
-        let response = await fetch(
+        let response = await this.foxFrame.contentWindow.fetch(
           `https://foxford.ru/api/lessons/${task.lessonId}/tasks/${task.id}/fails`,
           {
             method: "POST",
@@ -59,14 +59,15 @@ class HomeworkMixin {
               "X-CSRF-Token": helpers.getCookie(
                 "csrf_token",
                 this.foxFrame.contentWindow.document.cookie
-              )
+              ),
+              "X-Requested-With": "XMLHttpRequest"
             }
           }
         );
 
         if (response.ok) {
           this.foxFrame.contentWindow.location.reload(true);
-          await new Promise(resolve => setTimeout(resolve, 100));
+          await new Promise(resolve => setTimeout(resolve, 500));
         }
       } catch (e) { }
 
