@@ -434,9 +434,19 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Химия. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NzQ2MTAw)
 
+- [Практикум.Органическая химия](https://mega.nz/#F!23oEWSSD!kGIBxWfen7Rjt7YHrrz5OQ)
+
+- [Практикум. Неорганическая химия](https://mega.nz/#F!PzgRUCbC!lQ_bIvGZGlDTaHXZhIYNEg)
+
+- [Практикум. Общая химия](https://mega.nz/#F!bvBTQKpY!cq3yAgjspLMS-0GakdjUhw)
+
+- [Практикум. Олимпиадная химия](https://mega.nz/#F!znYVGSzD!bIKrPKNjDpYIOOaPq1B0CA)
+
 - [Биология. Базовый уровень](https://mega.nz/#F!n7AWTQrA!YYPfc_l10RaJ_Ir5liuD0w)
 
 - [Биология. Подготовка к ЕГЭ](https://mega.nz/#F!z3whlCDI!7WllZIhXidu9yEeFnkXa_g)
+
+- [Ботаника](https://mega.nz/#F!iuhxXYib!n6otON815nAJ0FAAXP6GuA)
 
 </details>
 <br>
@@ -445,7 +455,7 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Шахматы. Продвинутый уровень](https://mega.nz/#F!H6I0hY7Z!5an9b-wzH_-llTWqSZY7PA)
 
-- []()
+- [Эмоциональный интеллект - Навыки XXI века](https://drive.google.com/drive/folders/1z3RItBOKTBVg8Dglv2ek5f53PGGFX-2P?usp=sharing)
 
 </details>
 <br>
@@ -532,6 +542,8 @@ _Курсы предоставлены в ознакомительных цел�
 
 - `Yakui_The_Maid` : Анонимный союзник сил Света. Предоставил стандартные курсы биологии, химии и физики части С.
 
-- `Г-жа Н` : Ещё один союзник. Основатель канала 2018 года, загрузка почти всех курсов.
+- `Г-жа Н` : Ещё один союзник. Основатель канала, загрузка почти всех курсов.
+
+- `Pavel Павлик` : 90% курсов 2019 года
 
 - И многие другие.

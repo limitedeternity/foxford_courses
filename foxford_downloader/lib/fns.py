@@ -1,62 +1,19 @@
-# pylint: disable = too-many-function-args
-
-from argparse import ArgumentParser, Namespace
+import asyncio
 from collections import deque
 from datetime import datetime
-from functools import reduce
 from pathlib import Path
 from re import Match, match
-from traceback import format_exc
-from typing import Any, Callable, Dict, Iterable, Tuple, Union
+from typing import Dict, Iterable, List, Tuple, Union
 from urllib import parse
 
 import requests
 from bs4 import BeautifulSoup, Tag
 from more_itertools import unique_everseen
-from PyInquirer import prompt
+from pyppeteer import connect
 
-from requests_cache import CachedResponse, CachedSession
-
-
-class Logger():
-    @staticmethod
-    def error(message: str) -> None:
-        print(f"[\033[91mE\033[0m]: \033[1m{message}\033[0m")
-
-    @staticmethod
-    def warn(message: str) -> None:
-        print(f"[\033[93mW\033[0m]: \033[1m{message}\033[0m")
-
-    @staticmethod
-    def log(message: str) -> None:
-        print(f"[\033[94mL\033[0m]: \033[1m{message}\033[0m")
-
-
-def Maybe(t: type) -> Union[Any, None]:
-    return Union[t, None]
-
-
-def pipe(*args: Tuple[Callable]) -> Callable:
-    return lambda val: reduce(lambda prev, fn: fn(prev), args, val)
-
-
-def print_error_and_exit(error_text: str) -> None:
-    Logger.error(error_text)
-    exit(1)
-
-
-def error_handler(fn: Callable) -> Callable:
-    def wrapper(*args: Tuple, **kwargs: Dict):
-        try:
-            result: Any = fn(*args, **kwargs)
-            if isinstance(result, dict) and "fatal_error" in result:
-                print_error_and_exit(result["fatal_error"])
-
-            return result
-        except Exception:
-            print_error_and_exit(format_exc())
-
-    return wrapper
+from .browser import get_browser_connection_url
+from .helpers import error_handler, pipe
+from .requests_cache import CachedResponse, CachedSession
 
 
 @error_handler
@@ -126,7 +83,7 @@ def get_user_courses(session: CachedSession) -> Tuple[Dict]:
             return {"fatal_error": "Course list structure is unknown"}
 
         if all(False for _ in course_list_response.json()["bookmarks"]):
-            return {}
+            return ()
 
         if not {"name", "subtitle", "resource_id"}.issubset(set(course_list_response.json()["bookmarks"][0])):
             return {"fatal_error": "Course structure is unknown"}
@@ -141,7 +98,7 @@ def get_user_courses(session: CachedSession) -> Tuple[Dict]:
 
 class get_course_lessons():
     @error_handler
-    def __new__(self, course_id: int, session: CachedSession) -> Tuple[Dict]:
+    def __new__(self, course_id: int, session: CachedSession) -> Iterable[Dict]:
         lesson_list_at_somewhere_response: CachedResponse = session.get(
             f"https://foxford.ru/api/courses/{course_id}/lessons",
             headers={
@@ -178,14 +135,13 @@ class get_course_lessons():
             lambda lessons: map(
                 lambda lesson: self.lesson_extension(self, lesson),
                 lessons
-            ),
-            tuple
+            )
         )(lesson_list_at_somewhere_response.json())
 
     @error_handler
-    def recursive_collection(self, direction: str, cursor: Maybe(int)) -> Tuple[Dict]:
+    def recursive_collection(self, direction: str, cursor: Union[int, None]) -> Tuple[Dict]:
         if not cursor:
-            return {}
+            return ()
 
         lesson_list_at_direction_response: CachedResponse = self.session.get(
             f"https://foxford.ru/api/courses/{self.course_id}/lessons?{direction}={cursor}",
@@ -251,10 +207,10 @@ class get_resources_for_lessons():
 
     @error_handler
     def recursive_collection(self) -> Tuple[Dict]:
-        webinar_id: Maybe(int) = next(self.webinar_ids, None)
+        webinar_id: Union[int, None] = next(self.webinar_ids, None)
 
         if not webinar_id:
-            return {}
+            return ()
 
         video_source_response: CachedResponse = self.session.get(
             f"https://foxford.ru/groups/{webinar_id}"
@@ -273,7 +229,7 @@ class get_resources_for_lessons():
 
     @error_handler
     def retrieve_erly_iframe_src(self, video_source_response: CachedResponse) -> str:
-        erly_iframe: Maybe(Tag) = pipe(
+        erly_iframe: Union[Tag, None] = pipe(
             lambda r_content: BeautifulSoup(
                 r_content,
                 "html.parser"
@@ -286,7 +242,7 @@ class get_resources_for_lessons():
         if not erly_iframe:
             return {"fatal_error": ".full_screen > iframe wasn't found"}
 
-        erly_iframe_src: Maybe(str) = erly_iframe.get("src")
+        erly_iframe_src: Union[str, None] = erly_iframe.get("src")
 
         if not erly_iframe_src:
             return {"fatal_error": ".full_screen > iframe doesn't have src attribute"}
@@ -304,8 +260,8 @@ class get_resources_for_lessons():
         if not {"conf", "access_token"}.issubset(set(search_params)):
             return {"fatal_error": "Iframe src search params structure is unknown"}
 
-        webinar_id_match: Maybe(Match) = match(
-            r"^webinar-(\d{5})$", search_params.get("conf")
+        webinar_id_match: Union[Match, None] = match(
+            r"^webinar-(\d+)$", search_params.get("conf")
         )
 
         if not webinar_id_match:
@@ -317,7 +273,59 @@ class get_resources_for_lessons():
         }
 
 
-def build_dir_hierarchy(course_name: str, course_subtitle: str, grade: str, lesson_titles: Iterable[str]) -> Tuple[Path]:
+def get_lesson_tasks(lesson_ids: Iterable[int], session: CachedSession) -> Iterable[List[Dict]]:
+    @error_handler
+    def fetch(lesson_id: int) -> List[Dict]:
+        tasks_response: CachedResponse = session.get(
+            f"https://foxford.ru/api/lessons/{lesson_id}/tasks",
+            headers={
+                "X-Requested-With": "XMLHttpRequest"
+            }
+        )
+
+        if tasks_response.status_code != 200:
+            return {"fatal_error": "Tasks fetch has failed"}
+
+        if "id" not in tasks_response.json()[0]:
+            return {"fatal_error": "Task structure is unknown"}
+
+        return tasks_response.json()
+
+    return map(fetch, lesson_ids)
+
+
+def construct_task_urls(lesson_ids: Iterable[int], lesson_tasks: Iterable[List[Dict]]) -> Iterable[Iterable[str]]:
+    def combination(lesson_id: int, task_list: List[Dict]) -> Iterable[str]:
+        return map(
+            lambda task: f"https://foxford.ru/lessons/{lesson_id}/tasks/{task['id']}",
+            task_list
+        )
+
+    return map(
+        combination,
+        lesson_ids,
+        lesson_tasks
+    )
+
+
+def construct_conspect_urls(lesson_ids: Iterable[int], conspect_amount: Iterable[int]) -> Iterable[Tuple[str]]:
+    def recursive_collection(lesson_id: int, amount: int) -> Tuple[str]:
+        if amount == 0:
+            return ()
+
+        return (
+            *recursive_collection(lesson_id, amount - 1),
+            f"https://foxford.ru/lessons/{lesson_id}/conspects/{amount}"
+        )
+
+    return map(
+        recursive_collection,
+        lesson_ids,
+        conspect_amount
+    )
+
+
+def build_dir_hierarchy(course_name: str, course_subtitle: str, grade: str, lessons: Iterable[Dict]) -> Iterable[Path]:
     def sanitize_string(string: str) -> str:
         return pipe(
             lambda char_list: filter(
@@ -327,7 +335,7 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, grade: str, less
             lambda filtered_char_list: filtered_char_list[:30].strip()
         )(string)
 
-    def create_path(idx: int, lesson_title: str) -> Path:
+    def create_dir(lesson: Dict) -> Path:
         constructed_path: Path = Path(
             Path.cwd(),
             (
@@ -337,27 +345,23 @@ def build_dir_hierarchy(course_name: str, course_subtitle: str, grade: str, less
                 sanitize_string(course_subtitle)
             ).strip(),
             (
-                f"({idx}) " +
-                sanitize_string(lesson_title)
+                f"({lesson['number']}) " +
+                sanitize_string(lesson['title'])
             ).strip()
         )
 
         if not constructed_path.exists():
-            constructed_path.mkdir(parents=True, exist_ok=True)
+            constructed_path.mkdir(parents=True)
 
         return constructed_path
 
-    return pipe(
-        lambda titles: enumerate(titles, 1),
-        lambda enumed_titles: map(
-            lambda item: create_path(*item),
-            enumed_titles
-        ),
-        tuple
-    )(lesson_titles)
+    return map(
+        create_dir,
+        lessons
+    )
 
 
-def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -> None:
+def download_resources(res_with_path: Dict, session: CachedSession) -> None:
     @error_handler
     def download_url(url: str, dest: Path) -> None:
         with requests.get(url, stream=True) as r:
@@ -373,28 +377,31 @@ def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -
                     0
                 )
 
-    def save_video(current_iter_object: Dict) -> None:
-        if current_iter_object["destination"].joinpath("video.mp4").exists():
+    def save_video() -> None:
+        if res_with_path["destination"].joinpath("video.mp4").exists():
             return
 
         download_url(
-            current_iter_object["video"],
-            current_iter_object["destination"].joinpath("video.mp4")
+            res_with_path["video"],
+            res_with_path["destination"].joinpath("video.mp4")
         )
 
     @error_handler
-    def parse_and_save_event_data(current_iter_object: Dict) -> None:
-        if current_iter_object["destination"].joinpath("message_log.txt").exists():
+    def parse_and_save_event_data() -> None:
+        if res_with_path["destination"].joinpath("message_log.txt").exists():
             return
 
         events_response: CachedResponse = session.get(
-            current_iter_object["events"]
+            res_with_path["events"]
         )
 
         if events_response.status_code != 200:
             return {"fatal_error": "Events fetch has failed"}
 
-        with current_iter_object["destination"].joinpath("message_log.txt").open("w", errors="replace") as f:
+        if "meta" not in events_response.json()[0]:
+            return {"fatal_error": "Events structure is unknown"}
+
+        with res_with_path["destination"].joinpath("message_log.txt").open("w", errors="replace") as f:
             pipe(
                 lambda json: filter(
                     lambda obj: obj["meta"]["action"] == "message",
@@ -425,134 +432,67 @@ def download_resources(res_with_paths: Iterable[Dict], session: CachedSession) -
             lambda enumed_urls: map(
                 lambda item: download_url(
                     item[1],
-                    current_iter_object["destination"].joinpath(
-                        f"{item[0]}.pdf"
-                    )
+                    res_with_path["destination"]
+                    .joinpath(f"{item[0]}.pdf")
                 ),
                 enumed_urls
             ),
             lambda task_map: deque(task_map, 0)
         )(events_response.json())
 
-    def recursive_iteration() -> None:
-        current_iter_object: Maybe(Dict) = next(res_with_paths, None)
+    save_video()
+    parse_and_save_event_data()
+    print(
+        f"-> {res_with_path['destination'].name}: \033[92m\u2713\033[0m"
+    )
 
-        if not current_iter_object:
-            return
 
-        save_video(current_iter_object)
-        parse_and_save_event_data(current_iter_object)
+async def save_page(url: str, path: Path, folder: str, cookies: Iterable[Dict], semaphore: asyncio.Semaphore) -> None:
+    async with semaphore:
+        if not path.joinpath(folder).joinpath(url.split("/")[-1] + ".pdf").exists():
+            browser_endpoint = await get_browser_connection_url()
+            browser = await connect(browserWSEndpoint=browser_endpoint)
+            page = await browser.newPage()
+            await page.emulateMedia("screen")
+            await page.setCookie(*cookies)
+            await page.goto(url, {"waitUntil": "domcontentloaded"})
+
+            if await page.waitForFunction("() => window.MathJax", timeout=10000):
+                await asyncio.sleep(3.5)
+                await page.evaluate("""
+                    async function() {
+                        await new Promise(function(resolve) {
+                            window.MathJax.Hub.Register.StartupHook(
+                                "End",
+                                resolve
+                            )
+                        })
+                    }
+                """)
+                await asyncio.sleep(0.1)
+
+            await page.evaluate("""
+                document.querySelectorAll(".toggle_element > .toggle_content").forEach(el => el.style.display = "block")
+            """, force_expr=True)
+            await asyncio.sleep(0.1)
+
+            await page.evaluate("""
+                document.querySelector("#cc_container").remove()
+            """, force_expr=True)
+            await asyncio.sleep(0.1)
+
+            if not path.joinpath(folder).exists():
+                path.joinpath(folder).mkdir()
+
+            path.joinpath(folder).joinpath(url.split("/")[-1] + ".pdf").touch()
+
+            await page.pdf({
+                "path": str(path.joinpath(folder).joinpath(url.split("/")[-1] + ".pdf")),
+                "printBackground": True
+            })
+
+            await page.close()
 
         print(
-            f"-> {current_iter_object['destination'].name}: \033[92m\u2713\033[0m"
+            f"-> {folder}/{url.split('/')[-3]}/{url.split('/')[-1]}: \033[92m\u2713\033[0m"
         )
-
-        recursive_iteration()
-
-    recursive_iteration()
-
-
-def main(params: Dict) -> None:
-    session: CachedSession = CachedSession()
-    credential_query: Dict = params if params["email"] and params["password"] else prompt([
-        {
-            "type": "input",
-            "name": "email",
-            "message": "Email"
-        },
-        {
-            "type": "password",
-            "name": "password",
-            "message": "Password"
-        }
-    ])
-
-    Logger.log("Fetching course list...")
-
-    user_courses: Tuple[Dict] = get_user_courses(
-        login(
-            credential_query["email"],
-            credential_query["password"],
-            session
-        )
-    )
-
-    course_query: Dict = prompt([
-        {
-            "type": "list",
-            "name": "course",
-            "message": "Select course",
-            "choices": map(lambda obj: f"({obj['grades_range']}) {obj['name']} - {obj['subtitle']}", user_courses)
-        }
-    ])
-
-    selected_course: Dict = next(
-        filter(
-            lambda obj: f"({obj['grades_range']}) {obj['name']} - {obj['subtitle']}" == course_query["course"],
-            user_courses
-        )
-    )
-
-    Logger.log("Constructing lesson list...")
-
-    available_course_lessons: Tuple[Dict] = pipe(
-        lambda cid: get_course_lessons(
-            cid,
-            session
-        ),
-        lambda l: filter(
-            lambda lesson:
-                lesson["access_state"] == "available" and not
-                lesson["is_locked"] and
-                lesson["webinar_status"] == "video_available",
-            l
-        ),
-        tuple
-    )(selected_course["resource_id"])
-
-    Logger.log("Fetching resource links...")
-
-    resources_for_lessons: Tuple[Dict] = get_resources_for_lessons(
-        selected_course["resource_id"],
-        map(
-            lambda obj: obj["webinar_id"],
-            available_course_lessons
-        ),
-        session
-    )
-
-    Logger.log("Creating paths...")
-
-    paths: Tuple[Path] = build_dir_hierarchy(
-        selected_course["name"],
-        selected_course["subtitle"],
-        selected_course["grades_range"],
-        map(
-            lambda obj: obj["title"],
-            available_course_lessons
-        )
-    )
-
-    Logger.log("Downloading resources...")
-
-    download_resources(
-        map(
-            lambda res_obj, path: {
-                **res_obj,
-                "destination": path
-            },
-            resources_for_lessons,
-            paths
-        ),
-        session
-    )
-
-    Logger.log("Done!")
-
-
-if __name__ == "__main__":
-    parser: ArgumentParser = ArgumentParser()
-    parser.add_argument("--email", type=str, required=False)
-    parser.add_argument("--password", type=str, required=False)
-    args: Namespace = parser.parse_args()
-    main(args.__dict__)

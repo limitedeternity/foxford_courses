@@ -23,7 +23,7 @@ class CachedResponse(Response):
         return super().json(**kwargs)
 
 
-class CacheHTTPAdapter(HTTPAdapter):
+class CachedHTTPAdapter(HTTPAdapter):
     def build_response(self, req, resp):
         response = CachedResponse()
         response.status_code = getattr(resp, "status", None)
@@ -34,6 +34,7 @@ class CacheHTTPAdapter(HTTPAdapter):
 
         if isinstance(req.url, bytes):
             response.url = req.url.decode("utf-8")
+
         else:
             response.url = req.url
 
@@ -46,7 +47,7 @@ class CacheHTTPAdapter(HTTPAdapter):
 class CachedSession():
     def __new__(self):
         s = Session()
-        a = CacheHTTPAdapter(max_retries=3)
+        a = CachedHTTPAdapter(max_retries=3)
         s.mount("http://", a)
         s.mount("https://", a)
         return s

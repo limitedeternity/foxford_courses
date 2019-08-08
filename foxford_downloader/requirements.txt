@@ -1,4 +1,6 @@
 requests==2.22.0
 beautifulsoup4==4.7.1
-PyInquirer==1.0.3
 more-itertools==7.1.0
+PyInquirer==1.0.3
+pyppeteer==0.0.25
+async_lru==1.0.2
