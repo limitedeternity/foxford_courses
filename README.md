@@ -1,10 +1,12 @@
 ﻿# /un/
 
-Платиновая шапка платинового треда, посвященного подготовке к ОГЭ/ЕГЭ по техническим направлениям (в основном), а также курсам от лучших преподавателей М(ФТИ), любезно слитым анонимами.
-
-Донаты принимаются на телефон +79956009255 (не киви, не сбер, просто телефон).
-
-Текущий тред: https://2ch.hk/un/res/668939.html
+<p style="color:red"><i>Incoming message</i>:</p> Друзья, много времени прошло с того момента, как я начал работу над FDL. Три года, если быть точным. И последней версией оказалась 6.5. Я внёс последнюю строчку кода с этим коммитом и решил, что мне пора двигаться дальше, поэтому я архивирую репозиторий, никаких изменений вноситься больше не будет. Я его оставлю для себя на память. <br>
+Пирожковую я передал доверенному лицу, которое сможет продолжать вести её. <br>
+Тред в скором времени утонет. Создайте новый, если нужно. <br>
+Весь код я оставляю открытым: любой может посмотреть его и модифицировать под свои нужды. На его полное понимание может уйти не один день, но оно того стоит. Я гарантирую это. <br>
+Используйте форк от этого репозитория в качестве шапки. Изменения в FDL тоже вносите в форк.<br>
+И убедительная просьба: не пишите мне по поводу этого всего. Игнорирую и блокирую. <br>
+Ну, вот и всё, сайонара. Люблю всех.
 
 ---
 
@@ -15,22 +17,22 @@
 <details>
 <summary>⚛️ <b>[Технические]</b></summary>
 
-- [Математика. Подготовка к ЕГЭ. Часть С](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01MjU3MjM1)
+- [Математика. Подготовка к ЕГЭ. Часть С](https://rutracker.org/forum/viewtopic.php?t=5257235)
 
-- [Физика. Подготовка к ЕГЭ. Часть С](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01MjU3MjQ5)
+- [Физика. Подготовка к ЕГЭ. Часть С](https://rutracker.org/forum/viewtopic.php?t=5257249)
 
-- [Информатика. Экспресс-подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01MjU3MjIw)
+- [Информатика. Экспресс-подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5257220)
 
-- [Алгебра. 10 класс](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDI3MjU0)
+- [Алгебра. 10 класс](https://rutracker.org/forum/viewtopic.php?t=5427254)
 
-- [Геометрия. 10 класс](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDI5Mzcw)
+- [Геометрия. 10 класс](https://rutracker.org/forum/viewtopic.php?t=5429370)
 
 </details>
 <br>
 <details>
 <summary>✊ <b>[Гуманитарные]</b></summary>
 
-- [Русский Язык. Подготовка к ЕГЭ. Сочинение](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01MjU3MjYz)
+- [Русский Язык. Подготовка к ЕГЭ. Сочинение](https://rutracker.org/forum/viewtopic.php?t=5257263)
 
 - [Экспресс-курс. Учи английский легко.](https://cloud.mail.ru/public/6og2/YZeFbTwYT/)
 
@@ -50,74 +52,74 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 <details>
 <summary>⚛️ <b>[Технические]</b></summary>
 
-- [Подготовка к ОГЭ. Физика](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjMz)
+- [Подготовка к ОГЭ. Физика](https://rutracker.org/forum/viewtopic.php?t=5446633)
 
-- [Подготовка к олимпиадам. Математика. 9 класс](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjMy)
+- [Подготовка к олимпиадам. Математика. 9 класс](https://rutracker.org/forum/viewtopic.php?t=5446632)
 
-- [Экспресс-подготовка к ОГЭ. Физика](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjIx)
+- [Экспресс-подготовка к ОГЭ. Физика](https://rutracker.org/forum/viewtopic.php?t=5446621)
 
-- [Подготовка к ОГЭ. Математика](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjM1)
+- [Подготовка к ОГЭ. Математика](https://rutracker.org/forum/viewtopic.php?t=5446635)
 
-- [Экспресс-подготовка к ОГЭ. Математика](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjIz)
+- [Экспресс-подготовка к ОГЭ. Математика](https://rutracker.org/forum/viewtopic.php?t=5446623)
 
-- [Углубленный курс. Алгебра](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjI3)
+- [Углубленный курс. Алгебра](https://rutracker.org/forum/viewtopic.php?t=5446627)
 
-- [Углубленный курс. Геометрия](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjI2)
+- [Углубленный курс. Геометрия](https://rutracker.org/forum/viewtopic.php?t=5446626)
 
-- [Подготовка к олимпиадам "Физтех" по математике](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE4MTk2)
+- [Подготовка к олимпиадам "Физтех" по математике](https://rutracker.org/forum/viewtopic.php?t=5418196)
 
-- [Подготовка к олимпиадам "Физтех" по физике](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQxMjQw)
+- [Подготовка к олимпиадам "Физтех" по физике](https://rutracker.org/forum/viewtopic.php?t=5441240)
 
-- [Подготовка к олимпиадам по математике](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE4MTA4)
+- [Подготовка к олимпиадам по математике](https://rutracker.org/forum/viewtopic.php?t=5418108)
 
-- [Подготовка к олимпиадам по физике](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQyNjg3)
+- [Подготовка к олимпиадам по физике](https://rutracker.org/forum/viewtopic.php?t=5442687)
 
-- [Программирование (9-11 классы). Подготовка к олимпиадам, базовый уровень](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDM3)
+- [Программирование (9-11 классы). Подготовка к олимпиадам, базовый уровень](https://rutracker.org/forum/viewtopic.php?t=5444437)
 
-- [Программирование (9-11 классы). Подготовка к олимпиадам, продвинутый уровень](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE3MzE0)
+- [Программирование (9-11 классы). Подготовка к олимпиадам, продвинутый уровень](https://rutracker.org/forum/viewtopic.php?t=5417314)
 
-- [Математика. Подготовка к ЕГЭ / Часть С](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE3ODg2)
+- [Математика. Подготовка к ЕГЭ / Часть С](https://rutracker.org/forum/viewtopic.php?t=5417886)
 
-- [Математика. Экспресс-подготовка к ЕГЭ / Часть С](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NTEw)
+- [Математика. Экспресс-подготовка к ЕГЭ / Часть С](https://rutracker.org/forum/viewtopic.php?t=5444510)
 
-- [Математика. Экспресс-подготовка к ЕГЭ / Часть B](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0OTYw)
+- [Математика. Экспресс-подготовка к ЕГЭ / Часть B](https://rutracker.org/forum/viewtopic.php?t=5444960)
 
-- [Физика. Экспресс-подготовка к ЕГЭ / Часть С](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0OTUz)
+- [Физика. Экспресс-подготовка к ЕГЭ / Часть С](https://rutracker.org/forum/viewtopic.php?t=5444953)
 
-- [Физика. Экспресс-подготовка к ЕГЭ / Часть B](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0OTU0)
+- [Физика. Экспресс-подготовка к ЕГЭ / Часть B](https://rutracker.org/forum/viewtopic.php?t=5444954)
 
-- [Информатика. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE3ODA3)
+- [Информатика. Подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5417807)
 
-- [Изучение языков С и С++ / Язык С++](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE3ODI4)
+- [Изучение языков С и С++ / Язык С++](https://rutracker.org/forum/viewtopic.php?t=5417828)
 
-- [Web-программирование](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDE4NDM3)
+- [Web-программирование](https://rutracker.org/forum/viewtopic.php?t=5418437)
 
-- [Программирование на языке Python](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDIz)
+- [Программирование на языке Python](https://rutracker.org/forum/viewtopic.php?t=5444423)
 
 </details>
 <br>
 <details>
 <summary>✊ <b>[Гуманитарные]</b></summary>
 
-- [Подготовка к ОГЭ. Обществознание](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjM0)
+- [Подготовка к ОГЭ. Обществознание](https://rutracker.org/forum/viewtopic.php?t=5446634)
 
-- [Подготовка к олимпиадам. Обществознание](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2NjMw)
+- [Подготовка к олимпиадам. Обществознание](https://rutracker.org/forum/viewtopic.php?t=5446630)
 
-- [Русский язык. Подготовка к ЕГЭ. Часть 1](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDA5)
+- [Русский язык. Подготовка к ЕГЭ. Часть 1](https://rutracker.org/forum/viewtopic.php?t=5444409)
 
-- [Русский язык. Экспресс-подготовка к ЕГЭ. Часть 1](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0OTU3)
+- [Русский язык. Экспресс-подготовка к ЕГЭ. Часть 1](https://rutracker.org/forum/viewtopic.php?t=5444957)
 
-- [Русский язык. Сочинение. Экспресс-подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDQ5)
+- [Русский язык. Сочинение. Экспресс-подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444449)
 
-- [Английский язык. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDE5)
+- [Английский язык. Подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444419)
 
-- [Английский язык. Экспресс-подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDM0)
+- [Английский язык. Экспресс-подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444434)
 
-- [Стань сильнее. Pre-Intermediate (A2-B1)](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDEy)
+- [Стань сильнее. Pre-Intermediate (A2-B1)](https://rutracker.org/forum/viewtopic.php?t=5444412)
 
-- [Обществознание. Экспресс-подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0MzA3)
+- [Обществознание. Экспресс-подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444307)
 
-- [Обществознание. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0MzAz)
+- [Обществознание. Подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444303)
 
 - [Обществознание. Подготовка к олимпиадам](https://mega.nz/#F!Vv4AmCpS!ClUpGarpD8yXyrx1MEoeLQ)
 
@@ -128,24 +130,24 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 <details>
 <summary>🔬 <b>[Естественно-научные]</b></summary>
 
-- [Биология. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDM4ODA1)
+- [Биология. Подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5438805)
 
-- [Биология. Экспресс-подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDE0)
+- [Биология. Экспресс-подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444414)
 
-- [Биология. Подготовка к олимпиадам](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ1MDA1)
+- [Биология. Подготовка к олимпиадам](https://rutracker.org/forum/viewtopic.php?t=5445005)
 
-- [Химия. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQxMTE4)
+- [Химия. Подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5441118)
 
-- [Химия. Подоготовка к олимпиадам](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NDI2)
+- [Химия. Подоготовка к олимпиадам](https://rutracker.org/forum/viewtopic.php?t=5444426)
 
-- [Химия. Экспресс-подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ0NTAw)
+- [Химия. Экспресс-подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5444500)
 
 </details>
 <br>
 <details>
 <summary>💡 <b>[Другое]</b></summary>
 
-- [Словесность. Работа с информацией](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NDQ2ODMy)
+- [Словесность. Работа с информацией](https://rutracker.org/forum/viewtopic.php?t=5446832)
 
 - -
 
@@ -350,7 +352,7 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Математика. Подготовка к ЕГЭ. Часть С](https://mega.nz/#F!IZ9CDarJ!ol_8oe2BQRSWz6L3_ps8IA)
 
-- [Математика. Подготовка к ЕГЭ. Часть Б](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/cD03NzU0NjE5MQ==)
+- [Математика. Подготовка к ЕГЭ. Часть Б](https://rutracker.org/forum/viewtopic.php?p=77546191)
 
 - [Мини-курс по математике "Векторный метод в пространстве"](https://yadi.sk/d/VpO8uoXWqzfwVg)
 
@@ -432,9 +434,9 @@ https://mega.nz/#!BFNV3Q7b!kioo4rQuzS5l7GyGpXJyGhlgPlnSQ2c15DYMsuOi8kw
 
 - [Химия. Базовый уровень](https://mega.nz/#F!DvZAwSaJ!-wkNQlzKPGuSeF5Yop9ogw)
 
-- [Химия. Подготовка к ЕГЭ](https://unblocker.now.sh/?url=aHR0cHM6Ly9ydXRyYWNrZXIub3JnL2ZvcnVtL3ZpZXd0b3BpYy5waHA/dD01NzQ2MTAw)
+- [Химия. Подготовка к ЕГЭ](https://rutracker.org/forum/viewtopic.php?t=5746100)
 
-- [Практикум.Органическая химия](https://mega.nz/#F!23oEWSSD!kGIBxWfen7Rjt7YHrrz5OQ)
+- [Практикум. Органическая химия](https://mega.nz/#F!23oEWSSD!kGIBxWfen7Rjt7YHrrz5OQ)
 
 - [Практикум. Неорганическая химия](https://mega.nz/#F!PzgRUCbC!lQ_bIvGZGlDTaHXZhIYNEg)
 
@@ -508,10 +510,6 @@ https://russianpy.marisehayashi.repl.run/
 - _ВМК, Поляков, Ткаучук и прочее:_
 
   https://mega.nz/#F!Ei4GmBCL!eKqBEOF9fmCwnOnuSELowQ
-
-- _Разное вперемешку:_
-
-  https://mega.nz/#F!VdMS1QTL!UzidAXtwhfSPXDC8YoUDAQ
 
 - _Платина разного рода:_
 
