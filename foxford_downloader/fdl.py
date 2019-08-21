@@ -69,7 +69,9 @@ def main(params: Dict) -> None:
         tuple,
         lambda available_lessons: map(
             lambda that_include: filter(
-                lambda lesson: "available" in lesson[f"{that_include}_status"],
+                lambda lesson:
+                    "available" in lesson[f"{that_include}_status"] and
+                    "not" not in lesson[f"{that_include}_status"],
                 available_lessons
             ), [
                 "webinar",
