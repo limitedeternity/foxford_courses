@@ -485,8 +485,6 @@ https://mega.nz/#F!T9pR3STQ!pjIy_jvZOMvg9ucrMENKSw
 
 - [_47-я Пирожковая (бывает не только Фоксфорд)_](https://t.me/joinchat/AAAAAFAGr86CHo5-FRQkdA)
 
-- [_Курлык (uchus.online)_](https://t.me/qurlik)
-
 - [_Сливы со сливы (умскул)_](https://t.me/shokavosliv)
 
 ---
