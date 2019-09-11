@@ -483,7 +483,7 @@ https://mega.nz/#F!T9pR3STQ!pjIy_jvZOMvg9ucrMENKSw
 
 **Каналы**
 
-- [_47-я Пирожковая (бывает не только Фоксфорд)_](https://t.me/joinchat/AAAAAFAGr86CHo5-FRQkdA)
+- [_47-я Пирожковая (бывает не только Фоксфорд)_](https://t.me/joinchat/AAAAAFAGr87npHU8ras3zQ)
 
 - [_Сливы со сливы (умскул)_](https://t.me/shokavosliv)
 
