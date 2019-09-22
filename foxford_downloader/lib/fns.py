@@ -62,17 +62,11 @@ def login(email: str, password: str, session: CachedSession) -> CachedSession:
 def get_user_courses(session: CachedSession) -> Tuple[Dict]:
     @error_handler
     def recursive_collection(page_num: int) -> Tuple[Dict]:
-        course_list_response: CachedResponse = session.post(
-            "https://foxford.ru/api/user/bookmarks/search",
+        course_list_response: CachedResponse = session.get(
+            f"https://foxford.ru/api/user/bookmarks?page={page_num}&archived=false",
             headers={
                 "X-CSRF-Token": get_csrf_token(session),
                 "X-Requested-With": "XMLHttpRequest"
-            },
-            json={
-                "page": page_num,
-                "discipline_ids": [],
-                "resource_types": [],
-                "archived": False
             }
         )
 
